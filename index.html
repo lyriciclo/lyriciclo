@@ -10,6 +10,7 @@
       --main: #7B6ED6;
       --main-hover: #6C5AC2;
       --light-bg: #F8F6FD;
+      --hover-accent: #E6E0F5; /* NEW hover color */
       --white: #ffffff;
       --muted-text: #e0ddf5;
     }
@@ -61,7 +62,9 @@
     }
 
     .beta-tagline:hover {
-      background: var(--light-bg);
+      background: var(--hover-accent);
+      color: var(--main);
+      cursor: pointer;
     }
 
     footer {
