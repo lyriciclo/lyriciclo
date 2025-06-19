@@ -121,6 +121,7 @@
     let startTime = null;
     let intervalId = null;
     let pausedAt = 0;
+    let finished = false;
 
     function updatePlayback() {
       const now = (Date.now() - startTime) / 1000;
@@ -128,6 +129,7 @@
       if (current >= lines.length) {
         clearInterval(intervalId);
         isPlaying = false;
+        finished = true;
         playPauseBtn.textContent = '▶︎';
         return;
       }
@@ -144,6 +146,14 @@
     }
 
     playPauseBtn.addEventListener('click', () => {
+      if (finished) {
+        // Restart from beginning
+        lines.forEach(l => l.classList.remove('active'));
+        current = 0;
+        pausedAt = 0;
+        finished = false;
+      }
+
       if (!isPlaying) {
         startTime = Date.now() - pausedAt * 1000;
         intervalId = setInterval(updatePlayback, 100);
