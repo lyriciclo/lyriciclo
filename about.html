@@ -6,12 +6,21 @@
   <title>About Lyriciclo</title>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
   <style>
+    :root {
+      --primary: #7B6ED6;
+      --secondary: #B2B9F6;
+      --hover-accent: #E3E2F7;
+      --light-bg: #F4F6FE;
+      --text-muted: #DCDCF6;
+      --text-light: #ffffff;
+    }
+
     html, body {
       margin: 0;
       padding: 0;
       height: 100%;
       font-family: 'Poppins', sans-serif;
-      background: #f4f0ff;
+      background: var(--light-bg);
       color: #333;
       box-sizing: border-box;
     }
@@ -33,7 +42,7 @@
     }
 
     h1 {
-      color: #7B6ED6;
+      color: var(--primary);
       font-size: 2rem;
       margin-bottom: 2rem;
     }
@@ -41,11 +50,11 @@
     p {
       font-size: 1.1rem;
       line-height: 1.6;
-      margin-bottom: 0.75rem; /* tighter spacing */
+      margin-bottom: 0.75rem;
     }
 
     a {
-      color: #7B6ED6;
+      color: var(--primary);
       text-decoration: none;
       font-weight: 500;
       transition: font-weight 0.15s ease;
