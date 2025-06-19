@@ -75,8 +75,14 @@
       width: 3rem;
       height: 3rem;
       cursor: pointer;
-      line-height: 1.2;
+      line-height: 1;
       transition: font-size 0.2s, letter-spacing 0.2s;
+
+      /* Center text inside button */
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding-bottom: 1px; /* slight tweak for visual centering */
     }
 
     .controls button.pause {
