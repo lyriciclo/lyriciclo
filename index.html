@@ -6,24 +6,20 @@
   <title>Lyriciclo — Coming Soon</title>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet" />
   <style>
-    /* === Brand Colors === */
     :root {
-      --accent: #7B6ED6;
-      --accent-hover: #6C5AC2;
-      --accent-light: #ECE9FB;
-      --accent-dark: #4C4089;
-      --bg: #FFF7F0;
-      --text: #333333;
-      --text-muted: #777777;
+      --main: #7B6ED6;
+      --main-hover: #6C5AC2;
+      --light-bg: #F8F6FD;
+      --white: #ffffff;
+      --muted-text: #e0ddf5;
     }
 
-    /* === Base Styles === */
     body {
       margin: 0;
       padding: 0;
       font-family: 'Poppins', sans-serif;
-      background: var(--bg);
-      color: var(--text);
+      background: var(--main);
+      color: var(--white);
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -43,46 +39,45 @@
       font-size: 1.25rem;
       font-weight: 400;
       margin-bottom: 1.5rem;
-      color: var(--text-muted);
+      color: var(--muted-text);
     }
 
-    /* === Tagline Badge === */
     .beta-tagline {
       font-size: 1rem;
       font-weight: 500;
-      color: var(--accent-dark);
-      background: var(--accent-light);
+      color: var(--main);
+      background: var(--white);
       padding: 6px 12px;
       border-radius: 12px;
       display: inline-block;
-      box-shadow: 0 1px 4px rgba(0, 0, 0, 0.05);
       letter-spacing: 0.5px;
       margin-top: -1rem;
     }
 
-    /* === CTA Button === */
     .cta-button {
-      background: var(--accent);
-      color: white;
+      background: var(--white);
+      color: var(--main);
       padding: 12px 24px;
-      border: none;
+      border: 2px solid var(--white);
       border-radius: 8px;
       font-size: 1rem;
       font-weight: 500;
       margin-top: 2.5rem;
       cursor: pointer;
-      transition: background 0.2s ease;
+      transition: all 0.2s ease;
     }
 
     .cta-button:hover {
-      background: var(--accent-hover);
+      background: var(--main-hover);
+      color: var(--white);
+      border-color: var(--main-hover);
     }
 
     footer {
       position: absolute;
       bottom: 20px;
       font-size: 0.9rem;
-      color: var(--text-muted);
+      color: var(--muted-text);
     }
 
     @media (max-width: 600px) {
