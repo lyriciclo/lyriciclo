@@ -83,14 +83,16 @@
       align-items: center;
       justify-content: center;
       padding-bottom: 1px;
-
-      /* Subtle right shift for visual centering */
-      transform: translateX(0.05rem);
     }
 
     .controls button.pause {
       font-size: 1.5rem;
       letter-spacing: 0.1em;
+    }
+
+    .controls button span {
+      display: inline-block;
+      transform: translateX(0.05rem); /* Subtle right shift */
     }
   </style>
 </head>
@@ -98,7 +100,7 @@
   <h1>Tengo una vaca lechera</h1>
 
   <div class="controls">
-    <button id="play-pause">▶︎</button>
+    <button id="play-pause"><span>▶︎</span></button>
   </div>
 
   <div class="lyrics-container" id="lyrics">
@@ -131,6 +133,7 @@
   <script>
     const lines = document.querySelectorAll('.lyric-line');
     const playPauseBtn = document.getElementById('play-pause');
+    const playPauseIcon = playPauseBtn.querySelector('span');
     let isPlaying = false;
     let current = 0;
     let startTime = null;
@@ -145,7 +148,7 @@
         clearInterval(intervalId);
         isPlaying = false;
         finished = true;
-        playPauseBtn.textContent = '▶︎';
+        playPauseIcon.textContent = '▶︎';
         playPauseBtn.classList.remove('pause');
         return;
       }
@@ -172,13 +175,13 @@
       if (!isPlaying) {
         startTime = Date.now() - pausedAt * 1000;
         intervalId = setInterval(updatePlayback, 100);
-        playPauseBtn.textContent = 'II';
+        playPauseIcon.textContent = 'II';
         playPauseBtn.classList.add('pause');
         isPlaying = true;
       } else {
         clearInterval(intervalId);
         pausedAt = (Date.now() - startTime) / 1000;
-        playPauseBtn.textContent = '▶︎';
+        playPauseIcon.textContent = '▶︎';
         playPauseBtn.classList.remove('pause');
         isPlaying = false;
       }
