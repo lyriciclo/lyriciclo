@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Lyriciclo Sync Demo</title>
 
-  <!-- ✅ Google Fonts: Poppins -->
+  <!-- Google Fonts: Poppins -->
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
 
   <style>
@@ -69,10 +69,13 @@
       background-color: #7B6ED6;
       color: white;
       border: none;
-      padding: 0.5rem 1.2rem;
-      font-size: 1rem;
-      border-radius: 8px;
+      font-weight: 700;
+      font-size: 1.2rem;
+      border-radius: 50%;
+      width: 3rem;
+      height: 3rem;
       cursor: pointer;
+      line-height: 1.2;
     }
   </style>
 </head>
@@ -80,7 +83,7 @@
   <h1>Tengo una vaca lechera</h1>
 
   <div class="controls">
-    <button id="play">▶️ Play Demo</button>
+    <button id="play-pause">▶︎</button>
   </div>
 
   <div class="lyrics-container" id="lyrics">
@@ -112,31 +115,46 @@
 
   <script>
     const lines = document.querySelectorAll('.lyric-line');
-    const playBtn = document.getElementById('play');
-    const container = document.getElementById('lyrics');
+    const playPauseBtn = document.getElementById('play-pause');
+    let isPlaying = false;
+    let current = 0;
+    let startTime = null;
+    let intervalId = null;
+    let pausedAt = 0;
 
-    playBtn.addEventListener('click', () => {
-      let start = Date.now();
-      let current = 0;
+    function updatePlayback() {
+      const now = (Date.now() - startTime) / 1000;
 
-      const interval = setInterval(() => {
-        const now = (Date.now() - start) / 1000;
+      if (current >= lines.length) {
+        clearInterval(intervalId);
+        isPlaying = false;
+        playPauseBtn.textContent = '▶︎';
+        return;
+      }
 
-        if (current >= lines.length) {
-          clearInterval(interval);
-          return;
-        }
+      const line = lines[current];
+      const time = parseFloat(line.dataset.time);
 
-        const line = lines[current];
-        const time = parseFloat(line.dataset.time);
+      if (now >= time) {
+        lines.forEach(l => l.classList.remove('active'));
+        line.classList.add('active');
+        line.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        current++;
+      }
+    }
 
-        if (now >= time) {
-          lines.forEach(l => l.classList.remove('active'));
-          line.classList.add('active');
-          line.scrollIntoView({ behavior: 'smooth', block: 'center' });
-          current++;
-        }
-      }, 200);
+    playPauseBtn.addEventListener('click', () => {
+      if (!isPlaying) {
+        startTime = Date.now() - pausedAt * 1000;
+        intervalId = setInterval(updatePlayback, 100);
+        playPauseBtn.textContent = '| |';
+        isPlaying = true;
+      } else {
+        clearInterval(intervalId);
+        pausedAt = (Date.now() - startTime) / 1000;
+        playPauseBtn.textContent = '▶︎';
+        isPlaying = false;
+      }
     });
   </script>
 </body>
