@@ -20,26 +20,33 @@
       font-family: 'Poppins', sans-serif;
       background: var(--main);
       color: var(--white);
+      height: 100vh;
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      height: 100vh;
       text-align: center;
+    }
+
+    .center-content {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
     }
 
     h1 {
       font-size: 3rem;
       font-weight: 600;
-      margin: 0; /* Remove bottom margin entirely */
+      margin: 0;
       letter-spacing: -0.5px;
     }
 
-    p {
+    .tagline {
       font-size: 1.05rem;
       font-weight: 400;
-      margin-top: 0.5rem;  /* Add manual space above tagline */
-      margin-bottom: 3.5rem;
+      margin-top: 0.5rem;
+      margin-bottom: 0;
       color: var(--muted-text);
     }
 
@@ -52,7 +59,7 @@
       border-radius: 12px;
       display: inline-block;
       letter-spacing: 0.5px;
-      margin-top: -0.25rem;
+      margin-top: 3.5rem; /* Moved much lower */
     }
 
     footer {
@@ -67,16 +74,18 @@
         font-size: 2.2rem;
       }
 
-      p {
+      .tagline {
         font-size: 0.95rem;
       }
     }
   </style>
 </head>
 <body>
-  <h1>Lyriciclo</h1>
-  <p>Spanish music. Bilingual lyrics. In sync.</p>
-  <p class="beta-tagline">Beta coming soon</p>
+  <div class="center-content">
+    <h1>Lyriciclo</h1>
+    <p class="tagline">Spanish music. Bilingual lyrics. In sync.</p>
+    <p class="beta-tagline">Beta coming soon</p>
+  </div>
   <footer>&copy; 2025 Lyriciclo</footer>
 </body>
 </html>
