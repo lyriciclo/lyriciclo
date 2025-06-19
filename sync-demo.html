@@ -76,6 +76,11 @@
       height: 3rem;
       cursor: pointer;
       line-height: 1.2;
+      transition: font-size 0.2s;
+    }
+
+    .controls button.pause {
+      font-size: 1.4rem;
     }
   </style>
 </head>
@@ -131,6 +136,7 @@
         isPlaying = false;
         finished = true;
         playPauseBtn.textContent = '▶︎';
+        playPauseBtn.classList.remove('pause');
         return;
       }
 
@@ -158,11 +164,13 @@
         startTime = Date.now() - pausedAt * 1000;
         intervalId = setInterval(updatePlayback, 100);
         playPauseBtn.textContent = 'II';
+        playPauseBtn.classList.add('pause');
         isPlaying = true;
       } else {
         clearInterval(intervalId);
         pausedAt = (Date.now() - startTime) / 1000;
         playPauseBtn.textContent = '▶︎';
+        playPauseBtn.classList.remove('pause');
         isPlaying = false;
       }
     });
