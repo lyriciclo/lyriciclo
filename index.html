@@ -3,77 +3,68 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Lyriciclo</title>
+  <title>Lyriciclo — Coming Soon</title>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet" />
   <style>
     :root {
-      --main: #7B6ED6;
-      --main-hover: #6C5AC2;
-      --light-bg: #F8F6FD;
-      --hover-accent: #E6E0F5; /* NEW hover color */
-      --white: #ffffff;
-      --muted-text: #e0ddf5;
+      --primary: #7B6ED6;
+      --secondary: #B2B9F6;
+      --hover-accent: #E3E2F7;
+      --light-bg: #F4F6FE;
+      --text-muted: #DCDCF6;
+      --text-light: #ffffff;
     }
 
-    html, body {
+    body {
       margin: 0;
       padding: 0;
-      height: 100%;
       font-family: 'Poppins', sans-serif;
-      background: var(--main);
-      color: var(--white);
-    }
-
-    .container {
+      background: var(--primary);
+      color: var(--text-light);
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
       height: 100vh;
       text-align: center;
-      gap: 1.75rem;
     }
 
     h1 {
       font-size: 3rem;
       font-weight: 600;
-      margin: 0;
+      margin-bottom: 0.25rem;
       letter-spacing: -0.5px;
-      color: var(--white);
     }
 
-    .tagline {
-      font-size: 1.05rem;
+    p {
+      font-size: 1.2rem;
       font-weight: 400;
-      color: var(--muted-text);
-      margin: 0;
+      margin-bottom: 2rem;
+      color: var(--text-muted);
     }
 
     .beta-tagline {
       font-size: 1rem;
       font-weight: 500;
-      color: var(--main);
-      background: var(--white);
+      color: var(--primary);
+      background: var(--text-light);
       padding: 6px 12px;
       border-radius: 12px;
+      display: inline-block;
       letter-spacing: 0.5px;
-      text-decoration: none;
+      margin-top: 0.25rem;
       transition: background 0.2s ease;
     }
 
     .beta-tagline:hover {
       background: var(--hover-accent);
-      color: var(--main);
-      cursor: pointer;
     }
 
     footer {
       position: absolute;
       bottom: 20px;
       font-size: 0.9rem;
-      color: var(--muted-text);
-      width: 100%;
-      text-align: center;
+      color: var(--text-muted);
     }
 
     @media (max-width: 600px) {
@@ -81,18 +72,16 @@
         font-size: 2.2rem;
       }
 
-      .tagline {
-        font-size: 0.95rem;
+      p {
+        font-size: 1rem;
       }
     }
   </style>
 </head>
 <body>
-  <div class="container">
-    <h1>Lyriciclo</h1>
-    <p class="tagline">Spanish music. Bilingual lyrics. In sync.</p>
-    <a href="/about.html" class="beta-tagline">Beta coming soon</a>
-  </div>
+  <h1>Lyriciclo</h1>
+  <p>Spanish music. Bilingual lyrics. In sync.</p>
+  <p><a class="beta-tagline" href="/about.html">Beta coming soon</a></p>
   <footer>&copy; 2025 Lyriciclo</footer>
 </body>
 </html>
