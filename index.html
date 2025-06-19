@@ -14,27 +14,30 @@
       --muted-text: #e0ddf5;
     }
 
-    body {
+    html, body {
       margin: 0;
       padding: 0;
+      height: 100%;
       font-family: 'Poppins', sans-serif;
       background: var(--main);
       color: var(--white);
-      height: 100vh;
+      text-align: center;
+    }
+
+    .layout {
       display: flex;
       flex-direction: column;
-      align-items: center;
       justify-content: space-between;
-      text-align: center;
-      position: relative;
+      align-items: center;
+      height: 100vh;
     }
 
     .center-wrapper {
       display: flex;
-      flex: 1;
       flex-direction: column;
       align-items: center;
       justify-content: center;
+      flex-grow: 1;
     }
 
     h1 {
@@ -51,6 +54,13 @@
       color: var(--muted-text);
     }
 
+    .beta-container {
+      flex-grow: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
     .beta-tagline {
       font-size: 1rem;
       font-weight: 500;
@@ -58,17 +68,13 @@
       background: var(--white);
       padding: 6px 12px;
       border-radius: 12px;
-      display: inline-block;
       letter-spacing: 0.5px;
-      margin-top: 1rem;      /* tightened from 2rem */
-      margin-bottom: 3rem;
     }
 
     footer {
-      position: absolute;
-      bottom: 20px;
       font-size: 0.9rem;
       color: var(--muted-text);
+      margin-bottom: 20px;
     }
 
     @media (max-width: 600px) {
@@ -83,13 +89,17 @@
   </style>
 </head>
 <body>
-  <div class="center-wrapper">
-    <h1>Lyriciclo</h1>
-    <p class="tagline">Spanish music. Bilingual lyrics. In sync.</p>
+  <div class="layout">
+    <div class="center-wrapper">
+      <h1>Lyriciclo</h1>
+      <p class="tagline">Spanish music. Bilingual lyrics. In sync.</p>
+    </div>
+
+    <div class="beta-container">
+      <p class="beta-tagline">Beta coming soon</p>
+    </div>
+
+    <footer>&copy; 2025 Lyriciclo</footer>
   </div>
-
-  <p class="beta-tagline">Beta coming soon</p>
-
-  <footer>&copy; 2025 Lyriciclo</footer>
 </body>
 </html>
