@@ -77,12 +77,16 @@
       height: 3rem;
       cursor: pointer;
       line-height: 1;
-      transition: font-size 0.2s, letter-spacing 0.2s;
+      transition: background-color 0.2s, font-size 0.2s, letter-spacing 0.2s;
 
       display: flex;
       align-items: center;
       justify-content: center;
       padding-bottom: 1px;
+    }
+
+    .controls button:hover {
+      background-color: #9A90E2;
     }
 
     .controls button.pause {
@@ -92,7 +96,7 @@
 
     .controls button span {
       display: inline-block;
-      transform: translateX(0.05rem); /* Subtle right shift */
+      transform: translateX(0.05rem);
     }
   </style>
 </head>
