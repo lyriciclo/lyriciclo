@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Lyriciclo Sync Demo</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      background-color: #fff;
+      color: #333;
+      margin: 0;
+      padding: 2rem;
+    }
+
+    h1 {
+      text-align: center;
+      color: #7B6ED6;
+    }
+
+    .lyrics-container {
+      max-width: 600px;
+      margin: 2rem auto;
+      overflow-y: auto;
+      height: 70vh;
+      scroll-behavior: smooth;
+      border-top: 1px solid #ddd;
+      border-bottom: 1px solid #ddd;
+      padding: 1rem 0;
+    }
+
+    .lyric-line {
+      margin: 1.5rem 0;
+      text-align: center;
+      line-height: 1.6;
+      opacity: 0.4;
+      transition: opacity 0.2s, font-weight 0.2s, color 0.2s;
+    }
+
+    .lyric-line.active {
+      opacity: 1;
+      font-weight: bold;
+      color: #7B6ED6;
+    }
+
+    .spanish, .english {
+      display: block;
+    }
+
+    .word {
+      cursor: pointer;
+      padding: 0 2px;
+    }
+
+    .word:hover {
+      background-color: #f0f0f0;
+    }
+
+    .controls {
+      text-align: center;
+      margin-top: 1rem;
+    }
+
+    .controls button {
+      background-color: #7B6ED6;
+      color: white;
+      border: none;
+      padding: 0.5rem 1.2rem;
+      font-size: 1rem;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <h1>Tengo una vaca lechera</h1>
+
+  <div class="controls">
+    <button id="play">▶️ Play Demo</button>
+  </div>
+
+  <div class="lyrics-container" id="lyrics">
+    <div class="lyric-line" data-time="0">
+      <div class="spanish">
+        <span class="word">Tengo</span> <span class="word">una</span> <span class="word">vaca</span> <span class="word">lechera</span>
+      </div>
+      <div class="english">I have a dairy cow</div>
+    </div>
+    <div class="lyric-line" data-time="3">
+      <div class="spanish">
+        <span class="word">No</span> <span class="word">es</span> <span class="word">una</span> <span class="word">vaca</span> <span class="word">cualquiera</span>
+      </div>
+      <div class="english">It’s not just any cow</div>
+    </div>
+    <div class="lyric-line" data-time="6">
+      <div class="spanish">
+        <span class="word">Me</span> <span class="word">da</span> <span class="word">leche</span> <span class="word">condensada</span>
+      </div>
+      <div class="english">She gives me condensed milk</div>
+    </div>
+    <div class="lyric-line" data-time="9">
+      <div class="spanish">
+        <span class="word">Ay</span> <span class="word">qué</span> <span class="word">vaca</span> <span class="word">tan</span> <span class="word">salada</span>
+      </div>
+      <div class="english">Oh what a lucky cow</div>
+    </div>
+  </div>
+
+  <script>
+    const lines = document.querySelectorAll('.lyric-line');
+    const playBtn = document.getElementById('play');
+    const container = document.getElementById('lyrics');
+
+    playBtn.addEventListener('click', () => {
+      let start = Date.now();
+      let current = 0;
+
+      const interval = setInterval(() => {
+        const now = (Date.now() - start) / 1000;
+
+        if (current >= lines.length) {
+          clearInterval(interval);
+          return;
+        }
+
+        const line = lines[current];
+        const time = parseFloat(line.dataset.time);
+
+        if (now >= time) {
+          // Remove active from all
+          lines.forEach(l => l.classList.remove('active'));
+
+          // Add active to current
+          line.classList.add('active');
+
+          // Scroll it into view (centered)
+          line.scrollIntoView({ behavior: 'smooth', block: 'center' });
+
+          current++;
+        }
+      }, 200);
+    });
+  </script>
+</body>
+</html>
