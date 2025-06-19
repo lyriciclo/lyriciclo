@@ -30,7 +30,7 @@
       justify-content: center;
       height: 100vh;
       text-align: center;
-      gap: 1.75rem; /* spacing between each block */
+      gap: 1.75rem;
     }
 
     h1 {
@@ -56,6 +56,12 @@
       padding: 6px 12px;
       border-radius: 12px;
       letter-spacing: 0.5px;
+      text-decoration: none;
+      transition: background 0.2s ease;
+    }
+
+    .beta-tagline:hover {
+      background: var(--light-bg);
     }
 
     footer {
@@ -82,7 +88,7 @@
   <div class="container">
     <h1>Lyriciclo</h1>
     <p class="tagline">Spanish music. Bilingual lyrics. In sync.</p>
-    <p class="beta-tagline">Beta coming soon</p>
+    <a href="/about.html" class="beta-tagline">Beta coming soon</a>
   </div>
   <footer>&copy; 2025 Lyriciclo</footer>
 </body>
