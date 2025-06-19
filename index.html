@@ -21,15 +21,16 @@
       font-family: 'Poppins', sans-serif;
       background: var(--main);
       color: var(--white);
-      text-align: center;
     }
 
     .container {
       display: flex;
       flex-direction: column;
       align-items: center;
-      min-height: 100vh;
-      padding-top: 20vh; /* Push title and tagline lower */
+      justify-content: center;
+      height: 100vh;
+      text-align: center;
+      gap: 1.75rem; /* spacing between each block */
     }
 
     h1 {
@@ -43,9 +44,8 @@
     .tagline {
       font-size: 1.05rem;
       font-weight: 400;
-      margin-top: 0.5rem;
-      margin-bottom: 2.5rem;
       color: var(--muted-text);
+      margin: 0;
     }
 
     .beta-tagline {
@@ -56,14 +56,15 @@
       padding: 6px 12px;
       border-radius: 12px;
       letter-spacing: 0.5px;
-      margin-bottom: 3rem;
     }
 
     footer {
+      position: absolute;
+      bottom: 20px;
       font-size: 0.9rem;
       color: var(--muted-text);
-      margin-top: auto;
-      margin-bottom: 20px;
+      width: 100%;
+      text-align: center;
     }
 
     @media (max-width: 600px) {
@@ -82,7 +83,7 @@
     <h1>Lyriciclo</h1>
     <p class="tagline">Spanish music. Bilingual lyrics. In sync.</p>
     <p class="beta-tagline">Beta coming soon</p>
-    <footer>&copy; 2025 Lyriciclo</footer>
   </div>
+  <footer>&copy; 2025 Lyriciclo</footer>
 </body>
 </html>
