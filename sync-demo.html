@@ -157,7 +157,7 @@
       if (!isPlaying) {
         startTime = Date.now() - pausedAt * 1000;
         intervalId = setInterval(updatePlayback, 100);
-        playPauseBtn.textContent = '| |';
+        playPauseBtn.textContent = 'II';
         isPlaying = true;
       } else {
         clearInterval(intervalId);
