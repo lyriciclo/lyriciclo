@@ -6,20 +6,31 @@
   <title>About Lyriciclo</title>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
   <style>
-    body {
+    html, body {
+      margin: 0;
+      padding: 0;
+      height: 100%;
       font-family: 'Poppins', sans-serif;
       background: #f4f0ff;
       color: #333;
-      padding: 3rem;
+    }
+
+    .container {
       max-width: 600px;
       margin: auto;
+      padding: 3rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
       text-align: center;
     }
 
     h1 {
       color: #7B6ED6;
       font-size: 2rem;
-      margin-bottom: 2.5rem; /* increased spacing */
+      margin-bottom: 2.5rem;
     }
 
     p {
@@ -41,20 +52,22 @@
   </style>
 </head>
 <body>
-  <h1>About Lyriciclo</h1>
-  <p>
-    Lyriciclo is a bilingual lyric syncing tool<br>
-    for Spanish learners.
-  </p>
-  <p>
-    View lyrics in three ways: side-by-side Spanish and<br>
-    English, just Spanish, or just English. Every line is synced<br>
-    to the music so you can follow along in real time.<br>
-    No pausing, no guesswork.
-  </p>
-  <p>
-    Beta coming soon :)
-  </p>
-  <p><a href="/">ᐊ  Back to home</a></p>
+  <div class="container">
+    <h1>About Lyriciclo</h1>
+    <p>
+      Lyriciclo is a bilingual lyric syncing tool<br>
+      for Spanish learners.
+    </p>
+    <p>
+      View lyrics in three ways: side-by-side Spanish and<br>
+      English, just Spanish, or just English. Every line is synced<br>
+      to the music so you can follow along in real time.<br>
+      No pausing, no guesswork.
+    </p>
+    <p>
+      Beta coming soon :)
+    </p>
+    <p><a href="/">ᐊ  Back to home</a></p>
+  </div>
 </body>
 </html>
