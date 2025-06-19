@@ -24,26 +24,12 @@
       text-align: center;
     }
 
-    .layout {
-      display: flex;
-      flex-direction: column;
-      height: 100vh;
-    }
-
-    .center-wrapper {
-      flex: 1;
+    .container {
       display: flex;
       flex-direction: column;
       align-items: center;
-      justify-content: flex-end;
-      padding-bottom: 4rem; /* push content down */
-    }
-
-    .beta-container {
-      flex: 2; /* gives the badge more vertical weight */
-      display: flex;
-      align-items: flex-start;
-      justify-content: center;
+      min-height: 100vh;
+      padding-top: 20vh; /* Push title and tagline lower */
     }
 
     h1 {
@@ -51,12 +37,14 @@
       font-weight: 600;
       margin: 0;
       letter-spacing: -0.5px;
+      color: var(--white);
     }
 
     .tagline {
       font-size: 1.05rem;
       font-weight: 400;
       margin-top: 0.5rem;
+      margin-bottom: 2.5rem;
       color: var(--muted-text);
     }
 
@@ -68,11 +56,13 @@
       padding: 6px 12px;
       border-radius: 12px;
       letter-spacing: 0.5px;
+      margin-bottom: 3rem;
     }
 
     footer {
       font-size: 0.9rem;
       color: var(--muted-text);
+      margin-top: auto;
       margin-bottom: 20px;
     }
 
@@ -88,16 +78,10 @@
   </style>
 </head>
 <body>
-  <div class="layout">
-    <div class="center-wrapper">
-      <h1>Lyriciclo</h1>
-      <p class="tagline">Spanish music. Bilingual lyrics. In sync.</p>
-    </div>
-
-    <div class="beta-container">
-      <p class="beta-tagline">Beta coming soon</p>
-    </div>
-
+  <div class="container">
+    <h1>Lyriciclo</h1>
+    <p class="tagline">Spanish music. Bilingual lyrics. In sync.</p>
+    <p class="beta-tagline">Beta coming soon</p>
     <footer>&copy; 2025 Lyriciclo</footer>
   </div>
 </body>
