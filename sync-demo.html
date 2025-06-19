@@ -4,9 +4,13 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Lyriciclo Sync Demo</title>
+
+  <!-- ✅ Google Fonts: Poppins -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+
   <style>
     body {
-      font-family: sans-serif;
+      font-family: 'Poppins', sans-serif;
       background-color: #fff;
       color: #333;
       margin: 0;
@@ -39,7 +43,7 @@
 
     .lyric-line.active {
       opacity: 1;
-      font-weight: bold;
+      font-weight: 600;
       color: #7B6ED6;
     }
 
@@ -127,15 +131,9 @@
         const time = parseFloat(line.dataset.time);
 
         if (now >= time) {
-          // Remove active from all
           lines.forEach(l => l.classList.remove('active'));
-
-          // Add active to current
           line.classList.add('active');
-
-          // Scroll it into view (centered)
           line.scrollIntoView({ behavior: 'smooth', block: 'center' });
-
           current++;
         }
       }, 200);
