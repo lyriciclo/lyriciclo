@@ -76,11 +76,12 @@
       height: 3rem;
       cursor: pointer;
       line-height: 1.2;
-      transition: font-size 0.2s;
+      transition: font-size 0.2s, letter-spacing 0.2s;
     }
 
     .controls button.pause {
       font-size: 1.7rem;
+      letter-spacing: 0.1em;
     }
   </style>
 </head>
@@ -153,7 +154,6 @@
 
     playPauseBtn.addEventListener('click', () => {
       if (finished) {
-        // Restart from beginning
         lines.forEach(l => l.classList.remove('active'));
         current = 0;
         pausedAt = 0;
