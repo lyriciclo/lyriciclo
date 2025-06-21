@@ -17,7 +17,7 @@
 
     h1 {
       text-align: center;
-      color: #5F52B7;
+      color: #6150CE;
       font-weight: 600;
       margin: 0.8rem 0 0.4rem;
       font-size: 2.2rem;
@@ -121,7 +121,7 @@
 
     .lyric-line.active {
       font-weight: 600;
-      color: #5F52B7;
+      color: #6150CE;
     }
 
     .spanish, .english {
@@ -202,7 +202,6 @@
         playPauseIcon.textContent = '▶︎';
         playPauseBtn.classList.remove('pause');
 
-        // Wait 1.5s before removing final highlight
         setTimeout(() => {
           lines.forEach(l => l.classList.remove('active'));
         }, 1500);
