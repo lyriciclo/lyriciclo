@@ -67,7 +67,7 @@
     }
 
     .controls button {
-      background-color: #8C80DB;
+      background-color: #7B6ED6;
       color: white;
       border: none;
       font-weight: 700;
@@ -86,7 +86,7 @@
     }
 
     .controls button:hover {
-      background-color: #A9A1EB;
+      background-color: #9A90E2;
     }
 
     .controls button.pause {
@@ -120,7 +120,7 @@
 
     .lyric-line.active {
       font-weight: 600;
-      color: #7B6ED6;
+      color: #5F52B7;
     }
 
     .spanish, .english {
@@ -201,8 +201,6 @@
         playPauseIcon.textContent = '▶︎';
         playPauseBtn.classList.remove('pause');
         lines.forEach(l => l.classList.remove('active'));
-        lines[0].classList.add('active');
-        lines[0].scrollIntoView({ behavior: 'smooth', block: 'center' });
         return;
       }
 
