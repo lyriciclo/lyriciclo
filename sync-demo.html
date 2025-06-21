@@ -127,7 +127,9 @@
       height: 70vh;
       overflow-y: auto;
       scroll-behavior: smooth;
-      padding-bottom: 2rem;
+      padding-bottom: 4rem;
+      scroll-padding-top: 5rem;
+      scroll-padding-bottom: 5rem;
       scrollbar-width: none;
     }
     .lyrics-container::-webkit-scrollbar {
@@ -267,7 +269,7 @@
     function scrollLine(line, index) {
       line.scrollIntoView({
         behavior: 'smooth',
-        block: index > 1 ? 'center' : 'start'
+        block: index > 2 ? 'center' : 'start'
       });
     }
 
