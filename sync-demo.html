@@ -88,7 +88,7 @@
       display: inline-block;
     }
     .controls button.play span {
-      transform: translate(2px, 2px);
+      transform: translate(3px, 2px);
     }
     .controls button:hover { background-color: #9A90E2; }
     .lyrics-container {
@@ -200,6 +200,7 @@
         finished = true;
         playPauseIcon.textContent = '▶︎';
         playPauseBtn.classList.remove('pause');
+        playPauseBtn.classList.add('play');
         setTimeout(() => lines.forEach(l => l.classList.remove('active')), 1500);
         return;
       }
@@ -219,6 +220,7 @@
         startTime = Date.now() - pausedAt * 1000;
         intervalId = setInterval(updatePlayback, 100);
         playPauseIcon.textContent = 'II';
+        playPauseBtn.classList.remove('play');
         playPauseBtn.classList.add('pause');
         isPlaying = true;
       } else {
@@ -226,6 +228,7 @@
         pausedAt = (Date.now() - startTime) / 1000;
         playPauseIcon.textContent = '▶︎';
         playPauseBtn.classList.remove('pause');
+        playPauseBtn.classList.add('play');
         isPlaying = false;
       }
     });
