@@ -18,15 +18,21 @@
     h1 {
       text-align: center;
       color: #7B6ED6;
-      font-weight: 600; /* Poppins Semi-Bold */
+      font-weight: 600;
+      margin-bottom: 0.3rem;
     }
 
     .song-info {
       max-width: 600px;
-      margin: 1rem auto;
+      margin: 0 auto 1.5rem;
       font-size: 0.95rem;
       text-align: center;
-      color: #666;
+      line-height: 1.4;
+    }
+
+    .song-info .secondary {
+      color: #9A90E2;
+      font-weight: 500;
     }
 
     .toggle-controls {
@@ -37,16 +43,18 @@
     }
 
     .toggle-controls button {
-      background-color: #f2f2f2;
+      background-color: #9A90E2;
+      color: white;
       border: none;
       padding: 0.5rem 1rem;
       border-radius: 0.5rem;
       cursor: pointer;
       font-weight: 600;
+      transition: background-color 0.2s;
     }
 
     .toggle-controls button:hover {
-      background-color: #e0e0e0;
+      background-color: #7B6ED6;
     }
 
     .lyrics-container {
@@ -63,13 +71,13 @@
       text-align: center;
       line-height: 1.6;
       opacity: 0.4;
-      font-weight: 400; /* Poppins Light */
+      font-weight: 400;
       transition: opacity 0.2s, font-weight 0.2s, color 0.2s;
     }
 
     .lyric-line.active {
       opacity: 1;
-      font-weight: 600; /* Poppins Semi-Bold */
+      font-weight: 600;
       color: #7B6ED6;
     }
 
@@ -126,9 +134,8 @@
   <h1>Tengo una vaca lechera</h1>
 
   <div class="song-info">
-    <strong>Artist:</strong> Tradicional<br>
-    <strong>Country:</strong> Spain<br>
-    <strong>Year:</strong> Unknown
+    Tradicional | Canciones Infantiles Españolas | 2000<br>
+    <span class="secondary">Children's Song | España</span>
   </div>
 
   <div class="toggle-controls">
@@ -179,7 +186,6 @@
     let pausedAt = 0;
     let finished = false;
 
-    // Highlight first line on load
     lines[0].classList.add('active');
 
     function updatePlayback() {
@@ -191,8 +197,6 @@
         finished = true;
         playPauseIcon.textContent = '▶︎';
         playPauseBtn.classList.remove('pause');
-
-        // Reset to top
         lines.forEach(l => l.classList.remove('active'));
         lines[0].classList.add('active');
         lines[0].scrollIntoView({ behavior: 'smooth', block: 'center' });
