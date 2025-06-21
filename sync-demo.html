@@ -141,16 +141,24 @@
     .lyric-line:hover {
       font-weight: 500;
     }
-    .lyric-line:hover .english {
-      font-weight: 400;
+    .lyric-line:hover .english,
+    .lyric-line:hover .spanish {
+      font-weight: 500;
     }
     .lyric-line.active {
       font-weight: 600;
       color: #6150CE;
     }
-    .lyric-line .english { color: #bbb; font-weight: 300; }
-    .lyric-line.active .english { color: #8F85C4; font-weight: 500; }
-
+    .lyric-line .english,
+    .lyric-line .spanish {
+      display: block;
+      transition: color 0.2s, font-weight 0.2s;
+    }
+    .lyric-line.active .english,
+    .lyric-line.active .spanish {
+      color: #8F85C4;
+      font-weight: 500;
+    }
     .back-to-top {
       text-align: center;
       margin-top: 2rem;
@@ -178,7 +186,7 @@
     </div>
     <div class="toggle-buttons">
       <button class="mode-btn" data-mode="spanish">Español</button>
-      <button class="mode-btn" data-mode="dual" id="default-mode">Dual</button>
+      <button class="mode-btn active" data-mode="dual">Dual</button>
       <button class="mode-btn" data-mode="english">English</button>
     </div>
   </div>
@@ -223,7 +231,7 @@
 
     window.onload = () => {
       resetToTopState();
-      setMode('dual'); // default
+      setMode('dual');
     };
 
     backToTopLink.addEventListener('click', (e) => {
@@ -288,14 +296,13 @@
       });
     });
 
-    // Toggle mode logic
     const modeButtons = document.querySelectorAll('.mode-btn');
     const spanishLines = document.querySelectorAll('.spanish');
     const englishLines = document.querySelectorAll('.english');
 
     function setMode(mode) {
       modeButtons.forEach(btn => btn.classList.remove('active'));
-      document.querySelector(`.mode-btn[data-mode="${mode}"]`).classList.add('active');
+      document.querySelector(`.mode-btn[data-mode=\"${mode}\"]`).classList.add('active');
 
       spanishLines.forEach(span => {
         span.style.display = (mode === 'english') ? 'none' : 'block';
