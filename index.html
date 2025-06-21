@@ -29,15 +29,10 @@
       text-align: center;
     }
 
-    h1 {
-      font-size: 3rem;
-      font-weight: 600;
-      margin-bottom: 0.25rem;
-      letter-spacing: -0.5px;
-    }
-
-    .iclo {
-      color: var(--secondary);
+    .logo {
+      max-width: 280px;
+      height: auto;
+      margin-bottom: 0.5rem;
     }
 
     p {
@@ -49,7 +44,7 @@
 
     .beta-tagline {
       font-size: 1rem;
-      font-weight: 600; /* 👈 semi-bold */
+      font-weight: 600;
       color: var(--primary);
       background: var(--text-light);
       padding: 6px 12px;
@@ -73,8 +68,8 @@
     }
 
     @media (max-width: 600px) {
-      h1 {
-        font-size: 2.2rem;
+      .logo {
+        max-width: 200px;
       }
 
       p {
@@ -84,7 +79,7 @@
   </style>
 </head>
 <body>
-  <h1><span style="color: white;">Lyric</span><span class="iclo">iclo</span></h1>
+  <img src="assets/lyriciclo-logo.svg" alt="Lyriciclo logo" class="logo" />
   <p>Spanish music. Bilingual lyrics. In sync.</p>
   <a class="beta-tagline" href="/about.html">Beta coming soon</a>
   <footer>&copy; 2025 Lyriciclo</footer>
