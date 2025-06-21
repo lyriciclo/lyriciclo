@@ -96,22 +96,22 @@
       margin-top: 1.5rem;
       text-align: center;
     }
-    .mode-label {
-      margin-right: 0.5rem;
-      font-weight: 500;
-      color: #4D4787;
-      font-size: 0.95rem;
-    }
     #mode-select {
       background-color: #f1effc;
       color: #6150CE;
       font-weight: 500;
       border: none;
-      padding: 0.4rem 1rem;
+      padding: 0.4rem 1.2rem;
       border-radius: 999px;
       font-family: 'Poppins', sans-serif;
       font-size: 0.95rem;
       cursor: pointer;
+      appearance: none;
+      background-image: url('data:image/svg+xml;utf8,<svg fill="%236150CE" height="16" viewBox="0 0 24 24" width="16" xmlns="http://www.w3.org/2000/svg"><path d="M7 10l5 5 5-5z"/></svg>');
+      background-repeat: no-repeat;
+      background-position: right 0.75rem center;
+      background-size: 1rem;
+      padding-right: 2rem;
       transition: background-color 0.2s ease;
     }
     #mode-select:hover {
@@ -201,7 +201,6 @@
       <button id="play-pause"><span>▶︎</span></button>
     </div>
     <div class="mode-selector">
-      <label for="mode-select" class="mode-label">Modo:</label>
       <select id="mode-select">
         <option value="spanish">Español</option>
         <option value="dual" selected>Dual</option>
