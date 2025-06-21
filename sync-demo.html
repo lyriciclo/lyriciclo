@@ -149,16 +149,30 @@
       font-weight: 600;
       color: #6150CE;
     }
-    .lyric-line .english,
+
     .lyric-line .spanish {
-      display: block;
+      color: #9E9EBD;
+      font-weight: 400;
       transition: color 0.2s, font-weight 0.2s;
     }
-    .lyric-line.active .english,
-    .lyric-line.active .spanish {
-      color: #8F85C4;
-      font-weight: 500;
+    .lyric-line .english {
+      color: #9E9EBD;
+      font-weight: 400;
+      transition: color 0.2s, font-weight 0.2s;
     }
+    .lyric-line .english.dual-mode {
+      color: #bbb;
+      font-weight: 300;
+    }
+    .lyric-line.active .spanish {
+      color: #6150CE;
+      font-weight: 600;
+    }
+    .lyric-line.active .english {
+      color: #6150CE;
+      font-weight: 600;
+    }
+
     .back-to-top {
       text-align: center;
       margin-top: 2rem;
@@ -302,20 +316,14 @@
 
     function setMode(mode) {
       modeButtons.forEach(btn => btn.classList.remove('active'));
-      document.querySelector(`.mode-btn[data-mode=\"${mode}\"]`).classList.add('active');
+      document.querySelector(`.mode-btn[data-mode="${mode}"]`).classList.add('active');
 
       spanishLines.forEach(span => {
         span.style.display = (mode === 'english') ? 'none' : 'block';
       });
       englishLines.forEach(en => {
         en.style.display = (mode === 'spanish') ? 'none' : 'block';
-        if (mode === 'dual') {
-          en.style.color = '#bbb';
-          en.style.fontWeight = '300';
-        } else if (mode === 'english') {
-          en.style.color = '#4D4787';
-          en.style.fontWeight = '400';
-        }
+        en.classList.toggle('dual-mode', mode === 'dual');
       });
     }
 
