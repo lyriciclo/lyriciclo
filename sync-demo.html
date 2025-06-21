@@ -31,7 +31,7 @@
       position: fixed;
       top: 0;
       left: 0;
-      background: white;
+      background: #7B6ED6;
       box-shadow: 0 2px 4px rgba(0,0,0,0.06);
       display: flex;
       justify-content: space-between;
@@ -40,20 +40,26 @@
       z-index: 1000;
       font-size: 0.95rem;
     }
-    .nav-left {
+    .nav-left a {
+      text-decoration: none;
+      color: white;
       font-weight: 600;
-      color: #6150CE;
       font-size: 1.1rem;
     }
+    .nav-right {
+      flex: 1;
+      display: flex;
+      justify-content: center;
+    }
     .nav-right a {
-      margin-left: 1.5rem;
+      margin: 0 1rem;
       text-decoration: none;
-      color: #333;
+      color: white;
       font-weight: 400;
       transition: color 0.2s;
     }
     .nav-right a:hover {
-      color: #7B6ED6;
+      color: #eae6ff;
       font-weight: 500;
     }
     h1 {
@@ -229,7 +235,7 @@
 </head>
 <body>
   <nav class="top-nav">
-    <div class="nav-left">Lyriciclo</div>
+    <div class="nav-left"><a href="#">Lyriciclo</a></div>
     <div class="nav-right">
       <a href="#">Home</a>
       <a href="#">Songs</a>
@@ -237,155 +243,3 @@
       <a href="#">Contact</a>
     </div>
   </nav>
-
-  <div class="song-info">
-    <div class="tags">
-      <span class="tag" id="genre">Reguetón</span>
-      <span class="tag" id="country">España</span>
-    </div>
-    <h1>Amor sin nombre</h1>
-    <div class="line1" id="metadata">Juan Pérez | Primera Luz | 2000</div>
-    <div class="controls">
-      <button id="play-pause" class="play"><span>▶︎</span></button>
-    </div>
-    <div class="mode-selector">
-      <select id="mode-select">
-        <option value="spanish">Español</option>
-        <option value="dual" selected>Bilingual</option>
-        <option value="english">English</option>
-      </select>
-    </div>
-  </div>
-
-  <div class="lyrics-container" id="lyrics">
-    <div class="lyric-line" data-time="0">
-      <div class="spanish">Tengo una vaca lechera</div>
-      <div class="english">I have a dairy cow</div>
-    </div>
-    <div class="lyric-line" data-time="3">
-      <div class="spanish">No es una vaca cualquiera</div>
-      <div class="english">It’s not just any cow</div>
-    </div>
-    <div class="lyric-line" data-time="6">
-      <div class="spanish">Me da leche condensada</div>
-      <div class="english">She gives me condensed milk</div>
-    </div>
-    <div class="lyric-line" data-time="9">
-      <div class="spanish">Ay qué vaca tan salada</div>
-      <div class="english">Oh what a lucky cow</div>
-    </div>
-    <div class="back-to-top">
-      <a id="back-to-top-link">Back to Top</a>
-    </div>
-  </div>
-
-  <script>
-    const lines = document.querySelectorAll('.lyric-line');
-    const playPauseBtn = document.getElementById('play-pause');
-    const playPauseIcon = playPauseBtn.querySelector('span');
-    const backToTopLink = document.getElementById('back-to-top-link');
-
-    let isPlaying = false, current = 0, startTime = null, intervalId = null, pausedAt = 0, finished = false;
-
-    function resetToTopState() {
-      lines.forEach(l => l.classList.remove('active'));
-      current = 0;
-      pausedAt = 0;
-      finished = false;
-      lines[0].scrollIntoView({ behavior: 'smooth', block: 'start' });
-    }
-
-    window.onload = () => {
-      resetToTopState();
-      setMode('dual');
-    };
-
-    backToTopLink.addEventListener('click', (e) => {
-      e.preventDefault();
-      resetToTopState();
-    });
-
-    function scrollLine(line, index) {
-      line.scrollIntoView({
-        behavior: 'smooth',
-        block: index > 2 ? 'center' : 'start'
-      });
-    }
-
-    function updatePlayback() {
-      const now = (Date.now() - startTime) / 1000;
-      if (current >= lines.length) {
-        clearInterval(intervalId);
-        isPlaying = false;
-        finished = true;
-        playPauseIcon.textContent = '▶︎';
-        playPauseBtn.classList.remove('pause');
-        playPauseBtn.classList.add('play');
-        setTimeout(() => lines.forEach(l => l.classList.remove('active')), 1500);
-        return;
-      }
-      const line = lines[current];
-      const time = parseFloat(line.dataset.time);
-      if (now >= time) {
-        lines.forEach(l => l.classList.remove('active'));
-        line.classList.add('active');
-        scrollLine(line, current);
-        current++;
-      }
-    }
-
-    playPauseBtn.addEventListener('click', () => {
-      if (finished) resetToTopState();
-      if (!isPlaying) {
-        startTime = Date.now() - pausedAt * 1000;
-        intervalId = setInterval(updatePlayback, 100);
-        playPauseIcon.textContent = 'II';
-        playPauseBtn.classList.remove('play');
-        playPauseBtn.classList.add('pause');
-        isPlaying = true;
-      } else {
-        clearInterval(intervalId);
-        pausedAt = (Date.now() - startTime) / 1000;
-        playPauseIcon.textContent = '▶︎';
-        playPauseBtn.classList.remove('pause');
-        playPauseBtn.classList.add('play');
-        isPlaying = false;
-      }
-    });
-
-    lines.forEach((line, index) => {
-      line.addEventListener('click', () => {
-        const time = parseFloat(line.dataset.time);
-        current = index;
-        pausedAt = time;
-        if (isPlaying) {
-          clearInterval(intervalId);
-          startTime = Date.now() - time * 1000;
-          intervalId = setInterval(updatePlayback, 100);
-        }
-        lines.forEach(l => l.classList.remove('active'));
-        line.classList.add('active');
-        scrollLine(line, current);
-      });
-    });
-
-    const modeSelect = document.getElementById('mode-select');
-    const spanishLines = document.querySelectorAll('.spanish');
-    const englishLines = document.querySelectorAll('.english');
-
-    function setMode(mode) {
-      spanishLines.forEach(span => {
-        span.style.display = (mode === 'english') ? 'none' : 'block';
-      });
-      englishLines.forEach(en => {
-        en.style.display = (mode === 'spanish') ? 'none' : 'block';
-        en.classList.toggle('dual-mode', mode === 'dual');
-      });
-    }
-
-    modeSelect.addEventListener('change', () => {
-      setMode(modeSelect.value);
-    });
-  </script>
-</body>
-</html>
