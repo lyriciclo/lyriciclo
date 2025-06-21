@@ -32,20 +32,18 @@
       top: 0;
       left: 0;
       background: #f1effc;
-      box-shadow: 0 2px 4px rgba(0,0,0,0.06);
       display: flex;
       justify-content: center;
       align-items: center;
       padding: 0.6rem 2rem;
       z-index: 1000;
-      font-size: 1rem;
     }
     .nav-logo {
       position: absolute;
       left: 2rem;
       font-weight: 700;
       color: #7B6ED6;
-      font-size: 1.3rem;
+      font-size: 1.4rem;
       text-decoration: none;
       letter-spacing: 0.5px;
     }
@@ -58,20 +56,11 @@
       color: #4D4787;
       font-weight: 400;
       transition: color 0.2s;
-      padding: 0.3rem 0.6rem;
     }
     .nav-links a:hover {
       color: #6150CE;
     }
-    .gradient-top {
-      position: absolute;
-      top: 0;
-      height: 2rem;
-      width: 100%;
-      background: linear-gradient(to bottom, #fff, transparent);
-      pointer-events: none;
-      z-index: 10;
-    }
+
     h1 {
       text-align: center;
       color: #6150CE;
@@ -141,6 +130,7 @@
       transform: none;
     }
     .controls button:hover { background-color: #9A90E2; }
+
     .mode-selector {
       margin: 2.2rem 0;
       text-align: center;
@@ -166,6 +156,7 @@
     #mode-select:hover {
       background-color: #e6e1f7;
     }
+
     .lyrics-container {
       width: 100%;
       max-width: 600px;
@@ -176,11 +167,11 @@
       scroll-padding-top: 5rem;
       scroll-padding-bottom: 5rem;
       scrollbar-width: none;
-      position: relative;
     }
     .lyrics-container::-webkit-scrollbar {
       display: none;
     }
+
     .lyric-line {
       margin: 1.5rem 0;
       text-align: center;
@@ -195,34 +186,24 @@
     .lyric-line:hover {
       font-weight: 500;
     }
-    .lyric-line:hover .english,
-    .lyric-line:hover .spanish {
-      font-weight: 500;
-    }
     .lyric-line.active {
       font-weight: 600;
       color: #6150CE;
     }
     .lyric-line .spanish {
-      color: #9E9EBD;
-      font-weight: 400;
+      display: block;
     }
     .lyric-line .english {
-      color: #9E9EBD;
-      font-weight: 400;
+      display: block;
     }
     .lyric-line .english.dual-mode {
       color: #bbb;
       font-weight: 300;
     }
-    .lyric-line.active .spanish,
-    .lyric-line.active .english {
-      color: #6150CE;
-      font-weight: 600;
-    }
     .lyric-line.active .english.dual-mode {
       color: #8F85C4;
     }
+
     .back-to-top {
       text-align: center;
       margin-top: 2rem;
@@ -267,7 +248,6 @@
   </div>
 
   <div class="lyrics-container" id="lyrics">
-    <div class="gradient-top"></div>
     <div class="lyric-line" data-time="0">
       <div class="spanish">Tengo una vaca lechera</div>
       <div class="english">I have a dairy cow</div>
@@ -294,7 +274,6 @@
     const playPauseBtn = document.getElementById('play-pause');
     const playPauseIcon = playPauseBtn.querySelector('span');
     const backToTopLink = document.getElementById('back-to-top-link');
-    const modeSelect = document.getElementById('mode-select');
 
     let isPlaying = false, current = 0, startTime = null, intervalId = null, pausedAt = 0, finished = false;
 
@@ -380,10 +359,11 @@
       });
     });
 
-    function setMode(mode) {
-      const spanishLines = document.querySelectorAll('.spanish');
-      const englishLines = document.querySelectorAll('.english');
+    const modeSelect = document.getElementById('mode-select');
+    const spanishLines = document.querySelectorAll('.spanish');
+    const englishLines = document.querySelectorAll('.english');
 
+    function setMode(mode) {
       spanishLines.forEach(span => {
         span.style.display = (mode === 'english') ? 'none' : 'block';
       });
