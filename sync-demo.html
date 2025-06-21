@@ -6,12 +6,16 @@
   <title>Lyriciclo Sync Demo</title>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
   <style>
-    html { scroll-behavior: smooth; }
+    html, body {
+      scroll-behavior: smooth;
+      overflow: hidden;
+      margin: 0;
+      padding: 0;
+    }
     body {
       font-family: 'Poppins', sans-serif;
       background-color: #fff;
       color: #333;
-      margin: 0;
       padding: 2rem;
     }
     h1 {
@@ -115,7 +119,6 @@
       font-weight: 400;
     }
     .back-to-top a:hover { font-weight: 600; }
-    .bottom-spacer { height: 30vh; }
   </style>
 </head>
 <body>
@@ -151,7 +154,6 @@
     <div class="back-to-top">
       <a id="back-to-top-link">Back to Top</a>
     </div>
-    <div class="bottom-spacer"></div>
   </div>
 
   <script>
