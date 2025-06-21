@@ -186,7 +186,6 @@
     }
 
     .lyrics-container {
-      position: relative;
       width: 100%;
       max-width: 600px;
       height: 70vh;
@@ -200,22 +199,6 @@
 
     .lyrics-container::-webkit-scrollbar {
       display: none;
-    }
-
-    .top-fade {
-      position: sticky;
-      top: 0;
-      height: 2rem;
-      width: 100%;
-      background: linear-gradient(to bottom, #fff, transparent);
-      pointer-events: none;
-      z-index: 5;
-      opacity: 0;
-      transition: opacity 0.3s ease;
-    }
-
-    .lyrics-container.scrolled .top-fade {
-      opacity: 1;
     }
 
     .lyric-line {
@@ -304,7 +287,6 @@
   </div>
 
   <div class="lyrics-container" id="lyrics">
-    <div class="top-fade"></div>
     <div class="lyric-line" data-time="0">
       <div class="spanish">Tengo una vaca lechera</div>
       <div class="english">I have a dairy cow</div>
@@ -331,7 +313,6 @@
     const playPauseBtn = document.getElementById('play-pause');
     const playPauseIcon = playPauseBtn.querySelector('span');
     const backToTopLink = document.getElementById('back-to-top-link');
-    const lyricsContainer = document.getElementById('lyrics');
 
     let isPlaying = false, current = 0, startTime = null, intervalId = null, pausedAt = 0, finished = false;
 
@@ -351,14 +332,6 @@
     backToTopLink.addEventListener('click', (e) => {
       e.preventDefault();
       resetToTopState();
-    });
-
-    lyricsContainer.addEventListener('scroll', () => {
-      if (lyricsContainer.scrollTop > 10) {
-        lyricsContainer.classList.add('scrolled');
-      } else {
-        lyricsContainer.classList.remove('scrolled');
-      }
     });
 
     function scrollLine(line, index) {
