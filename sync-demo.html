@@ -25,7 +25,7 @@
 
     .song-info {
       max-width: 600px;
-      margin: 0 auto 2.5rem;
+      margin: 0 auto;
       text-align: center;
       line-height: 1.4;
     }
@@ -60,9 +60,44 @@
       color: #6A6A8F;
     }
 
+    .controls {
+      display: flex;
+      justify-content: center;
+      margin-top: 1.2rem;
+    }
+
+    .controls button {
+      background-color: #7B6ED6;
+      color: white;
+      border: none;
+      font-weight: 700;
+      font-size: 1.4rem;
+      border-radius: 50%;
+      width: 3.5rem;
+      height: 3.5rem;
+      cursor: pointer;
+      line-height: 1;
+      transition: background-color 0.2s, font-size 0.2s, letter-spacing 0.2s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding-bottom: 1px;
+      touch-action: manipulation;
+    }
+
+    .controls button.pause {
+      font-size: 1.7rem;
+      letter-spacing: 0.1em;
+    }
+
+    .controls button span {
+      display: inline-block;
+      transform: translateX(0.05rem);
+    }
+
     .lyrics-container {
       max-width: 600px;
-      margin: 2rem auto;
+      margin: 3rem auto 0;
       overflow-y: auto;
       height: 70vh;
       scroll-behavior: smooth;
@@ -96,41 +131,6 @@
     .word:hover {
       background-color: transparent;
     }
-
-    .controls {
-      display: flex;
-      justify-content: center;
-      margin-top: 1rem;
-    }
-
-    .controls button {
-      background-color: #7B6ED6;
-      color: white;
-      border: none;
-      font-weight: 700;
-      font-size: 1.4rem;
-      border-radius: 50%;
-      width: 3.5rem;
-      height: 3.5rem;
-      cursor: pointer;
-      line-height: 1;
-      transition: background-color 0.2s, font-size 0.2s, letter-spacing 0.2s;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding-bottom: 1px;
-      touch-action: manipulation;
-    }
-
-    .controls button.pause {
-      font-size: 1.7rem;
-      letter-spacing: 0.1em;
-    }
-
-    .controls button span {
-      display: inline-block;
-      transform: translateX(0.05rem);
-    }
   </style>
 </head>
 <body>
@@ -141,10 +141,10 @@
     </div>
     <h1>Amor sin nombre</h1>
     <div class="line1">Juan Pérez | Primera Luz | 2000</div>
-  </div>
 
-  <div class="controls">
-    <button id="play-pause" aria-label="Play/Pause"><span>▶︎</span></button>
+    <div class="controls">
+      <button id="play-pause" aria-label="Play/Pause"><span>▶︎</span></button>
+    </div>
   </div>
 
   <div class="lyrics-container" id="lyrics">
