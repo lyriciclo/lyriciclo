@@ -25,36 +25,40 @@
     .song-info {
       max-width: 600px;
       margin: 0 auto 1.5rem;
-      font-size: 0.95rem;
       text-align: center;
       line-height: 1.4;
     }
 
-    .song-info .secondary {
-      color: #9A90E2;
+    .song-info .line1 {
+      font-size: 1rem;
       font-weight: 500;
+      color: #333;
     }
 
-    .toggle-controls {
+    .song-info .tags {
+      margin-top: 0.4rem;
       display: flex;
       justify-content: center;
-      gap: 1rem;
-      margin-bottom: 1rem;
+      gap: 0.5rem;
+      flex-wrap: wrap;
     }
 
-    .toggle-controls button {
-      background-color: #9A90E2;
-      color: white;
-      border: none;
-      padding: 0.5rem 1rem;
-      border-radius: 0.5rem;
+    .tag {
+      background-color: white;
+      color: #9A90E2;
+      font-size: 0.8rem;
+      padding: 0.25rem 0.75rem;
+      border: 2px solid #9A90E2;
+      border-radius: 999px;
+      font-weight: 500;
       cursor: pointer;
-      font-weight: 600;
-      transition: background-color 0.2s;
+      transition: all 0.2s ease;
     }
 
-    .toggle-controls button:hover {
-      background-color: #7B6ED6;
+    .tag:hover {
+      background-color: #f2f0fb;
+      color: #7B6ED6;
+      border-color: #7B6ED6;
     }
 
     .lyrics-container {
@@ -131,17 +135,14 @@
   </style>
 </head>
 <body>
-  <h1>Tengo una vaca lechera</h1>
+  <h1>Amor sin nombre</h1>
 
   <div class="song-info">
-    Tradicional | Canciones Infantiles Españolas | 2000<br>
-    <span class="secondary">Children's Song | España</span>
-  </div>
-
-  <div class="toggle-controls">
-    <button onclick="setView('both')">Both</button>
-    <button onclick="setView('spanish')">Spanish</button>
-    <button onclick="setView('english')">English</button>
+    <div class="line1">Juan Pérez | Primera Luz | 2000</div>
+    <div class="tags">
+      <span class="tag">Reguetón</span>
+      <span class="tag">España</span>
+    </div>
   </div>
 
   <div class="controls">
@@ -235,15 +236,6 @@
         isPlaying = false;
       }
     });
-
-    function setView(mode) {
-      document.querySelectorAll('.spanish').forEach(el => {
-        el.style.display = (mode === 'english') ? 'none' : 'block';
-      });
-      document.querySelectorAll('.english').forEach(el => {
-        el.style.display = (mode === 'spanish') ? 'none' : 'block';
-      });
-    }
   </script>
 </body>
 </html>
