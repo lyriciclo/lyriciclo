@@ -7,6 +7,10 @@
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
 
   <style>
+    html {
+      scroll-behavior: smooth;
+    }
+
     body {
       font-family: 'Poppins', sans-serif;
       background-color: #fff;
@@ -21,6 +25,7 @@
       font-weight: 600;
       margin: 0.8rem 0 0.4rem;
       font-size: 2.2rem;
+      display: inline-block;
     }
 
     .song-info {
@@ -28,10 +33,11 @@
       margin: 0 auto;
       text-align: center;
       line-height: 1.4;
+      position: relative;
     }
 
     .song-info .tags {
-      margin: 2.5rem auto 1rem;
+      margin: 3rem auto 1rem;
       display: flex;
       justify-content: center;
       gap: 1rem;
@@ -94,11 +100,6 @@
       letter-spacing: 0.1em;
     }
 
-    .controls button span {
-      display: inline-block;
-      transform: translateX(0.05rem);
-    }
-
     .lyrics-container {
       max-width: 600px;
       margin: 3rem auto 0;
@@ -124,28 +125,76 @@
       color: #6150CE;
     }
 
-    .spanish, .english {
-      display: block;
-    }
-
-    .word {
-      cursor: pointer;
-      padding: 0 2px;
+    .english {
+      opacity: 0.7;
     }
 
     .word:hover {
       background-color: transparent;
     }
+
+    .note-icon {
+      font-size: 1rem;
+      color: #aaa;
+      margin-left: 0.5rem;
+      cursor: pointer;
+      position: relative;
+      top: -0.4rem;
+    }
+
+    .note-icon:hover .tooltip {
+      display: block;
+    }
+
+    .tooltip {
+      display: none;
+      position: absolute;
+      top: 1.5rem;
+      left: 50%;
+      transform: translateX(-50%);
+      background: #f9f9ff;
+      color: #333;
+      border: 1px solid #ccc;
+      padding: 0.6rem;
+      font-size: 0.85rem;
+      border-radius: 6px;
+      width: 240px;
+      z-index: 10;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    }
+
+    .back-to-top {
+      text-align: center;
+      margin-top: 3rem;
+      font-size: 0.9rem;
+    }
+
+    .back-to-top a {
+      text-decoration: underline;
+      color: #6150CE;
+      cursor: pointer;
+    }
+
+    .back-to-top a:hover {
+      color: #4c3abb;
+    }
   </style>
 </head>
 <body>
-  <div class="song-info">
+  <div id="top" class="song-info">
     <div class="tags">
-      <span class="tag">Reguetón</span>
-      <span class="tag">España</span>
+      <span class="tag" id="genre">Reguetón</span>
+      <span class="tag" id="country">España</span>
     </div>
-    <h1>Amor sin nombre</h1>
-    <div class="line1">Juan Pérez | Primera Luz | 2000</div>
+    <div>
+      <h1>Amor sin nombre</h1>
+      <span class="note-icon">❓
+        <div class="tooltip">
+          This song plays with metaphor and simplicity. The original lyrics are light-hearted, but still poetic.
+        </div>
+      </span>
+    </div>
+    <div class="line1" id="metadata">Juan Pérez | Primera Luz | 2000</div>
 
     <div class="controls">
       <button id="play-pause" aria-label="Play/Pause"><span>▶︎</span></button>
@@ -154,29 +203,25 @@
 
   <div class="lyrics-container" id="lyrics">
     <div class="lyric-line" data-time="0">
-      <div class="spanish">
-        <span class="word">Tengo</span> <span class="word">una</span> <span class="word">vaca</span> <span class="word">lechera</span>
-      </div>
+      <div class="spanish"><span class="word">Tengo</span> <span class="word">una</span> <span class="word">vaca</span> <span class="word">lechera</span></div>
       <div class="english">I have a dairy cow</div>
     </div>
     <div class="lyric-line" data-time="3">
-      <div class="spanish">
-        <span class="word">No</span> <span class="word">es</span> <span class="word">una</span> <span class="word">vaca</span> <span class="word">cualquiera</span>
-      </div>
+      <div class="spanish"><span class="word">No</span> <span class="word">es</span> <span class="word">una</span> <span class="word">vaca</span> <span class="word">cualquiera</span></div>
       <div class="english">It’s not just any cow</div>
     </div>
     <div class="lyric-line" data-time="6">
-      <div class="spanish">
-        <span class="word">Me</span> <span class="word">da</span> <span class="word">leche</span> <span class="word">condensada</span>
-      </div>
+      <div class="spanish"><span class="word">Me</span> <span class="word">da</span> <span class="word">leche</span> <span class="word">condensada</span></div>
       <div class="english">She gives me condensed milk</div>
     </div>
     <div class="lyric-line" data-time="9">
-      <div class="spanish">
-        <span class="word">Ay</span> <span class="word">qué</span> <span class="word">vaca</span> <span class="word">tan</span> <span class="word">salada</span>
-      </div>
+      <div class="spanish"><span class="word">Ay</span> <span class="word">qué</span> <span class="word">vaca</span> <span class="word">tan</span> <span class="word">salada</span></div>
       <div class="english">Oh what a lucky cow</div>
     </div>
+  </div>
+
+  <div class="back-to-top">
+    <a href="#top">Back to Top</a>
   </div>
 
   <script>
@@ -189,6 +234,30 @@
     let intervalId = null;
     let pausedAt = 0;
     let finished = false;
+
+    const mode = 'dual'; // change to 'spanish' or 'english' to test language toggling
+
+    const genreText = {
+      english: 'Reggaeton',
+      spanish: 'Reguetón',
+      dual: 'Reguetón'
+    };
+
+    const countryText = {
+      english: 'Spain',
+      spanish: 'España',
+      dual: 'España'
+    };
+
+    const metadataText = {
+      english: 'Juan Pérez | First Light | 2000',
+      spanish: 'Juan Pérez | Primera Luz | 2000',
+      dual: 'Juan Pérez | Primera Luz | 2000'
+    };
+
+    document.getElementById('genre').textContent = genreText[mode];
+    document.getElementById('country').textContent = countryText[mode];
+    document.getElementById('metadata').textContent = metadataText[mode];
 
     lines[0].classList.add('active');
 
