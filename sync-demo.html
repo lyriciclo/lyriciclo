@@ -4,8 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Lyriciclo Sync Demo</title>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
-
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
   <style>
     html {
       scroll-behavior: smooth;
@@ -83,7 +82,7 @@
       height: 3.5rem;
       cursor: pointer;
       line-height: 1;
-      transition: background-color 0.2s, font-size 0.2s, letter-spacing 0.2s;
+      transition: background-color 0.2s;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -129,12 +128,14 @@
       color: #6150CE;
     }
 
-    .lyric-line.active .english {
-      color: #8F85C4;
+    .lyric-line .english {
+      color: #bbb;
+      font-weight: 300;
     }
 
-    .english {
-      color: #bbb;
+    .lyric-line.active .english {
+      color: #8F85C4;
+      font-weight: 500;
     }
 
     .back-to-top {
@@ -236,7 +237,6 @@
       current = 0;
       pausedAt = 0;
       finished = false;
-      lines[0].classList.add('active');
       lines[0].scrollIntoView({ behavior: 'smooth', block: 'center' });
     }
 
