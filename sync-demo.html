@@ -4,8 +4,6 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Lyriciclo Sync Demo</title>
-
-  <!-- Google Fonts: Poppins -->
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
 
   <style>
@@ -20,6 +18,34 @@
     h1 {
       text-align: center;
       color: #7B6ED6;
+    }
+
+    .song-info {
+      max-width: 600px;
+      margin: 1rem auto;
+      font-size: 0.95rem;
+      text-align: center;
+      color: #666;
+    }
+
+    .toggle-controls {
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+      margin-bottom: 1rem;
+    }
+
+    .toggle-controls button {
+      background-color: #f2f2f2;
+      border: none;
+      padding: 0.5rem 1rem;
+      border-radius: 0.5rem;
+      cursor: pointer;
+      font-weight: 600;
+    }
+
+    .toggle-controls button:hover {
+      background-color: #e0e0e0;
     }
 
     .lyrics-container {
@@ -73,20 +99,16 @@
       font-weight: 700;
       font-size: 1.2rem;
       border-radius: 50%;
-      width: 3rem;
-      height: 3rem;
+      width: 3.5rem;
+      height: 3.5rem;
       cursor: pointer;
       line-height: 1;
       transition: background-color 0.2s, font-size 0.2s, letter-spacing 0.2s;
-
       display: flex;
       align-items: center;
       justify-content: center;
       padding-bottom: 1px;
-    }
-
-    .controls button:hover {
-      background-color: #9A90E2;
+      touch-action: manipulation;
     }
 
     .controls button.pause {
@@ -103,8 +125,20 @@
 <body>
   <h1>Tengo una vaca lechera</h1>
 
+  <div class="song-info">
+    <strong>Artist:</strong> Tradicional<br>
+    <strong>Country:</strong> Spain<br>
+    <strong>Year:</strong> Unknown
+  </div>
+
+  <div class="toggle-controls">
+    <button onclick="setView('both')">Both</button>
+    <button onclick="setView('spanish')">Spanish</button>
+    <button onclick="setView('english')">English</button>
+  </div>
+
   <div class="controls">
-    <button id="play-pause"><span>▶︎</span></button>
+    <button id="play-pause" aria-label="Play/Pause"><span>▶︎</span></button>
   </div>
 
   <div class="lyrics-container" id="lyrics">
@@ -145,6 +179,9 @@
     let pausedAt = 0;
     let finished = false;
 
+    // Highlight first line on load
+    lines[0].classList.add('active');
+
     function updatePlayback() {
       const now = (Date.now() - startTime) / 1000;
 
@@ -154,6 +191,11 @@
         finished = true;
         playPauseIcon.textContent = '▶︎';
         playPauseBtn.classList.remove('pause');
+
+        // Reset to top
+        lines.forEach(l => l.classList.remove('active'));
+        lines[0].classList.add('active');
+        lines[0].scrollIntoView({ behavior: 'smooth', block: 'center' });
         return;
       }
 
@@ -170,7 +212,6 @@
 
     playPauseBtn.addEventListener('click', () => {
       if (finished) {
-        lines.forEach(l => l.classList.remove('active'));
         current = 0;
         pausedAt = 0;
         finished = false;
@@ -190,6 +231,15 @@
         isPlaying = false;
       }
     });
+
+    function setView(mode) {
+      document.querySelectorAll('.spanish').forEach(el => {
+        el.style.display = (mode === 'english') ? 'none' : 'block';
+      });
+      document.querySelectorAll('.english').forEach(el => {
+        el.style.display = (mode === 'spanish') ? 'none' : 'block';
+      });
+    }
   </script>
 </body>
 </html>
