@@ -190,7 +190,7 @@
     </div>
 
     <div class="back-to-top">
-      <a href="#top">Back to Top</a>
+      <a href="#top" id="back-to-top-link">Back to Top</a>
     </div>
   </div>
 
@@ -198,6 +198,8 @@
     const lines = document.querySelectorAll('.lyric-line');
     const playPauseBtn = document.getElementById('play-pause');
     const playPauseIcon = playPauseBtn.querySelector('span');
+    const backToTopLink = document.getElementById('back-to-top-link');
+
     let isPlaying = false;
     let current = 0;
     let startTime = null;
@@ -229,7 +231,22 @@
     document.getElementById('country').textContent = countryText[mode];
     document.getElementById('metadata').textContent = metadataText[mode];
 
-    lines[0].classList.add('active');
+    function resetToTopState() {
+      lines.forEach(l => l.classList.remove('active'));
+      current = 0;
+      pausedAt = 0;
+      finished = false;
+      lines[0].classList.add('active');
+      lines[0].scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }
+
+    window.onload = () => {
+      resetToTopState();
+    };
+
+    backToTopLink.addEventListener('click', () => {
+      resetToTopState();
+    });
 
     function updatePlayback() {
       const now = (Date.now() - startTime) / 1000;
@@ -260,9 +277,7 @@
 
     playPauseBtn.addEventListener('click', () => {
       if (finished) {
-        current = 0;
-        pausedAt = 0;
-        finished = false;
+        resetToTopState();
       }
 
       if (!isPlaying) {
