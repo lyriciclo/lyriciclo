@@ -90,6 +90,9 @@
     .controls button.play span {
       transform: translate(3px, 2px);
     }
+    .controls button.pause span {
+      transform: none;
+    }
     .controls button:hover { background-color: #9A90E2; }
 
     .mode-selector {
@@ -198,7 +201,7 @@
     <h1>Amor sin nombre</h1>
     <div class="line1" id="metadata">Juan Pérez | Primera Luz | 2000</div>
     <div class="controls">
-      <button id="play-pause"><span>▶︎</span></button>
+      <button id="play-pause" class="play"><span>▶︎</span></button>
     </div>
     <div class="mode-selector">
       <select id="mode-select">
