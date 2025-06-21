@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Lyriciclo Sync Demo</title>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
 
   <style>
     html {
@@ -120,52 +120,22 @@
       cursor: pointer;
     }
 
+    .lyric-line:hover {
+      font-weight: 500;
+    }
+
     .lyric-line.active {
       font-weight: 600;
       color: #6150CE;
     }
 
     .english {
-      opacity: 0.7;
-    }
-
-    .word:hover {
-      background-color: transparent;
-    }
-
-    .note-icon {
-      font-size: 1rem;
-      color: #aaa;
-      margin-left: 0.5rem;
-      cursor: pointer;
-      position: relative;
-      top: -0.4rem;
-    }
-
-    .note-icon:hover .tooltip {
-      display: block;
-    }
-
-    .tooltip {
-      display: none;
-      position: absolute;
-      top: 1.5rem;
-      left: 50%;
-      transform: translateX(-50%);
-      background: #f9f9ff;
-      color: #333;
-      border: 1px solid #ccc;
-      padding: 0.6rem;
-      font-size: 0.85rem;
-      border-radius: 6px;
-      width: 240px;
-      z-index: 10;
-      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+      color: #bbb;
     }
 
     .back-to-top {
       text-align: center;
-      margin-top: 3rem;
+      margin-top: 2rem;
       font-size: 0.9rem;
     }
 
@@ -173,10 +143,12 @@
       text-decoration: underline;
       color: #6150CE;
       cursor: pointer;
+      font-weight: 400;
+      transition: font-weight 0.2s ease;
     }
 
     .back-to-top a:hover {
-      color: #4c3abb;
+      font-weight: 600;
     }
   </style>
 </head>
@@ -186,14 +158,7 @@
       <span class="tag" id="genre">Reguetón</span>
       <span class="tag" id="country">España</span>
     </div>
-    <div>
-      <h1>Amor sin nombre</h1>
-      <span class="note-icon">❓
-        <div class="tooltip">
-          This song plays with metaphor and simplicity. The original lyrics are light-hearted, but still poetic.
-        </div>
-      </span>
-    </div>
+    <h1>Amor sin nombre</h1>
     <div class="line1" id="metadata">Juan Pérez | Primera Luz | 2000</div>
 
     <div class="controls">
@@ -235,7 +200,7 @@
     let pausedAt = 0;
     let finished = false;
 
-    const mode = 'dual'; // change to 'spanish' or 'english' to test language toggling
+    const mode = 'dual';
 
     const genreText = {
       english: 'Reggaeton',
