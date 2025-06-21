@@ -31,7 +31,7 @@
     }
 
     .song-info .tags {
-      margin: 1.5rem auto 1rem;
+      margin: 2.5rem auto 1rem;
       display: flex;
       justify-content: center;
       gap: 1rem;
@@ -41,7 +41,7 @@
     .tag {
       background-color: #f1effc;
       color: #7B6ED6;
-      font-size: 0.85rem;
+      font-size: 0.8rem;
       padding: 0.25rem 0.8rem;
       border: none;
       border-radius: 999px;
@@ -63,7 +63,7 @@
     .controls {
       display: flex;
       justify-content: center;
-      margin-top: 1.2rem;
+      margin-top: 1.5rem;
     }
 
     .controls button {
@@ -116,6 +116,7 @@
       font-weight: 400;
       color: #9E9EBD;
       transition: color 0.2s, font-weight 0.2s;
+      cursor: pointer;
     }
 
     .lyric-line.active {
@@ -200,7 +201,11 @@
         finished = true;
         playPauseIcon.textContent = '▶︎';
         playPauseBtn.classList.remove('pause');
-        lines.forEach(l => l.classList.remove('active'));
+
+        // Wait 1.5s before removing final highlight
+        setTimeout(() => {
+          lines.forEach(l => l.classList.remove('active'));
+        }, 1500);
         return;
       }
 
@@ -235,6 +240,24 @@
         playPauseBtn.classList.remove('pause');
         isPlaying = false;
       }
+    });
+
+    lines.forEach((line, index) => {
+      line.addEventListener('click', () => {
+        const time = parseFloat(line.dataset.time);
+        current = index;
+        pausedAt = time;
+
+        if (isPlaying) {
+          clearInterval(intervalId);
+          startTime = Date.now() - time * 1000;
+          intervalId = setInterval(updatePlayback, 100);
+        }
+
+        lines.forEach(l => l.classList.remove('active'));
+        line.classList.add('active');
+        line.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      });
     });
   </script>
 </body>
