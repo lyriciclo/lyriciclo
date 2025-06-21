@@ -127,7 +127,8 @@
       height: 70vh;
       overflow-y: auto;
       scroll-behavior: smooth;
-      padding: 3rem 0;
+      padding: 0;
+      padding-bottom: 2rem;
       scrollbar-width: none;
     }
     .lyrics-container::-webkit-scrollbar {
@@ -247,7 +248,7 @@
       current = 0;
       pausedAt = 0;
       finished = false;
-      lines[0].scrollIntoView({ behavior: 'smooth', block: 'center' });
+      lines[0].scrollIntoView({ behavior: 'smooth', block: 'start' });
     }
 
     window.onload = () => {
@@ -277,7 +278,10 @@
       if (now >= time) {
         lines.forEach(l => l.classList.remove('active'));
         line.classList.add('active');
-        line.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        line.scrollIntoView({
+          behavior: 'smooth',
+          block: current > 2 ? 'center' : 'start'
+        });
         current++;
       }
     }
@@ -313,7 +317,10 @@
         }
         lines.forEach(l => l.classList.remove('active'));
         line.classList.add('active');
-        line.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        line.scrollIntoView({
+          behavior: 'smooth',
+          block: current > 2 ? 'center' : 'start'
+        });
       });
     });
 
