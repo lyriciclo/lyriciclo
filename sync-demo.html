@@ -23,7 +23,38 @@
       align-items: center;
       justify-content: start;
       padding: 2rem;
+      padding-top: 4.5rem;
       box-sizing: border-box;
+    }
+    .top-nav {
+      width: 100%;
+      position: fixed;
+      top: 0;
+      left: 0;
+      background: white;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.06);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0.8rem 2rem;
+      z-index: 1000;
+      font-size: 0.95rem;
+    }
+    .nav-left {
+      font-weight: 600;
+      color: #6150CE;
+      font-size: 1.1rem;
+    }
+    .nav-right a {
+      margin-left: 1.5rem;
+      text-decoration: none;
+      color: #333;
+      font-weight: 400;
+      transition: color 0.2s;
+    }
+    .nav-right a:hover {
+      color: #7B6ED6;
+      font-weight: 500;
     }
     h1 {
       text-align: center;
@@ -157,7 +188,6 @@
       font-weight: 600;
       color: #6150CE;
     }
-
     .lyric-line .spanish {
       color: #9E9EBD;
       font-weight: 400;
@@ -183,7 +213,6 @@
     .lyric-line.active .english.dual-mode {
       color: #8F85C4;
     }
-
     .back-to-top {
       text-align: center;
       margin-top: 2rem;
@@ -199,6 +228,16 @@
   </style>
 </head>
 <body>
+  <nav class="top-nav">
+    <div class="nav-left">Lyriciclo</div>
+    <div class="nav-right">
+      <a href="#">Home</a>
+      <a href="#">Songs</a>
+      <a href="#">Behind Lyriciclo</a>
+      <a href="#">Contact</a>
+    </div>
+  </nav>
+
   <div class="song-info">
     <div class="tags">
       <span class="tag" id="genre">Reguetón</span>
