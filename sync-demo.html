@@ -23,7 +23,7 @@
       align-items: center;
       justify-content: start;
       padding: 2rem;
-      padding-top: 5.5rem;
+      padding-top: 5rem;
       box-sizing: border-box;
     }
     .top-nav {
@@ -31,39 +31,28 @@
       position: fixed;
       top: 0;
       left: 0;
-      background: #b2b9f6;
+      background: #f1effc;
       box-shadow: 0 2px 4px rgba(0,0,0,0.06);
       display: flex;
-      justify-content: space-between;
+      justify-content: flex-start;
       align-items: center;
-      padding: 1.2rem 2rem;
+      padding: 0.8rem 2rem;
       z-index: 1000;
       font-size: 1rem;
+      gap: 2rem;
     }
-    .nav-left a {
+    .top-nav a {
       text-decoration: none;
-      color: white;
-      font-weight: 600;
-      font-size: 1.1rem;
-    }
-    .nav-right {
-      flex: 1;
-      display: flex;
-      justify-content: center;
-    }
-    .nav-right a {
-      margin: 0 1rem;
-      text-decoration: none;
-      color: white;
-      font-weight: 400;
+      color: #7B6ED6;
+      font-weight: 500;
       transition: background-color 0.2s, color 0.2s;
       padding: 0.4rem 0.8rem;
       border-radius: 12px;
     }
-    .nav-right a:hover {
-      background-color: #9A90E2;
-      color: white;
-      font-weight: 500;
+    .top-nav a:hover {
+      background-color: #e3e0f5;
+      color: #6150CE;
+      font-weight: 600;
     }
     h1 {
       text-align: center;
@@ -238,13 +227,10 @@
 </head>
 <body>
   <nav class="top-nav">
-    <div class="nav-left"><a href="#">Lyriciclo</a></div>
-    <div class="nav-right">
-      <a href="#">Home</a>
-      <a href="#">Songs</a>
-      <a href="#">Behind Lyriciclo</a>
-      <a href="#">Contact</a>
-    </div>
+    <a href="#">Lyriciclo</a>
+    <a href="#">Songs</a>
+    <a href="#">Behind Lyriciclo</a>
+    <a href="#">Contact</a>
   </nav>
 
   <div class="song-info">
