@@ -56,10 +56,13 @@
       text-decoration: none;
       color: white;
       font-weight: 400;
-      transition: color 0.2s;
+      transition: background-color 0.2s, color 0.2s;
+      padding: 0.4rem 0.8rem;
+      border-radius: 12px;
     }
     .nav-right a:hover {
-      color: #eae6ff;
+      background-color: #9A90E2;
+      color: white;
       font-weight: 500;
     }
     h1 {
@@ -243,3 +246,46 @@
       <a href="#">Contact</a>
     </div>
   </nav>
+
+  <div class="song-info">
+    <div class="tags">
+      <span class="tag" id="genre">Reguetón</span>
+      <span class="tag" id="country">España</span>
+    </div>
+    <h1>Amor sin nombre</h1>
+    <div class="line1" id="metadata">Juan Pérez | Primera Luz | 2000</div>
+    <div class="controls">
+      <button id="play-pause" class="play"><span>▶︎</span></button>
+    </div>
+    <div class="mode-selector">
+      <select id="mode-select">
+        <option value="spanish">Español</option>
+        <option value="dual" selected>Bilingual</option>
+        <option value="english">English</option>
+      </select>
+    </div>
+  </div>
+
+  <div class="lyrics-container" id="lyrics">
+    <div class="lyric-line" data-time="0">
+      <div class="spanish">Tengo una vaca lechera</div>
+      <div class="english">I have a dairy cow</div>
+    </div>
+    <div class="lyric-line" data-time="3">
+      <div class="spanish">No es una vaca cualquiera</div>
+      <div class="english">It’s not just any cow</div>
+    </div>
+    <div class="lyric-line" data-time="6">
+      <div class="spanish">Me da leche condensada</div>
+      <div class="english">She gives me condensed milk</div>
+    </div>
+    <div class="lyric-line" data-time="9">
+      <div class="spanish">Ay qué vaca tan salada</div>
+      <div class="english">Oh what a lucky cow</div>
+    </div>
+    <div class="back-to-top">
+      <a id="back-to-top-link">Back to Top</a>
+    </div>
+  </div>
+</body>
+</html>
