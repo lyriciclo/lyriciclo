@@ -127,7 +127,6 @@
       height: 70vh;
       overflow-y: auto;
       scroll-behavior: smooth;
-      padding: 0;
       padding-bottom: 2rem;
       scrollbar-width: none;
     }
@@ -143,6 +142,7 @@
       color: #9E9EBD;
       transition: color 0.2s, font-weight 0.2s;
       cursor: pointer;
+      scroll-margin-top: 5rem;
     }
     .lyric-line:hover {
       font-weight: 500;
@@ -264,6 +264,13 @@
       resetToTopState();
     });
 
+    function scrollLine(line, index) {
+      line.scrollIntoView({
+        behavior: 'smooth',
+        block: index > 1 ? 'center' : 'start'
+      });
+    }
+
     function updatePlayback() {
       const now = (Date.now() - startTime) / 1000;
       if (current >= lines.length) {
@@ -281,10 +288,7 @@
       if (now >= time) {
         lines.forEach(l => l.classList.remove('active'));
         line.classList.add('active');
-        line.scrollIntoView({
-          behavior: 'smooth',
-          block: current > 2 ? 'center' : 'start'
-        });
+        scrollLine(line, current);
         current++;
       }
     }
@@ -320,10 +324,7 @@
         }
         lines.forEach(l => l.classList.remove('active'));
         line.classList.add('active');
-        line.scrollIntoView({
-          behavior: 'smooth',
-          block: current > 2 ? 'center' : 'start'
-        });
+        scrollLine(line, current);
       });
     });
 
