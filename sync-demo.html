@@ -36,11 +36,12 @@
       display: flex;
       justify-content: center;
       align-items: center;
-      padding: 1.2rem 2rem; /* Increased padding */
+      padding: 1.2rem 2rem;
       z-index: 1000;
       box-shadow: none;
       border-bottom: none;
     }
+
     .nav-logo {
       position: absolute;
       left: 2rem;
@@ -49,7 +50,14 @@
       font-size: 1.4rem;
       text-decoration: none;
       letter-spacing: 0.5px;
+      transition: color 0.2s ease, transform 0.2s ease;
     }
+
+    .nav-logo:hover {
+      color: #5e52b7;
+      transform: scale(1.05);
+    }
+
     .nav-links {
       display: flex;
       gap: 2rem;
@@ -71,12 +79,14 @@
       margin: 0.8rem 0 0.4rem;
       font-size: 2.2rem;
     }
+
     .song-info {
       width: 100%;
       max-width: 600px;
       text-align: center;
       line-height: 1.4;
     }
+
     .tags {
       margin: 3rem auto 1rem;
       display: flex;
@@ -84,6 +94,7 @@
       gap: 1rem;
       flex-wrap: wrap;
     }
+
     .tag {
       background-color: #f1effc;
       color: #7B6ED6;
@@ -95,17 +106,23 @@
       cursor: pointer;
       transition: all 0.2s ease;
     }
-    .tag:hover { background-color: #e3e0f5; }
+
+    .tag:hover {
+      background-color: #e3e0f5;
+    }
+
     .line1 {
       font-size: 1rem;
       font-weight: 400;
       color: #4D4787;
     }
+
     .controls {
       display: flex;
       justify-content: center;
       margin-top: 1.5rem;
     }
+
     .controls button {
       background-color: #7B6ED6;
       color: white;
@@ -123,21 +140,28 @@
       justify-content: center;
       padding-bottom: 1px;
     }
+
     .controls button span {
       display: inline-block;
     }
+
     .controls button.play span {
       transform: translate(3px, 2px);
     }
+
     .controls button.pause span {
       transform: none;
     }
-    .controls button:hover { background-color: #9A90E2; }
+
+    .controls button:hover {
+      background-color: #9A90E2;
+    }
 
     .mode-selector {
       margin: 2.2rem 0;
       text-align: center;
     }
+
     #mode-select {
       background-color: #f1effc;
       color: #6150CE;
@@ -149,13 +173,14 @@
       font-size: 0.95rem;
       cursor: pointer;
       appearance: none;
-      background-image: url('data:image/svg+xml;utf8,<svg fill=\"%236150CE\" height=\"16\" viewBox=\"0 0 24 24\" width=\"16\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M7 10l5 5 5-5z\"/></svg>');
+      background-image: url('data:image/svg+xml;utf8,<svg fill="%236150CE" height="16" viewBox="0 0 24 24" width="16" xmlns="http://www.w3.org/2000/svg"><path d="M7 10l5 5 5-5z"/></svg>');
       background-repeat: no-repeat;
       background-position: right 0.75rem center;
       background-size: 1rem;
       padding-right: 2rem;
       transition: background-color 0.2s ease;
     }
+
     #mode-select:hover {
       background-color: #e6e1f7;
     }
@@ -172,6 +197,7 @@
       scroll-padding-bottom: 5rem;
       scrollbar-width: none;
     }
+
     .lyrics-container::-webkit-scrollbar {
       display: none;
     }
@@ -187,6 +213,7 @@
       opacity: 0;
       transition: opacity 0.3s ease;
     }
+
     .lyrics-container.scrolled .top-fade {
       opacity: 1;
     }
@@ -202,23 +229,29 @@
       cursor: pointer;
       scroll-margin-top: 5rem;
     }
+
     .lyric-line:hover {
       font-weight: 500;
     }
+
     .lyric-line.active {
       font-weight: 600;
       color: #6150CE;
     }
+
     .lyric-line .spanish {
       display: block;
     }
+
     .lyric-line .english {
       display: block;
     }
+
     .lyric-line .english.dual-mode {
       color: #bbb;
       font-weight: 300;
     }
+
     .lyric-line.active .english.dual-mode {
       color: #8F85C4;
     }
@@ -228,13 +261,17 @@
       margin-top: 2rem;
       font-size: 0.9rem;
     }
+
     .back-to-top a {
       text-decoration: underline;
       color: #6150CE;
       cursor: pointer;
       font-weight: 400;
     }
-    .back-to-top a:hover { font-weight: 600; }
+
+    .back-to-top a:hover {
+      font-weight: 600;
+    }
   </style>
 </head>
 <body>
