@@ -131,7 +131,6 @@
       transform: none;
     }
     .controls button:hover { background-color: #9A90E2; }
-
     .mode-selector {
       margin: 2.2rem 0;
       text-align: center;
@@ -157,7 +156,6 @@
     #mode-select:hover {
       background-color: #e6e1f7;
     }
-
     .lyrics-container {
       width: 100%;
       max-width: 600px;
@@ -244,6 +242,7 @@
   </nav>
 
   <div class="song-info">
+    <nobr>
     <div class="tags">
       <span class="tag" id="genre">Reguetón</span>
       <span class="tag" id="country">España</span>
@@ -260,6 +259,7 @@
         <option value="english">English</option>
       </select>
     </div>
+    </nobr>
   </div>
 
   <div class="lyrics-container" id="lyrics">
@@ -283,5 +283,113 @@
       <a id="back-to-top-link">Back to Top</a>
     </div>
   </div>
+
+  <script>
+    const lines = document.querySelectorAll('.lyric-line');
+    const playPauseBtn = document.getElementById('play-pause');
+    const playPauseIcon = playPauseBtn.querySelector('span');
+    const backToTopLink = document.getElementById('back-to-top-link');
+    let isPlaying = false, current = 0, startTime = null, intervalId = null, pausedAt = 0, finished = false;
+
+    function resetToTopState() {
+      lines.forEach(l => l.classList.remove('active'));
+      current = 0;
+      pausedAt = 0;
+      finished = false;
+      lines[0].scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+
+    window.onload = () => {
+      resetToTopState();
+      setMode('dual');
+    };
+
+    backToTopLink.addEventListener('click', (e) => {
+      e.preventDefault();
+      resetToTopState();
+    });
+
+    function scrollLine(line, index) {
+      line.scrollIntoView({
+        behavior: 'smooth',
+        block: index > 2 ? 'center' : 'start'
+      });
+    }
+
+    function updatePlayback() {
+      const now = (Date.now() - startTime) / 1000;
+      if (current >= lines.length) {
+        clearInterval(intervalId);
+        isPlaying = false;
+        finished = true;
+        playPauseIcon.textContent = '▶︎';
+        playPauseBtn.classList.remove('pause');
+        playPauseBtn.classList.add('play');
+        setTimeout(() => lines.forEach(l => l.classList.remove('active')), 1500);
+        return;
+      }
+      const line = lines[current];
+      const time = parseFloat(line.dataset.time);
+      if (now >= time) {
+        lines.forEach(l => l.classList.remove('active'));
+        line.classList.add('active');
+        scrollLine(line, current);
+        current++;
+      }
+    }
+
+    playPauseBtn.addEventListener('click', () => {
+      if (finished) resetToTopState();
+      if (!isPlaying) {
+        startTime = Date.now() - pausedAt * 1000;
+        intervalId = setInterval(updatePlayback, 100);
+        playPauseIcon.textContent = 'II';
+        playPauseBtn.classList.remove('play');
+        playPauseBtn.classList.add('pause');
+        isPlaying = true;
+      } else {
+        clearInterval(intervalId);
+        pausedAt = (Date.now() - startTime) / 1000;
+        playPauseIcon.textContent = '▶︎';
+        playPauseBtn.classList.remove('pause');
+        playPauseBtn.classList.add('play');
+        isPlaying = false;
+      }
+    });
+
+    lines.forEach((line, index) => {
+      line.addEventListener('click', () => {
+        const time = parseFloat(line.dataset.time);
+        current = index;
+        pausedAt = time;
+        if (isPlaying) {
+          clearInterval(intervalId);
+          startTime = Date.now() - time * 1000;
+          intervalId = setInterval(updatePlayback, 100);
+        }
+        lines.forEach(l => l.classList.remove('active'));
+        line.classList.add('active');
+        scrollLine(line, current);
+      });
+    });
+
+    const modeSelect = document.getElementById('mode-select');
+    const spanishLines = document.querySelectorAll('.spanish');
+    const englishLines = document.querySelectorAll('.english');
+
+    function setMode(mode) {
+      spanishLines.forEach(span => {
+        span.style.display = (mode === 'english') ? 'none' : 'block';
+      });
+      englishLines.forEach(en => {
+        en.style.display = (mode === 'spanish') ? 'none' : 'block';
+        en.classList.toggle('dual-mode', mode === 'dual');
+      });
+    }
+
+    modeSelect.addEventListener('change', () => {
+      setMode(modeSelect.value);
+    });
+  </script>
 </body>
 </html>
