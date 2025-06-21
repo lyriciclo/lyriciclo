@@ -92,28 +92,30 @@
     }
     .controls button:hover { background-color: #9A90E2; }
 
-    .toggle-buttons {
-      display: flex;
-      justify-content: center;
-      margin-top: 1rem;
-      gap: 0.5rem;
+    .mode-selector {
+      margin-top: 1.5rem;
+      text-align: center;
     }
-    .mode-btn {
+    .mode-label {
+      margin-right: 0.5rem;
+      font-weight: 500;
+      color: #4D4787;
+      font-size: 0.95rem;
+    }
+    #mode-select {
       background-color: #f1effc;
       color: #6150CE;
+      font-weight: 500;
       border: none;
       padding: 0.4rem 1rem;
       border-radius: 999px;
-      font-weight: 500;
+      font-family: 'Poppins', sans-serif;
+      font-size: 0.95rem;
       cursor: pointer;
-      transition: background-color 0.2s;
+      transition: background-color 0.2s ease;
     }
-    .mode-btn.active {
-      background-color: #7B6ED6;
-      color: white;
-    }
-    .mode-btn:hover {
-      background-color: #dcd7f5;
+    #mode-select:hover {
+      background-color: #e6e1f7;
     }
 
     .lyrics-container {
@@ -198,10 +200,13 @@
     <div class="controls">
       <button id="play-pause"><span>▶︎</span></button>
     </div>
-    <div class="toggle-buttons">
-      <button class="mode-btn" data-mode="spanish">Español</button>
-      <button class="mode-btn active" data-mode="dual">Dual</button>
-      <button class="mode-btn" data-mode="english">English</button>
+    <div class="mode-selector">
+      <label for="mode-select" class="mode-label">Modo:</label>
+      <select id="mode-select">
+        <option value="spanish">Español</option>
+        <option value="dual" selected>Dual</option>
+        <option value="english">English</option>
+      </select>
     </div>
   </div>
 
@@ -310,14 +315,11 @@
       });
     });
 
-    const modeButtons = document.querySelectorAll('.mode-btn');
+    const modeSelect = document.getElementById('mode-select');
     const spanishLines = document.querySelectorAll('.spanish');
     const englishLines = document.querySelectorAll('.english');
 
     function setMode(mode) {
-      modeButtons.forEach(btn => btn.classList.remove('active'));
-      document.querySelector(`.mode-btn[data-mode="${mode}"]`).classList.add('active');
-
       spanishLines.forEach(span => {
         span.style.display = (mode === 'english') ? 'none' : 'block';
       });
@@ -327,11 +329,8 @@
       });
     }
 
-    modeButtons.forEach(button => {
-      button.addEventListener('click', () => {
-        const selected = button.getAttribute('data-mode');
-        setMode(selected);
-      });
+    modeSelect.addEventListener('change', () => {
+      setMode(modeSelect.value);
     });
   </script>
 </body>
