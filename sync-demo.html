@@ -6,10 +6,7 @@
   <title>Lyriciclo Sync Demo</title>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
   <style>
-    html {
-      scroll-behavior: smooth;
-    }
-
+    html { scroll-behavior: smooth; }
     body {
       font-family: 'Poppins', sans-serif;
       background-color: #fff;
@@ -17,32 +14,26 @@
       margin: 0;
       padding: 2rem;
     }
-
     h1 {
       text-align: center;
       color: #6150CE;
       font-weight: 600;
       margin: 0.8rem 0 0.4rem;
       font-size: 2.2rem;
-      display: inline-block;
     }
-
     .song-info {
       max-width: 600px;
       margin: 0 auto;
       text-align: center;
       line-height: 1.4;
-      position: relative;
     }
-
-    .song-info .tags {
+    .tags {
       margin: 3rem auto 1rem;
       display: flex;
       justify-content: center;
       gap: 1rem;
       flex-wrap: wrap;
     }
-
     .tag {
       background-color: #f1effc;
       color: #7B6ED6;
@@ -54,23 +45,17 @@
       cursor: pointer;
       transition: all 0.2s ease;
     }
-
-    .tag:hover {
-      background-color: #e3e0f5;
-    }
-
-    .song-info .line1 {
+    .tag:hover { background-color: #e3e0f5; }
+    .line1 {
       font-size: 1rem;
       font-weight: 400;
       color: #4D4787;
     }
-
     .controls {
       display: flex;
       justify-content: center;
       margin-top: 1.5rem;
     }
-
     .controls button {
       background-color: #7B6ED6;
       color: white;
@@ -87,18 +72,8 @@
       align-items: center;
       justify-content: center;
       padding-bottom: 1px;
-      touch-action: manipulation;
     }
-
-    .controls button:hover {
-      background-color: #9A90E2;
-    }
-
-    .controls button.pause {
-      font-size: 1.7rem;
-      letter-spacing: 0.1em;
-    }
-
+    .controls button:hover { background-color: #9A90E2; }
     .lyrics-container {
       max-width: 600px;
       margin: 3rem auto 0;
@@ -107,7 +82,6 @@
       scroll-behavior: smooth;
       padding: 1rem 0;
     }
-
     .lyric-line {
       margin: 1.5rem 0;
       text-align: center;
@@ -118,81 +92,62 @@
       transition: color 0.2s, font-weight 0.2s;
       cursor: pointer;
     }
-
-    .lyric-line:hover {
-      font-weight: 500;
-    }
-
+    .lyric-line:hover { font-weight: 500; }
     .lyric-line.active {
       font-weight: 600;
       color: #6150CE;
     }
-
-    .lyric-line .english {
-      color: #bbb;
-      font-weight: 300;
-    }
-
-    .lyric-line.active .english {
-      color: #8F85C4;
-      font-weight: 500;
-    }
-
+    .lyric-line .english { color: #bbb; font-weight: 300; }
+    .lyric-line.active .english { color: #8F85C4; font-weight: 500; }
     .back-to-top {
       text-align: center;
       margin-top: 2rem;
       font-size: 0.9rem;
-      padding-bottom: 3rem;
     }
-
     .back-to-top a {
       text-decoration: underline;
       color: #6150CE;
       cursor: pointer;
       font-weight: 400;
-      transition: font-weight 0.2s ease;
     }
-
-    .back-to-top a:hover {
-      font-weight: 600;
-    }
+    .back-to-top a:hover { font-weight: 600; }
+    .bottom-spacer { height: 30vh; }
   </style>
 </head>
 <body>
-  <div id="top" class="song-info">
+  <div class="song-info">
     <div class="tags">
       <span class="tag" id="genre">Reguetón</span>
       <span class="tag" id="country">España</span>
     </div>
     <h1>Amor sin nombre</h1>
     <div class="line1" id="metadata">Juan Pérez | Primera Luz | 2000</div>
-
     <div class="controls">
-      <button id="play-pause" aria-label="Play/Pause"><span>▶︎</span></button>
+      <button id="play-pause"><span>▶︎</span></button>
     </div>
   </div>
 
   <div class="lyrics-container" id="lyrics">
     <div class="lyric-line" data-time="0">
-      <div class="spanish"><span class="word">Tengo</span> <span class="word">una</span> <span class="word">vaca</span> <span class="word">lechera</span></div>
+      <div class="spanish">Tengo una vaca lechera</div>
       <div class="english">I have a dairy cow</div>
     </div>
     <div class="lyric-line" data-time="3">
-      <div class="spanish"><span class="word">No</span> <span class="word">es</span> <span class="word">una</span> <span class="word">vaca</span> <span class="word">cualquiera</span></div>
+      <div class="spanish">No es una vaca cualquiera</div>
       <div class="english">It’s not just any cow</div>
     </div>
     <div class="lyric-line" data-time="6">
-      <div class="spanish"><span class="word">Me</span> <span class="word">da</span> <span class="word">leche</span> <span class="word">condensada</span></div>
+      <div class="spanish">Me da leche condensada</div>
       <div class="english">She gives me condensed milk</div>
     </div>
     <div class="lyric-line" data-time="9">
-      <div class="spanish"><span class="word">Ay</span> <span class="word">qué</span> <span class="word">vaca</span> <span class="word">tan</span> <span class="word">salada</span></div>
+      <div class="spanish">Ay qué vaca tan salada</div>
       <div class="english">Oh what a lucky cow</div>
     </div>
-
     <div class="back-to-top">
-      <a href="#top" id="back-to-top-link">Back to Top</a>
+      <a id="back-to-top-link">Back to Top</a>
     </div>
+    <div class="bottom-spacer"></div>
   </div>
 
   <script>
@@ -201,36 +156,7 @@
     const playPauseIcon = playPauseBtn.querySelector('span');
     const backToTopLink = document.getElementById('back-to-top-link');
 
-    let isPlaying = false;
-    let current = 0;
-    let startTime = null;
-    let intervalId = null;
-    let pausedAt = 0;
-    let finished = false;
-
-    const mode = 'dual';
-
-    const genreText = {
-      english: 'Reggaeton',
-      spanish: 'Reguetón',
-      dual: 'Reguetón'
-    };
-
-    const countryText = {
-      english: 'Spain',
-      spanish: 'España',
-      dual: 'España'
-    };
-
-    const metadataText = {
-      english: 'Juan Pérez | First Light | 2000',
-      spanish: 'Juan Pérez | Primera Luz | 2000',
-      dual: 'Juan Pérez | Primera Luz | 2000'
-    };
-
-    document.getElementById('genre').textContent = genreText[mode];
-    document.getElementById('country').textContent = countryText[mode];
-    document.getElementById('metadata').textContent = metadataText[mode];
+    let isPlaying = false, current = 0, startTime = null, intervalId = null, pausedAt = 0, finished = false;
 
     function resetToTopState() {
       lines.forEach(l => l.classList.remove('active'));
@@ -240,33 +166,26 @@
       lines[0].scrollIntoView({ behavior: 'smooth', block: 'center' });
     }
 
-    window.onload = () => {
-      resetToTopState();
-    };
+    window.onload = resetToTopState;
 
-    backToTopLink.addEventListener('click', () => {
+    backToTopLink.addEventListener('click', (e) => {
+      e.preventDefault();
       resetToTopState();
     });
 
     function updatePlayback() {
       const now = (Date.now() - startTime) / 1000;
-
       if (current >= lines.length) {
         clearInterval(intervalId);
         isPlaying = false;
         finished = true;
         playPauseIcon.textContent = '▶︎';
         playPauseBtn.classList.remove('pause');
-
-        setTimeout(() => {
-          lines.forEach(l => l.classList.remove('active'));
-        }, 1500);
+        setTimeout(() => lines.forEach(l => l.classList.remove('active')), 1500);
         return;
       }
-
       const line = lines[current];
       const time = parseFloat(line.dataset.time);
-
       if (now >= time) {
         lines.forEach(l => l.classList.remove('active'));
         line.classList.add('active');
@@ -276,10 +195,7 @@
     }
 
     playPauseBtn.addEventListener('click', () => {
-      if (finished) {
-        resetToTopState();
-      }
-
+      if (finished) resetToTopState();
       if (!isPlaying) {
         startTime = Date.now() - pausedAt * 1000;
         intervalId = setInterval(updatePlayback, 100);
@@ -300,13 +216,11 @@
         const time = parseFloat(line.dataset.time);
         current = index;
         pausedAt = time;
-
         if (isPlaying) {
           clearInterval(intervalId);
           startTime = Date.now() - time * 1000;
           intervalId = setInterval(updatePlayback, 100);
         }
-
         lines.forEach(l => l.classList.remove('active'));
         line.classList.add('active');
         line.scrollIntoView({ behavior: 'smooth', block: 'center' });
