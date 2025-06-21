@@ -91,6 +91,31 @@
       transform: translate(3px, 2px);
     }
     .controls button:hover { background-color: #9A90E2; }
+
+    .toggle-buttons {
+      display: flex;
+      justify-content: center;
+      margin-top: 1rem;
+      gap: 0.5rem;
+    }
+    .mode-btn {
+      background-color: #f1effc;
+      color: #6150CE;
+      border: none;
+      padding: 0.4rem 1rem;
+      border-radius: 999px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: background-color 0.2s;
+    }
+    .mode-btn.active {
+      background-color: #7B6ED6;
+      color: white;
+    }
+    .mode-btn:hover {
+      background-color: #dcd7f5;
+    }
+
     .lyrics-container {
       width: 100%;
       max-width: 600px;
@@ -120,6 +145,7 @@
     }
     .lyric-line .english { color: #bbb; font-weight: 300; }
     .lyric-line.active .english { color: #8F85C4; font-weight: 500; }
+
     .back-to-top {
       text-align: center;
       margin-top: 2rem;
@@ -144,6 +170,11 @@
     <div class="line1" id="metadata">Juan Pérez | Primera Luz | 2000</div>
     <div class="controls">
       <button id="play-pause"><span>▶︎</span></button>
+    </div>
+    <div class="toggle-buttons">
+      <button class="mode-btn" data-mode="spanish">Español</button>
+      <button class="mode-btn" data-mode="dual" id="default-mode">Dual</button>
+      <button class="mode-btn" data-mode="english">English</button>
     </div>
   </div>
 
@@ -185,7 +216,10 @@
       lines[0].scrollIntoView({ behavior: 'smooth', block: 'center' });
     }
 
-    window.onload = resetToTopState;
+    window.onload = () => {
+      resetToTopState();
+      setMode('dual'); // default
+    };
 
     backToTopLink.addEventListener('click', (e) => {
       e.preventDefault();
@@ -246,6 +280,37 @@
         lines.forEach(l => l.classList.remove('active'));
         line.classList.add('active');
         line.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      });
+    });
+
+    // Toggle mode logic
+    const modeButtons = document.querySelectorAll('.mode-btn');
+    const spanishLines = document.querySelectorAll('.spanish');
+    const englishLines = document.querySelectorAll('.english');
+
+    function setMode(mode) {
+      modeButtons.forEach(btn => btn.classList.remove('active'));
+      document.querySelector(`.mode-btn[data-mode="${mode}"]`).classList.add('active');
+
+      spanishLines.forEach(span => {
+        span.style.display = (mode === 'english') ? 'none' : 'block';
+      });
+      englishLines.forEach(en => {
+        en.style.display = (mode === 'spanish') ? 'none' : 'block';
+        if (mode === 'dual') {
+          en.style.color = '#bbb';
+          en.style.fontWeight = '300';
+        } else if (mode === 'english') {
+          en.style.color = '#4D4787';
+          en.style.fontWeight = '400';
+        }
+      });
+    }
+
+    modeButtons.forEach(button => {
+      button.addEventListener('click', () => {
+        const selected = button.getAttribute('data-mode');
+        setMode(selected);
       });
     });
   </script>
