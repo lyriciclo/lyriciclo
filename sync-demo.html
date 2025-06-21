@@ -3,126 +3,113 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Lyriciclo Sync Demo</title>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <title>Lyriciclo</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
   <style>
-    html, body {
-      scroll-behavior: smooth;
-      margin: 0;
-      padding: 0;
-      overflow: hidden;
-      width: 100vw;
-      height: 100vh;
-    }
-    body {
-      font-family: 'Poppins', sans-serif;
-      background-color: #fff;
-      color: #333;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: start;
-      padding: 2rem;
-      padding-top: 5rem;
+    * {
       box-sizing: border-box;
     }
-
+    html, body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Poppins', sans-serif;
+      background: #fff;
+      color: #333;
+      overflow: hidden;
+      height: 100vh;
+      width: 100vw;
+      scroll-behavior: smooth;
+    }
     .top-nav {
-      width: 100%;
       position: fixed;
       top: 0;
       left: 0;
+      width: 100%;
+      padding: 1.2rem 2rem;
       background: #f1effc;
       display: flex;
       justify-content: center;
       align-items: center;
-      padding: 1.2rem 2rem;
       z-index: 1000;
-      box-shadow: none;
-      border-bottom: none;
     }
-
     .nav-logo {
       position: absolute;
       left: 2rem;
       font-weight: 700;
-      color: #7B6ED6;
       font-size: 1.4rem;
+      color: #7B6ED6;
       text-decoration: none;
-      letter-spacing: 0.5px;
-      transition: color 0.2s ease, transform 0.2s ease;
+      transition: transform 0.2s ease, color 0.2s ease;
     }
-
     .nav-logo:hover {
       color: #5e52b7;
       transform: scale(1.05);
     }
-
     .nav-links {
       display: flex;
-      gap: 2rem;
+      gap: 1rem;
+      font-size: 0.95rem;
     }
     .nav-links a {
       text-decoration: none;
       color: #4D4787;
-      font-weight: 400;
+      position: relative;
       transition: color 0.2s;
+    }
+    .nav-links a::after {
+      content: '|';
+      position: absolute;
+      right: -0.6rem;
+      color: #ccc;
+    }
+    .nav-links a:last-child::after {
+      content: '';
     }
     .nav-links a:hover {
       color: #6150CE;
     }
-
-    h1 {
-      text-align: center;
-      color: #6150CE;
-      font-weight: 600;
-      margin: 0.8rem 0 0.4rem;
-      font-size: 2.2rem;
-    }
-
     .song-info {
-      width: 100%;
-      max-width: 600px;
+      margin-top: 7rem;
       text-align: center;
-      line-height: 1.4;
+      max-width: 600px;
+      margin-left: auto;
+      margin-right: auto;
     }
-
     .tags {
-      margin: 3rem auto 1rem;
       display: flex;
       justify-content: center;
       gap: 1rem;
       flex-wrap: wrap;
+      margin: 3rem 0 1rem;
     }
-
     .tag {
-      background-color: #f1effc;
+      background: #f1effc;
       color: #7B6ED6;
       font-size: 0.8rem;
       padding: 0.25rem 0.8rem;
-      border: none;
       border-radius: 999px;
       font-weight: 500;
       cursor: pointer;
-      transition: all 0.2s ease;
+      transition: background-color 0.2s ease;
     }
-
     .tag:hover {
       background-color: #e3e0f5;
     }
-
+    h1 {
+      font-size: 2.2rem;
+      color: #6150CE;
+      font-weight: 600;
+      margin: 0.8rem 0 0.4rem;
+    }
     .line1 {
       font-size: 1rem;
-      font-weight: 400;
       color: #4D4787;
     }
-
     .controls {
+      margin-top: 1.5rem;
       display: flex;
       justify-content: center;
-      margin-top: 1.5rem;
     }
-
     .controls button {
       background-color: #7B6ED6;
       color: white;
@@ -132,126 +119,91 @@
       border-radius: 50%;
       width: 3.5rem;
       height: 3.5rem;
-      cursor: pointer;
-      line-height: 1;
-      transition: background-color 0.2s;
       display: flex;
       align-items: center;
       justify-content: center;
-      padding-bottom: 1px;
+      cursor: pointer;
+      transition: background-color 0.2s ease;
     }
-
-    .controls button span {
-      display: inline-block;
-    }
-
-    .controls button.play span {
-      transform: translate(3px, 2px);
-    }
-
-    .controls button.pause span {
-      transform: none;
-    }
-
     .controls button:hover {
       background-color: #9A90E2;
     }
-
     .mode-selector {
-      margin: 2.2rem 0;
       text-align: center;
+      margin: 2.2rem 0;
     }
-
     #mode-select {
       background-color: #f1effc;
       color: #6150CE;
       font-weight: 500;
-      border: none;
-      padding: 0.4rem 1.2rem;
-      border-radius: 999px;
-      font-family: 'Poppins', sans-serif;
       font-size: 0.95rem;
-      cursor: pointer;
+      border: none;
+      border-radius: 999px;
+      padding: 0.4rem 1.2rem 0.4rem 1rem;
       appearance: none;
       background-image: url('data:image/svg+xml;utf8,<svg fill="%236150CE" height="16" viewBox="0 0 24 24" width="16" xmlns="http://www.w3.org/2000/svg"><path d="M7 10l5 5 5-5z"/></svg>');
       background-repeat: no-repeat;
       background-position: right 0.75rem center;
       background-size: 1rem;
       padding-right: 2rem;
+      cursor: pointer;
       transition: background-color 0.2s ease;
     }
-
     #mode-select:hover {
       background-color: #e6e1f7;
     }
-
     .lyrics-container {
-      width: 100%;
       max-width: 600px;
+      margin: auto;
       height: 70vh;
       overflow-y: auto;
-      scroll-behavior: smooth;
       padding-bottom: 4rem;
-      scroll-padding-top: 5rem;
-      scroll-padding-bottom: 5rem;
+      scroll-padding-top: 0;
       scrollbar-width: none;
     }
-
     .lyrics-container::-webkit-scrollbar {
       display: none;
     }
-
     .lyric-line {
-      margin: 1.5rem 0;
       text-align: center;
-      line-height: 1.8;
+      margin: 1.5rem 0;
       font-size: 1.2rem;
-      font-weight: 400;
       color: #9E9EBD;
-      transition: color 0.2s, font-weight 0.2s;
+      font-weight: 400;
+      line-height: 1.8;
+      transition: color 0.2s ease, font-weight 0.2s ease;
       cursor: pointer;
-      scroll-margin-top: 5rem;
     }
-
     .lyric-line:hover {
       font-weight: 500;
     }
-
     .lyric-line.active {
       font-weight: 600;
       color: #6150CE;
     }
-
     .lyric-line .spanish {
       display: block;
     }
-
     .lyric-line .english {
       display: block;
     }
-
     .lyric-line .english.dual-mode {
       color: #bbb;
       font-weight: 300;
     }
-
     .lyric-line.active .english.dual-mode {
       color: #8F85C4;
     }
-
     .back-to-top {
       text-align: center;
       margin-top: 2rem;
       font-size: 0.9rem;
     }
-
     .back-to-top a {
-      text-decoration: underline;
       color: #6150CE;
-      cursor: pointer;
+      text-decoration: underline;
       font-weight: 400;
     }
-
     .back-to-top a:hover {
       font-weight: 600;
     }
@@ -269,14 +221,16 @@
 
   <div class="song-info">
     <div class="tags">
-      <span class="tag" id="genre">Reguetón</span>
-      <span class="tag" id="country">España</span>
+      <span class="tag">Reguetón</span>
+      <span class="tag">España</span>
     </div>
     <h1>Amor sin nombre</h1>
-    <div class="line1" id="metadata">Juan Pérez | Primera Luz | 2000</div>
+    <div class="line1">Juan Pérez | Primera Luz | 2000</div>
+
     <div class="controls">
       <button id="play-pause" class="play"><span>▶︎</span></button>
     </div>
+
     <div class="mode-selector">
       <select id="mode-select">
         <option value="spanish">Español</option>
@@ -307,114 +261,5 @@
       <a id="back-to-top-link">Back to Top</a>
     </div>
   </div>
-
-  <script>
-    const lines = document.querySelectorAll('.lyric-line');
-    const playPauseBtn = document.getElementById('play-pause');
-    const playPauseIcon = playPauseBtn.querySelector('span');
-    const backToTopLink = document.getElementById('back-to-top-link');
-
-    let isPlaying = false, current = 0, startTime = null, intervalId = null, pausedAt = 0, finished = false;
-
-    function resetToTopState() {
-      lines.forEach(l => l.classList.remove('active'));
-      current = 0;
-      pausedAt = 0;
-      finished = false;
-      lines[0].scrollIntoView({ behavior: 'smooth', block: 'start' });
-    }
-
-    window.onload = () => {
-      resetToTopState();
-      setMode('dual');
-    };
-
-    backToTopLink.addEventListener('click', (e) => {
-      e.preventDefault();
-      resetToTopState();
-    });
-
-    function scrollLine(line, index) {
-      line.scrollIntoView({
-        behavior: 'smooth',
-        block: index > 2 ? 'center' : 'start'
-      });
-    }
-
-    function updatePlayback() {
-      const now = (Date.now() - startTime) / 1000;
-      if (current >= lines.length) {
-        clearInterval(intervalId);
-        isPlaying = false;
-        finished = true;
-        playPauseIcon.textContent = '▶︎';
-        playPauseBtn.classList.remove('pause');
-        playPauseBtn.classList.add('play');
-        setTimeout(() => lines.forEach(l => l.classList.remove('active')), 1500);
-        return;
-      }
-      const line = lines[current];
-      const time = parseFloat(line.dataset.time);
-      if (now >= time) {
-        lines.forEach(l => l.classList.remove('active'));
-        line.classList.add('active');
-        scrollLine(line, current);
-        current++;
-      }
-    }
-
-    playPauseBtn.addEventListener('click', () => {
-      if (finished) resetToTopState();
-      if (!isPlaying) {
-        startTime = Date.now() - pausedAt * 1000;
-        intervalId = setInterval(updatePlayback, 100);
-        playPauseIcon.textContent = 'II';
-        playPauseBtn.classList.remove('play');
-        playPauseBtn.classList.add('pause');
-        isPlaying = true;
-      } else {
-        clearInterval(intervalId);
-        pausedAt = (Date.now() - startTime) / 1000;
-        playPauseIcon.textContent = '▶︎';
-        playPauseBtn.classList.remove('pause');
-        playPauseBtn.classList.add('play');
-        isPlaying = false;
-      }
-    });
-
-    lines.forEach((line, index) => {
-      line.addEventListener('click', () => {
-        const time = parseFloat(line.dataset.time);
-        current = index;
-        pausedAt = time;
-        if (isPlaying) {
-          clearInterval(intervalId);
-          startTime = Date.now() - time * 1000;
-          intervalId = setInterval(updatePlayback, 100);
-        }
-        lines.forEach(l => l.classList.remove('active'));
-        line.classList.add('active');
-        scrollLine(line, current);
-      });
-    });
-
-    const modeSelect = document.getElementById('mode-select');
-    const spanishLines = document.querySelectorAll('.spanish');
-    const englishLines = document.querySelectorAll('.english');
-
-    function setMode(mode) {
-      spanishLines.forEach(span => {
-        span.style.display = (mode === 'english') ? 'none' : 'block';
-      });
-      englishLines.forEach(en => {
-        en.style.display = (mode === 'spanish') ? 'none' : 'block';
-        en.classList.toggle('dual-mode', mode === 'dual');
-      });
-    }
-
-    modeSelect.addEventListener('change', () => {
-      setMode(modeSelect.value);
-    });
-  </script>
 </body>
 </html>
