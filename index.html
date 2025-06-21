@@ -29,14 +29,15 @@
       text-align: center;
     }
 
-    .logo {
-      max-width: 160px;
-      height: auto;
-      margin-bottom: 0.5rem;
-      background: white;
-      padding: 12px;
-      border-radius: 16px;
-      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    h1 {
+      font-size: 3rem;
+      font-weight: 600;
+      margin-bottom: 0.25rem;
+      letter-spacing: -0.5px;
+    }
+
+    .iclo {
+      color: var(--secondary);
     }
 
     p {
@@ -72,8 +73,8 @@
     }
 
     @media (max-width: 600px) {
-      .logo {
-        max-width: 120px;
+      h1 {
+        font-size: 2.2rem;
       }
 
       p {
@@ -83,11 +84,7 @@
   </style>
 </head>
 <body>
-  <img
-    src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGQAAABkCAYAAABw4pVUAAAACXBIWXMAAAsTAAALEwEAmpwYAAABzUlEQVR4nO3bvY3CMBAF0eZSLbdW6Qr5KfYpuYtWYaYpIzPnfK+ugEpyr+8ACD37ML+/x89AXZ8K7uyVABERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERGROXAcMPcxkeZqCtzx8+ylyDdmSBfAJ4EUe3K96ANcSXubN7AXUCF8Db8i3Y5cF++owryr/gp0SzBz3V+EZlPsJ8ghrpux7DW8tYTwN3p6dkefL+B0+jzrB8f95fn/CeI+Jv6Hn18OD8RfBX5HxO8qf3L8n8WvHf1fwHqkPAff11z3wr8rfx3zKPOclUAVD+ReEBY/yFwQFr/IHBQWv8hMFBZ/yEwUFn/IHBQWv8hMFBZ/yEwUFn/IHBQWv8hMFBZ/yEwUFn/IHBQWv8hMFBZ/yEwUFn/IHBQWv8hMFBZ/yEwUFn/IHBQWv8hMFBZ/yEwUFn/IHBQWv8hMFBZ/yEwUFn/IHBQWv8hMFBZ/yEwUFn/IHBQWv8hMFBZ/yEwUFn/IHBQWv8hMFBZ/yEwUFn/IHBQWv8hMFBZ/7LgDfoMiIUe5CagAAAABJRU5ErkJggg=="
-    alt="Lyriciclo logo"
-    class="logo"
-  />
+  <h1><span style="color: white;">Lyric</span><span class="iclo">iclo</span></h1>
   <p>Spanish music. Bilingual lyrics. In sync.</p>
   <a class="beta-tagline" href="/about.html">Beta coming soon</a>
   <footer>&copy; 2025 Lyriciclo</footer>
