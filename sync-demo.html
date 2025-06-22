@@ -330,3 +330,79 @@
   </div>
 </body>
 </html>
+<script>
+  const lines = document.querySelectorAll('.lyric-line');
+  const playPauseBtn = document.querySelector('.controls button');
+  const playPauseIcon = playPauseBtn?.querySelector('span');
+
+  let isPlaying = false, current = 0, startTime = null, intervalId = null, pausedAt = 0, finished = false;
+
+  function resetToTopState() {
+    lines.forEach(l => l.classList.remove('active'));
+    current = 0;
+    pausedAt = 0;
+    finished = false;
+    lines[0]?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+
+  function scrollLine(line) {
+    line.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+
+  function updatePlayback() {
+    const now = (Date.now() - startTime) / 1000;
+    if (current >= lines.length) {
+      clearInterval(intervalId);
+      isPlaying = false;
+      finished = true;
+      playPauseIcon.textContent = '▶︎';
+      playPauseBtn.classList.remove('pause');
+      playPauseBtn.classList.add('play');
+      setTimeout(() => lines.forEach(l => l.classList.remove('active')), 1500);
+      return;
+    }
+    const line = lines[current];
+    const time = current * 3; // 3 seconds between lines (fake timing)
+    if (now >= time) {
+      lines.forEach(l => l.classList.remove('active'));
+      line.classList.add('active');
+      scrollLine(line);
+      current++;
+    }
+  }
+
+  playPauseBtn?.addEventListener('click', () => {
+    if (finished) resetToTopState();
+    if (!isPlaying) {
+      startTime = Date.now() - pausedAt * 1000;
+      intervalId = setInterval(updatePlayback, 100);
+      playPauseIcon.textContent = 'II';
+      playPauseBtn.classList.remove('play');
+      playPauseBtn.classList.add('pause');
+      isPlaying = true;
+    } else {
+      clearInterval(intervalId);
+      pausedAt = (Date.now() - startTime) / 1000;
+      playPauseIcon.textContent = '▶︎';
+      playPauseBtn.classList.remove('pause');
+      playPauseBtn.classList.add('play');
+      isPlaying = false;
+    }
+  });
+
+  lines.forEach((line, index) => {
+    line.addEventListener('click', () => {
+      const time = index * 3;
+      current = index;
+      pausedAt = time;
+      if (isPlaying) {
+        clearInterval(intervalId);
+        startTime = Date.now() - time * 1000;
+        intervalId = setInterval(updatePlayback, 100);
+      }
+      lines.forEach(l => l.classList.remove('active'));
+      line.classList.add('active');
+      scrollLine(line);
+    });
+  });
+</script>
