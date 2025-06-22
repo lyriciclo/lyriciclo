@@ -26,17 +26,11 @@
       box-sizing: border-box;
     }
 
-    .nav-top-spacer {
-      height: 2rem; /* Adjust this to control space above nav */
-    }
-
     .top-nav {
       width: 100%;
-      position: fixed;
-      top: 0;
-      left: 0;
       background: #fff;
       padding: 1.2rem 2rem;
+      margin-top: 2rem; /* now nav bar sits lower */
       display: flex;
       justify-content: center;
       align-items: center;
@@ -81,7 +75,7 @@
       max-width: 600px;
       text-align: center;
       line-height: 1.4;
-      margin-top: 6.2rem;
+      margin-top: 2rem;
     }
 
     .tags {
@@ -263,8 +257,6 @@
   </style>
 </head>
 <body>
-  <div class="nav-top-spacer"></div>
-
   <nav class="top-nav">
     <a href="#" class="nav-logo">Lyriciclo</a>
     <div class="nav-center">
