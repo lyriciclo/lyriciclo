@@ -10,11 +10,22 @@
       scroll-behavior: smooth;
       margin: 0;
       padding: 0;
+      overflow: hidden;
       width: 100vw;
       height: 100vh;
+    }
+
+    body {
       font-family: 'Poppins', sans-serif;
       background-color: #fff;
       color: #333;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: start;
+      padding: 2rem;
+      padding-top: 3rem; /* reduced space above nav */
+      box-sizing: border-box;
     }
 
     .top-nav {
@@ -23,49 +34,40 @@
       top: 0;
       left: 0;
       background: #fff;
-      padding: 0.5rem 2rem;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 1.2rem 2rem;
+      margin-bottom: 4rem; /* increased space below nav */
       z-index: 1000;
       border-bottom: none;
     }
 
     .nav-logo {
       position: absolute;
-      left: 4rem;
+      left: 2rem;
       font-weight: 700;
       color: #7B6ED6;
-      font-size: 1.65rem;
+      font-size: 1.8rem; /* increased size */
       text-decoration: none;
       letter-spacing: 0.5px;
     }
 
-    .nav-center {
-      position: absolute;
-      left: 50%;
-      transform: translateX(-50%);
+    .nav-links {
       display: flex;
-      gap: 2.5rem;
-      font-size: 0.85rem;
+      gap: 1.5rem; /* more spacing */
+      font-size: 0.75rem; /* smaller nav items */
     }
 
-    .nav-center a {
+    .nav-links a {
       text-decoration: none;
       color: #4D4787;
       font-weight: 400;
+      transition: color 0.2s;
     }
 
-    .nav-center a:hover {
-      color: #4D4787;
-      font-weight: 400;
-    }
-
-    .main-content {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: start;
-      padding: 2rem;
-      margin-top: 6.5rem; /* distance from fixed nav */
-      box-sizing: border-box;
+    .nav-links a:hover {
+      color: #6150CE;
     }
 
     h1 {
@@ -256,57 +258,55 @@
 <body>
   <nav class="top-nav">
     <a href="#" class="nav-logo">Lyriciclo</a>
-    <div class="nav-center">
+    <div class="nav-links">
       <a href="#">Songs</a>
       <a href="#">About</a>
       <a href="#">Contact</a>
     </div>
   </nav>
 
-  <main class="main-content">
-    <div class="song-info">
-      <div class="tags">
-        <span class="tag">Reguetón</span>
-        <span class="tag">España</span>
-      </div>
-      <h1>Amor sin nombre</h1>
-      <div class="line1">Juan Pérez | Primera Luz | 2000</div>
+  <div class="song-info">
+    <div class="tags">
+      <span class="tag">Reguetón</span>
+      <span class="tag">España</span>
+    </div>
+    <h1>Amor sin nombre</h1>
+    <div class="line1">Juan Pérez | Primera Luz | 2000</div>
 
-      <div class="controls">
-        <button id="play-pause" class="play"><span>▶︎</span></button>
-      </div>
-
-      <div class="mode-selector">
-        <select id="mode-select">
-          <option value="spanish">Español</option>
-          <option value="dual" selected>Bilingual</option>
-          <option value="english">English</option>
-        </select>
-      </div>
+    <div class="controls">
+      <button id="play-pause" class="play"><span>▶︎</span></button>
     </div>
 
-    <div class="lyrics-container" id="lyrics">
-      <div class="lyric-line" data-time="0">
-        <div class="spanish">Tengo una vaca lechera</div>
-        <div class="english">I have a dairy cow</div>
-      </div>
-      <div class="lyric-line" data-time="3">
-        <div class="spanish">No es una vaca cualquiera</div>
-        <div class="english">It’s not just any cow</div>
-      </div>
-      <div class="lyric-line" data-time="6">
-        <div class="spanish">Me da leche condensada</div>
-        <div class="english">She gives me condensed milk</div>
-      </div>
-      <div class="lyric-line" data-time="9">
-        <div class="spanish">Ay qué vaca tan salada</div>
-        <div class="english">Oh what a lucky cow</div>
-      </div>
-      <div class="back-to-top">
-        <a id="back-to-top-link">Back to Top</a>
-      </div>
+    <div class="mode-selector">
+      <select id="mode-select">
+        <option value="spanish">Español</option>
+        <option value="dual" selected>Bilingual</option>
+        <option value="english">English</option>
+      </select>
     </div>
-  </main>
+  </div>
+
+  <div class="lyrics-container" id="lyrics">
+    <div class="lyric-line" data-time="0">
+      <div class="spanish">Tengo una vaca lechera</div>
+      <div class="english">I have a dairy cow</div>
+    </div>
+    <div class="lyric-line" data-time="3">
+      <div class="spanish">No es una vaca cualquiera</div>
+      <div class="english">It’s not just any cow</div>
+    </div>
+    <div class="lyric-line" data-time="6">
+      <div class="spanish">Me da leche condensada</div>
+      <div class="english">She gives me condensed milk</div>
+    </div>
+    <div class="lyric-line" data-time="9">
+      <div class="spanish">Ay qué vaca tan salada</div>
+      <div class="english">Oh what a lucky cow</div>
+    </div>
+    <div class="back-to-top">
+      <a id="back-to-top-link">Back to Top</a>
+    </div>
+  </div>
 
   <script>
     const lines = document.querySelectorAll('.lyric-line');
