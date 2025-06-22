@@ -23,14 +23,7 @@
       flex-direction: column;
       align-items: center;
       justify-content: start;
-      padding-top: 0;
       box-sizing: border-box;
-    }
-
-    .pre-nav-message {
-      margin-top: 1.2rem;
-      font-size: 0.65rem;
-      color: #fff;
     }
 
     .top-nav {
@@ -65,7 +58,7 @@
     .nav-links {
       display: flex;
       gap: 2rem;
-      font-size: 1rem;
+      font-size: 1.05rem;
     }
 
     .nav-links a {
@@ -79,12 +72,8 @@
       color: #6150CE;
     }
 
-    h1 {
-      text-align: center;
-      color: #6150CE;
-      font-weight: 600;
-      margin: 0.8rem 0 0.4rem;
-      font-size: 2.2rem;
+    .nav-spacer {
+      height: 2rem;
     }
 
     .song-info {
@@ -92,11 +81,11 @@
       max-width: 600px;
       text-align: center;
       line-height: 1.4;
-      margin-top: 8rem;
+      margin-top: 2rem;
     }
 
     .tags {
-      margin: 3rem auto 1rem;
+      margin: 2rem auto 1rem;
       display: flex;
       justify-content: center;
       gap: 1rem;
@@ -117,6 +106,14 @@
 
     .tag:hover {
       background-color: #e3e0f5;
+    }
+
+    h1 {
+      text-align: center;
+      color: #6150CE;
+      font-weight: 600;
+      margin: 0.8rem 0 0.4rem;
+      font-size: 2.2rem;
     }
 
     .line1 {
@@ -266,8 +263,6 @@
   </style>
 </head>
 <body>
-  <p class="pre-nav-message">:)</p>
-
   <nav class="top-nav">
     <a href="#" class="nav-logo">Lyriciclo</a>
     <div class="nav-center">
@@ -278,6 +273,8 @@
       </div>
     </div>
   </nav>
+
+  <div class="nav-spacer"></div>
 
   <div class="song-info">
     <div class="tags">
