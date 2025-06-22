@@ -23,20 +23,18 @@
       flex-direction: column;
       align-items: center;
       justify-content: start;
-      padding-top: 0; /* no extra top space */
+      padding-top: 0;
       box-sizing: border-box;
     }
 
-    .pre-nav-message {
-      margin-top: 1.2rem;
-      font-size: 0.85rem;
-      color: #000;
+    .spacer {
+      height: 1.2rem;
     }
 
     .top-nav {
       width: 100%;
       position: fixed;
-      top: 2rem; /* shifted down slightly to make room for paragraph */
+      top: 0;
       left: 0;
       background: #fff;
       padding: 1.2rem 2rem;
@@ -65,7 +63,7 @@
     .nav-links {
       display: flex;
       gap: 2rem;
-      font-size: 0.85rem;
+      font-size: 0.9rem;
     }
 
     .nav-links a {
@@ -92,7 +90,7 @@
       max-width: 600px;
       text-align: center;
       line-height: 1.4;
-      margin-top: 8rem; /* balances out nav + paragraph */
+      margin-top: 8rem;
     }
 
     .tags {
@@ -266,8 +264,8 @@
   </style>
 </head>
 <body>
-  <p class="pre-nav-message">This is a placeholder paragraph above the navigation bar.</p>
-
+  <div class="spacer"></div>
+  
   <nav class="top-nav">
     <a href="#" class="nav-logo">Lyriciclo</a>
     <div class="nav-center">
