@@ -55,12 +55,12 @@
       align-items: center;
       gap: 0.5rem;
       transition: color 0.2s;
-      font-size: 0.95rem;
+      font-size: 1rem;
     }
 
     .arrow {
       font-size: 0.65rem;
-      font-weight: 400;
+      font-weight: 500;
       transform: scale(1.6, 1.2);
       display: inline-block;
       transition: transform 0.2s ease;
@@ -223,7 +223,6 @@
     #mode-select:hover {
       background-color: #e6e1f7;
     }
-
     .lyrics-container {
       width: 100%;
       max-width: 600px;
@@ -261,8 +260,13 @@
       color: #6150CE;
     }
 
-    .lyric-line .spanish { display: block; }
-    .lyric-line .english { display: block; }
+    .lyric-line .spanish {
+      display: block;
+    }
+
+    .lyric-line .english {
+      display: block;
+    }
 
     .lyric-line .english.dual-mode {
       color: #bbb;
@@ -311,7 +315,7 @@
     <div class="line1">Juan Pérez | Primera Luz | 2000</div>
 
     <div class="controls">
-      <button class="play"><span>▶︎</span></button>
+      <button id="play-pause" class="play"><span>▶︎</span></button>
     </div>
 
     <div class="mode-selector">
@@ -323,87 +327,122 @@
     </div>
   </div>
 
-  <div class="lyrics-container">
-    <div class="lyric-line"><span class="spanish">Me da leche condensada</span><span class="english dual-mode">She gives me condensed milk</span></div>
-    <div class="lyric-line"><span class="spanish">y me dice que me quiere</span><span class="english dual-mode">and she tells me she loves me</span></div>
-    <div class="lyric-line"><span class="spanish">pero nunca dice nada</span><span class="english dual-mode">but she never says a thing</span></div>
-    <div class="lyric-line"><span class="spanish">cuando el sol por fin se muere</span><span class="english dual-mode">when the sun finally dies</span></div>
+  <div class="lyrics-container" id="lyrics">
+    <div class="lyric-line" data-time="0">
+      <div class="spanish">Tengo una vaca lechera</div>
+      <div class="english">I have a dairy cow</div>
+    </div>
+    <div class="lyric-line" data-time="3">
+      <div class="spanish">No es una vaca cualquiera</div>
+      <div class="english">It’s not just any cow</div>
+    </div>
+    <div class="lyric-line" data-time="6">
+      <div class="spanish">Me da leche condensada</div>
+      <div class="english">She gives me condensed milk</div>
+    </div>
+    <div class="lyric-line" data-time="9">
+      <div class="spanish">Ay qué vaca tan salada</div>
+      <div class="english">Oh what a lucky cow</div>
+    </div>
   </div>
+
+  <script>
+    const lines = document.querySelectorAll('.lyric-line');
+    const playPauseBtn = document.getElementById('play-pause');
+    const playPauseIcon = playPauseBtn?.querySelector('span');
+    let isPlaying = false, current = 0, startTime = null, intervalId = null, pausedAt = 0, finished = false;
+
+    function resetToTopState() {
+      lines.forEach(l => l.classList.remove('active'));
+      current = 0;
+      pausedAt = 0;
+      finished = false;
+      lines[0]?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+
+    window.onload = () => {
+      resetToTopState();
+      setMode('dual');
+    };
+
+    function scrollLine(line) {
+      line.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+
+    function updatePlayback() {
+      const now = (Date.now() - startTime) / 1000;
+      if (current >= lines.length) {
+        clearInterval(intervalId);
+        isPlaying = false;
+        finished = true;
+        playPauseIcon.textContent = '▶︎';
+        playPauseBtn.classList.remove('pause');
+        playPauseBtn.classList.add('play');
+        setTimeout(() => lines.forEach(l => l.classList.remove('active')), 1500);
+        return;
+      }
+      const line = lines[current];
+      const time = parseFloat(line.dataset.time);
+      if (now >= time) {
+        lines.forEach(l => l.classList.remove('active'));
+        line.classList.add('active');
+        scrollLine(line);
+        current++;
+      }
+    }
+
+    playPauseBtn?.addEventListener('click', () => {
+      if (finished) resetToTopState();
+      if (!isPlaying) {
+        startTime = Date.now() - pausedAt * 1000;
+        intervalId = setInterval(updatePlayback, 100);
+        playPauseIcon.textContent = 'II';
+        playPauseBtn.classList.remove('play');
+        playPauseBtn.classList.add('pause');
+        isPlaying = true;
+      } else {
+        clearInterval(intervalId);
+        pausedAt = (Date.now() - startTime) / 1000;
+        playPauseIcon.textContent = '▶︎';
+        playPauseBtn.classList.remove('pause');
+        playPauseBtn.classList.add('play');
+        isPlaying = false;
+      }
+    });
+
+    lines.forEach((line, index) => {
+      line.addEventListener('click', () => {
+        const time = parseFloat(line.dataset.time);
+        current = index;
+        pausedAt = time;
+        if (isPlaying) {
+          clearInterval(intervalId);
+          startTime = Date.now() - time * 1000;
+          intervalId = setInterval(updatePlayback, 100);
+        }
+        lines.forEach(l => l.classList.remove('active'));
+        line.classList.add('active');
+        scrollLine(line);
+      });
+    });
+
+    const modeSelect = document.getElementById('mode-select');
+    const spanishLines = document.querySelectorAll('.spanish');
+    const englishLines = document.querySelectorAll('.english');
+
+    function setMode(mode) {
+      spanishLines.forEach(span => {
+        span.style.display = (mode === 'english') ? 'none' : 'block';
+      });
+      englishLines.forEach(en => {
+        en.style.display = (mode === 'spanish') ? 'none' : 'block';
+        en.classList.toggle('dual-mode', mode === 'dual');
+      });
+    }
+
+    modeSelect?.addEventListener('change', () => {
+      setMode(modeSelect.value);
+    });
+  </script>
 </body>
 </html>
-<script>
-  const lines = document.querySelectorAll('.lyric-line');
-  const playPauseBtn = document.querySelector('.controls button');
-  const playPauseIcon = playPauseBtn?.querySelector('span');
-
-  let isPlaying = false, current = 0, startTime = null, intervalId = null, pausedAt = 0, finished = false;
-
-  function resetToTopState() {
-    lines.forEach(l => l.classList.remove('active'));
-    current = 0;
-    pausedAt = 0;
-    finished = false;
-    lines[0]?.scrollIntoView({ behavior: 'smooth', block: 'start' });
-  }
-
-  function scrollLine(line) {
-    line.scrollIntoView({ behavior: 'smooth', block: 'start' });
-  }
-
-  function updatePlayback() {
-    const now = (Date.now() - startTime) / 1000;
-    if (current >= lines.length) {
-      clearInterval(intervalId);
-      isPlaying = false;
-      finished = true;
-      playPauseIcon.textContent = '▶︎';
-      playPauseBtn.classList.remove('pause');
-      playPauseBtn.classList.add('play');
-      setTimeout(() => lines.forEach(l => l.classList.remove('active')), 1500);
-      return;
-    }
-    const line = lines[current];
-    const time = current * 3; // 3 seconds between lines (fake timing)
-    if (now >= time) {
-      lines.forEach(l => l.classList.remove('active'));
-      line.classList.add('active');
-      scrollLine(line);
-      current++;
-    }
-  }
-
-  playPauseBtn?.addEventListener('click', () => {
-    if (finished) resetToTopState();
-    if (!isPlaying) {
-      startTime = Date.now() - pausedAt * 1000;
-      intervalId = setInterval(updatePlayback, 100);
-      playPauseIcon.textContent = 'II';
-      playPauseBtn.classList.remove('play');
-      playPauseBtn.classList.add('pause');
-      isPlaying = true;
-    } else {
-      clearInterval(intervalId);
-      pausedAt = (Date.now() - startTime) / 1000;
-      playPauseIcon.textContent = '▶︎';
-      playPauseBtn.classList.remove('pause');
-      playPauseBtn.classList.add('play');
-      isPlaying = false;
-    }
-  });
-
-  lines.forEach((line, index) => {
-    line.addEventListener('click', () => {
-      const time = index * 3;
-      current = index;
-      pausedAt = time;
-      if (isPlaying) {
-        clearInterval(intervalId);
-        startTime = Date.now() - time * 1000;
-        intervalId = setInterval(updatePlayback, 100);
-      }
-      lines.forEach(l => l.classList.remove('active'));
-      line.classList.add('active');
-      scrollLine(line);
-    });
-  });
-</script>
