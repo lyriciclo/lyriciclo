@@ -24,7 +24,10 @@
       align-items: center;
       justify-content: start;
       box-sizing: border-box;
-      padding-top: 2rem; /* ✅ Pushes nav down */
+    }
+
+    .nav-top-spacer {
+      height: 2rem; /* Adjust this to control space above nav */
     }
 
     .top-nav {
@@ -73,16 +76,12 @@
       color: #6150CE;
     }
 
-    .nav-spacer {
-      height: 2rem;
-    }
-
     .song-info {
       width: 100%;
       max-width: 600px;
       text-align: center;
       line-height: 1.4;
-      margin-top: 3rem;
+      margin-top: 6.2rem;
     }
 
     .tags {
@@ -264,6 +263,8 @@
   </style>
 </head>
 <body>
+  <div class="nav-top-spacer"></div>
+
   <nav class="top-nav">
     <a href="#" class="nav-logo">Lyriciclo</a>
     <div class="nav-center">
