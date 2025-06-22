@@ -23,8 +23,7 @@
       flex-direction: column;
       align-items: center;
       justify-content: start;
-      padding: 2rem;
-      padding-top: 3rem; /* reduced space above nav */
+      padding-top: 4rem; /* more space above nav */
       box-sizing: border-box;
     }
 
@@ -34,13 +33,11 @@
       top: 0;
       left: 0;
       background: #fff;
+      padding: 1.2rem 2rem;
       display: flex;
       justify-content: center;
       align-items: center;
-      padding: 1.2rem 2rem;
-      margin-bottom: 4rem; /* increased space below nav */
       z-index: 1000;
-      border-bottom: none;
     }
 
     .nav-logo {
@@ -48,15 +45,21 @@
       left: 2rem;
       font-weight: 700;
       color: #7B6ED6;
-      font-size: 1.8rem; /* increased size */
+      font-size: 1.8rem;
       text-decoration: none;
       letter-spacing: 0.5px;
     }
 
+    .nav-center {
+      display: flex;
+      justify-content: center;
+      flex-grow: 1;
+    }
+
     .nav-links {
       display: flex;
-      gap: 1.5rem; /* more spacing */
-      font-size: 0.75rem; /* smaller nav items */
+      gap: 2rem;
+      font-size: 0.85rem; /* slightly bigger nav links */
     }
 
     .nav-links a {
@@ -83,6 +86,7 @@
       max-width: 600px;
       text-align: center;
       line-height: 1.4;
+      margin-top: 5rem; /* more space between nav and rest of content */
     }
 
     .tags {
@@ -258,10 +262,12 @@
 <body>
   <nav class="top-nav">
     <a href="#" class="nav-logo">Lyriciclo</a>
-    <div class="nav-links">
-      <a href="#">Songs</a>
-      <a href="#">About</a>
-      <a href="#">Contact</a>
+    <div class="nav-center">
+      <div class="nav-links">
+        <a href="#">Songs</a>
+        <a href="#">About</a>
+        <a href="#">Contact</a>
+      </div>
     </div>
   </nav>
 
