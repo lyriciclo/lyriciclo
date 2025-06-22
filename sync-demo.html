@@ -33,16 +33,13 @@
       left: 0;
       background: #ffffff;
       display: flex;
-      justify-content: center;
+      justify-content: space-between;
       align-items: center;
       padding: 1.2rem 2rem;
       z-index: 1000;
-      box-shadow: none;
-      border-bottom: none;
+      border-bottom: 1px solid #e5e5e5;
     }
     .nav-logo {
-      position: absolute;
-      left: 2rem;
       font-weight: 700;
       color: #7B6ED6;
       font-size: 1.4rem;
@@ -56,27 +53,18 @@
     }
     .nav-links {
       display: flex;
-      gap: 1rem;
+      gap: 2rem;
       font-size: 0.95rem;
     }
     .nav-links a {
       text-decoration: none;
       color: #4D4787;
       font-weight: 400;
-      transition: color 0.2s;
-      position: relative;
-    }
-    .nav-links a::after {
-      content: '|';
-      color: #ccc;
-      position: absolute;
-      right: -0.6rem;
-    }
-    .nav-links a:last-child::after {
-      content: '';
+      transition: color 0.2s ease;
     }
     .nav-links a:hover {
       color: #6150CE;
+      font-weight: 500;
     }
     h1 {
       text-align: center;
@@ -238,14 +226,14 @@
   </style>
 </head>
 <body>
-<nav class="top-nav">
-  <a href="#" class="nav-logo">Lyriciclo</a>
-  <div class="nav-links">
-    <a href="#">Songs</a>
-    <a href="#">Behind Lyriciclo</a>
-    <a href="#">Contact</a>
-  </div>
-</nav>
+  <nav class="top-nav">
+    <a href="#" class="nav-logo">Lyriciclo</a>
+    <div class="nav-links">
+      <a href="#">Songs</a>
+      <a href="#">About</a>
+      <a href="#">Contact</a>
+    </div>
+  </nav>
 
   <div class="song-info">
     <div class="tags">
