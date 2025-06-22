@@ -32,41 +32,76 @@
       padding: 0.5rem 1.5rem;
       margin-top: 2rem;
       display: flex;
-      justify-content: space-between;
+      justify-content: center;
       align-items: center;
       position: relative;
       z-index: 1000;
     }
 
-    .nav-center {
+    .nav-links {
+      display: flex;
+      gap: 3rem;
+      font-size: 0.98rem;
+      position: relative;
+    }
+
+    .nav-item {
+      position: relative;
+    }
+
+    .nav-item > a {
+      text-decoration: none;
+      color: #4D4787;
+      font-weight: 400;
+      padding: 0.3rem 0;
+      display: inline-block;
+      transition: color 0.2s;
+    }
+
+    .nav-item > a:hover {
+      color: #6150CE;
+    }
+
+    .dropdown {
       position: absolute;
+      top: 100%;
       left: 50%;
       transform: translateX(-50%);
+      background-color: #f9f7ff;
+      padding: 0.5rem 0;
+      border-radius: 0.5rem;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+      display: none;
+      min-width: 160px;
+      z-index: 10;
+    }
+
+    .dropdown a {
+      display: block;
+      text-align: center;
+      padding: 0.4rem 1rem;
+      text-decoration: none;
+      font-size: 0.9rem;
+      color: #4D4787;
+      transition: background-color 0.2s;
+    }
+
+    .dropdown a:hover {
+      background-color: #eae5fa;
+    }
+
+    .nav-item:hover .dropdown {
+      display: block;
     }
 
     .nav-logo {
+      position: absolute;
+      right: 2rem;
       font-weight: 700;
       color: #7B6ED6;
       font-size: 1.6rem;
       text-decoration: none;
       letter-spacing: 0.5px;
-    }
-
-    .nav-links {
-      display: flex;
-      gap: 1.5rem;
-      font-size: 0.95rem;
-    }
-
-    .nav-links a {
-      text-decoration: none;
-      color: #4D4787;
-      font-weight: 400;
-      transition: color 0.2s;
-    }
-
-    .nav-links a:hover {
-      color: #6150CE;
     }
 
     .song-info {
@@ -256,12 +291,29 @@
   </style>
 </head>
 <body>
+
   <nav class="top-nav">
-    <div class="nav-center">
-      <div class="nav-links">
+    <div class="nav-links">
+      <div class="nav-item">
         <a href="#">Songs</a>
+        <div class="dropdown">
+          <a href="#">By Popularity</a>
+          <a href="#">By Genre</a>
+          <a href="#">By Country</a>
+        </div>
+      </div>
+      <div class="nav-item">
         <a href="#">About</a>
+        <div class="dropdown">
+          <a href="#">Behind Lyriciclo</a>
+        </div>
+      </div>
+      <div class="nav-item">
         <a href="#">Contact</a>
+        <div class="dropdown">
+          <a href="#">Suggest a Song</a>
+          <a href="#">Report Issue</a>
+        </div>
       </div>
     </div>
     <a href="#" class="nav-logo">Lyriciclo</a>
