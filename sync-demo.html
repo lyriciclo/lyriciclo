@@ -26,8 +26,8 @@
     .top-nav {
       width: 100%;
       background: #fff;
-      padding: 0.1rem 2rem;
-      margin-top: 0.01rem;
+      padding: 0.3rem 2rem;
+      margin-top: 0;
       display: flex;
       justify-content: center;
       align-items: center;
@@ -38,7 +38,7 @@
     .nav-links {
       display: flex;
       gap: 5rem;
-      font-size: 0.95rem;
+      font-size: 1rem;
       position: relative;
     }
 
@@ -49,25 +49,25 @@
     .nav-item > a {
       text-decoration: none;
       color: #4D4787;
-      font-weight: 400;
+      font-weight: 500;
       padding: 0.3rem 0;
       display: inline-flex;
       align-items: center;
-      gap: 0.5rem;
+      gap: 0.7rem;
       transition: color 0.2s;
-      font-size: 1rem;
+      font-size: 1.05rem;
     }
 
     .arrow {
-      font-size: 0.65rem;
-      font-weight: 500;
-      transform: scale(1.6, 1.2);
+      font-size: 0.55rem;
+      font-weight: 600;
+      transform: scale(1.2, 0.9);
       display: inline-block;
       transition: transform 0.2s ease;
     }
 
     .nav-item:hover .arrow {
-      transform: rotate(180deg) scale(1.6, 1.2);
+      transform: rotate(180deg) scale(1.2, 0.9);
     }
 
     .nav-item > a:hover {
@@ -108,10 +108,10 @@
 
     .nav-logo {
       position: absolute;
-      left: 6.5rem;
+      left: 7.5rem;
       font-weight: 500;
       color: #7B6ED6;
-      font-size: 1.6rem;
+      font-size: 1.85rem;
       text-decoration: none;
       letter-spacing: 0.5px;
     }
@@ -121,11 +121,11 @@
       max-width: 600px;
       text-align: center;
       line-height: 1.4;
-      margin-top: 0.8rem;
+      margin-top: 1.3rem;
     }
 
     .tags {
-      margin: 1rem auto 0.6rem;
+      margin: 0.7rem auto 0.3rem;
       display: flex;
       justify-content: center;
       gap: 1rem;
@@ -152,18 +152,18 @@
       font-size: 1rem;
       font-weight: 400;
       color: #4D4787;
-      margin: 0.4rem 0 0.6rem;
+      margin: 0.2rem 0 0.3rem;
     }
 
     h1 {
       color: #4D4787;
-      margin: 0.2rem 0 0.4rem;
+      margin: 0.2rem 0 0.2rem;
     }
 
     .controls {
       display: flex;
       justify-content: center;
-      margin-top: 0.8rem;
+      margin-top: 0.4rem;
     }
 
     .controls button {
@@ -197,7 +197,7 @@
     }
 
     .mode-selector {
-      margin: 1.4rem 0 2.2rem;
+      margin: 1.1rem 0 2rem;
       text-align: center;
     }
 
@@ -223,6 +223,7 @@
     #mode-select:hover {
       background-color: #e6e1f7;
     }
+
     .lyrics-container {
       width: 100%;
       max-width: 600px;
@@ -260,13 +261,8 @@
       color: #6150CE;
     }
 
-    .lyric-line .spanish {
-      display: block;
-    }
-
-    .lyric-line .english {
-      display: block;
-    }
+    .lyric-line .spanish { display: block; }
+    .lyric-line .english { display: block; }
 
     .lyric-line .english.dual-mode {
       color: #bbb;
@@ -280,6 +276,7 @@
 </head>
 <body>
   <nav class="top-nav">
+    <a href="#" class="nav-logo">  Lyriciclo</a>
     <div class="nav-links">
       <div class="nav-item">
         <a href="#">Songs <span class="arrow">^</span></a>
@@ -303,7 +300,6 @@
         </div>
       </div>
     </div>
-    <a href="#" class="nav-logo">  Lyriciclo</a>
   </nav>
 
   <div class="song-info">
@@ -344,12 +340,17 @@
       <div class="spanish">Ay qué vaca tan salada</div>
       <div class="english">Oh what a lucky cow</div>
     </div>
+    <div class="back-to-top" style="text-align: center; margin-top: 2rem; font-size: 0.9rem;">
+      <a id="back-to-top-link" href="#">Back to Top</a>
+    </div>
   </div>
 
   <script>
     const lines = document.querySelectorAll('.lyric-line');
     const playPauseBtn = document.getElementById('play-pause');
     const playPauseIcon = playPauseBtn?.querySelector('span');
+    const backToTopLink = document.getElementById('back-to-top-link');
+
     let isPlaying = false, current = 0, startTime = null, intervalId = null, pausedAt = 0, finished = false;
 
     function resetToTopState() {
@@ -364,6 +365,11 @@
       resetToTopState();
       setMode('dual');
     };
+
+    backToTopLink?.addEventListener('click', (e) => {
+      e.preventDefault();
+      resetToTopState();
+    });
 
     function scrollLine(line) {
       line.scrollIntoView({ behavior: 'smooth', block: 'start' });
