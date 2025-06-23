@@ -113,7 +113,7 @@
       color: #7B6ED6;
       font-size: 1.85rem;
       text-decoration: none;
-      letter-spacing: 0.5px;
+      letter-spacing: 0.3px;
     }
 
     .song-info {
@@ -273,6 +273,15 @@
       color: #8F85C4;
       font-weight: 400;
     }
+ .back-to-top a {
+  color: #4D4787;
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.back-to-top a:hover {
+  color: #6150CE;
+}
   </style>
 </head>
 <body>
@@ -393,7 +402,11 @@
       if (now >= time) {
         lines.forEach(l => l.classList.remove('active'));
         line.classList.add('active');
-        scrollLine(line);
+if (current > 0 && current < lines.length - 1) {
+  lines[current - 1].scrollIntoView({ behavior: 'smooth', block: 'start' });
+} else {
+  line.scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
         current++;
       }
     }
