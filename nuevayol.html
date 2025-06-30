@@ -323,9 +323,61 @@
     <span class="tag">Reguetón</span>
     <span class="tag">Puerto Rico</span>
   </div>
+  <div id="album-panel" style="
+  position: fixed;
+  top: 0; right: 0;
+  height: 100vh;
+  width: 280px;
+  background-color: #f1effc;
+  box-shadow: -2px 0 8px rgba(0,0,0,0.1);
+  padding: 1.2rem;
+  transform: translateX(100%);
+  transition: transform 0.3s ease;
+  font-family: 'Poppins', sans-serif;
+  z-index: 1500;
+">
+  <button id="close-album-panel" style="
+    background: transparent;
+    border: none;
+    font-size: 1.3rem;
+    font-weight: 700;
+    cursor: pointer;
+    float: right;
+    color: #7B6ED6;
+    user-select: none;
+  ">×</button>
+  <h3 style="color: #6150CE; margin-top: 0;">Translation</h3>
+  <p style="color: #4D4787; line-height: 1.4;">
+    I SHOULD HAVE TAKEN MORE PHOTOS
+  </p>
+</div>
   <p> </p>
   <h1>NUEVAYoL</h1>
-  <div class="line1">Bad Bunny | DeBÍ TiRAR MáS FOToS | 2025</div>
+<div class="line1" style="display: flex; justify-content: center; align-items: center; gap: 0.5rem; cursor: default;">
+  Bad Bunny | 2025 | 
+  <span id="album-name" style="color: #7B6ED6; cursor: pointer; text-decoration: underline;">
+    DeBÍ TiRAR MáS FOToS
+  </span>
+  <button id="info-button" aria-label="Show album translation" style="
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
+    font-size: 0.9rem;
+    color: #7B6ED6;
+    background: transparent;
+    border: 1.5px solid #7B6ED6;
+    border-radius: 50%;
+    width: 1.3rem;
+    height: 1.3rem;
+    line-height: 1.2rem;
+    padding: 0;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    user-select: none;
+    transition: background-color 0.2s, color 0.2s;
+  ">?</button>
+</div>
   <p> </p>
   <div class="controls">
     <button id="play-pause" class="play"><span>▶︎</span></button>
@@ -493,5 +545,23 @@ if (current > 0 && current < lines.length - 1) {
       setMode(modeSelect.value);
     });
   </script>
+  <script>
+  const albumName = document.getElementById('album-name');
+  const infoButton = document.getElementById('info-button');
+  const albumPanel = document.getElementById('album-panel');
+  const closeBtn = document.getElementById('close-album-panel');
+
+  function openPanel() {
+    albumPanel.style.transform = 'translateX(0)';
+  }
+  function closePanel() {
+    albumPanel.style.transform = 'translateX(100%)';
+  }
+
+  albumName.addEventListener('click', openPanel);
+  infoButton.addEventListener('click', openPanel);
+  closeBtn.addEventListener('click', closePanel);
+</script>
+
 </body>
 </html>
