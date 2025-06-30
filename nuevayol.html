@@ -148,7 +148,7 @@
       background-color: #e3e0f5;
     }
 
-    .line1 {
+    . {
       font-size: 1rem;
       font-weight: 400;
       color: #4D4787;
@@ -353,10 +353,32 @@
 </div>
   <p> </p>
   <h1>NUEVAYoL</h1>
-<div class="line1" style="display: flex; justify-content: center; align-items: center; gap: 0.5rem; cursor: default;">
-  Bad Bunny | 2025 | 
-  <span id="album-name" style="color: #7B6ED6; cursor: pointer; text-decoration: underline;">
+<div class="line1" style="text-align: center; position: relative;">
+  <div style="color: #7B6ED6; font-weight: 500; display: inline;">
     DeBÍ TiRAR MáS FOToS
+  </div>
+  <button id="info-button" aria-label="Show album translation" style="
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
+    font-size: 0.6rem;
+    color: #7B6ED6;
+    background: transparent;
+    border: 1px solid #7B6ED6;
+    border-radius: 50%;
+    width: 0.9rem;
+    height: 0.9rem;
+    line-height: 0.9rem;
+    padding: 0;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    position: relative;
+    top: -0.5em;
+    margin-left: 0.3rem;
+  ">?</button>
+  <div style="color: #4D4787; margin-top: 0.2rem;">Bad Bunny | 2025</div>
+</div>
   </span>
   <button id="info-button" aria-label="Show album translation" style="
     font-family: 'Poppins', sans-serif;
@@ -545,6 +567,7 @@ if (current > 0 && current < lines.length - 1) {
       setMode(modeSelect.value);
     });
   </script>
+  
   <script>
   const albumName = document.getElementById('album-name');
   const infoButton = document.getElementById('info-button');
@@ -562,6 +585,32 @@ if (current > 0 && current < lines.length - 1) {
   infoButton.addEventListener('click', openPanel);
   closeBtn.addEventListener('click', closePanel);
 </script>
-
+<div id="floating-translation" style="
+  display: none;
+  position: absolute;
+  top: -2.3rem;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: #f9f7ff;
+  color: #4D4787;
+  padding: 0.7rem 1rem;
+  border-radius: 0.75rem;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+  font-size: 0.85rem;
+  font-weight: 500;
+  z-index: 2000;
+  white-space: nowrap;
+">
+  I ShOuLD HAvE TaKEN MoRE PHOToS
+  <button id="close-floating" style="
+    margin-left: 0.6rem;
+    background: none;
+    border: none;
+    font-weight: 600;
+    color: #7B6ED6;
+    font-size: 0.9rem;
+    cursor: pointer;
+  ">×</button>
+</div>
 </body>
 </html>
