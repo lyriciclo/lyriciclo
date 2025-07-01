@@ -347,9 +347,7 @@
   <p> </p>
   <h1>NUEVAYoL</h1>
 <div class="line1" style="text-align: center; position: relative;">
-  <div style="color: #7B6ED6; font-weight: 500; display: inline;">
-    DeBÍ TiRAR MáS FOToS
-  </div>
+  <span id="album-name" style="color: #7B6ED6; font-weight: 500;">DeBÍ TiRAR MáS FOToS</span>
   <button id="info-button" aria-label="Show album translation" style="
     font-family: 'Poppins', sans-serif;
     font-weight: 600;
@@ -370,7 +368,8 @@
     top: -0.5em;
     margin-left: 0.3rem;
   ">?</button>
-<div style="color: #4D4787; margin-top: 0.2rem; font-size: 0.85rem;">Bad Bunny | 2025</div>
+  <div style="color: #4D4787; margin-top: 0.2rem; font-size: 0.85rem;">Bad Bunny | 2025</div>
+</div>
   <p> </p>
   <div class="controls">
     <button id="play-pause" class="play"><span>▶︎</span></button>
@@ -539,7 +538,7 @@ if (current > 0 && current < lines.length - 1) {
     });
   </script>
   
-  <script>
+<script>
   const albumName = document.getElementById('album-name');
   const infoButton = document.getElementById('info-button');
   const albumPanel = document.getElementById('album-panel');
@@ -552,9 +551,9 @@ if (current > 0 && current < lines.length - 1) {
     albumPanel.style.transform = 'translateX(100%)';
   }
 
-  albumName.addEventListener('click', openPanel);
-  infoButton.addEventListener('click', openPanel);
-  closeBtn.addEventListener('click', closePanel);
+  albumName?.addEventListener('click', openPanel);
+  infoButton?.addEventListener('click', openPanel);
+  closeBtn?.addEventListener('click', closePanel);
 </script>
 <div id="floating-translation" style="
   display: none;
