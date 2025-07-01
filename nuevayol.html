@@ -278,6 +278,28 @@
     .back-to-top a:hover {
       color: #6150CE;
     }
+    #mode-dropdown a.active {
+  background-color: #eae5fa;
+  font-weight: 600;
+  color: #6150CE;
+}
+
+.mode-selector .arrow {
+  font-size: 0.75rem;
+  font-weight: 500;
+  transform: scale(1.2, 0.9);
+  display: inline-block;
+  transition: transform 0.2s ease;
+  user-select: none;
+}
+
+.mode-selector .arrow {
+  transform: rotate(0deg) scale(1.2, 0.9);
+}
+
+.mode-selector.nav-item:hover .arrow {
+  transform: rotate(180deg) scale(1.2, 0.9);
+}
   </style>
 </head>
 <body>
@@ -421,12 +443,30 @@ infoButton?.addEventListener('mouseleave', () => {
     <button id="play-pause" class="play"><span>▶︎</span></button>
   </div>
 
-  <div class="mode-selector">
-    <select id="mode-select">
-      <option value="spanish">Spanish</option>
-      <option value="dual" selected>Bilingual</option>
-      <option value="english">English</option>
-    </select>
+ <div class="mode-selector nav-item" style="position: relative; display: inline-block;">
+  <button id="mode-button" style="
+    background: #f9f7ff;
+    border: none;
+    padding: 0.5rem 1.2rem;
+    border-radius: 0.5rem;
+    color: #4D4787;
+    font-weight: 500;
+    font-family: 'Poppins', sans-serif;
+    font-size: 0.9rem;
+    cursor: pointer;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    min-width: 120px;
+    justify-content: space-between;
+  ">
+    Bilingual <span class="arrow">^</span>
+  </button>
+  <div id="mode-dropdown" class="dropdown" style="left: 0; transform: none; min-width: 120px;">
+    <a href="#" data-mode="spanish">Spanish</a>
+    <a href="#" data-mode="dual" class="active">Bilingual</a>
+    <a href="#" data-mode="english">English</a>
   </div>
 </div>
 
@@ -602,6 +642,44 @@ if (current > 0 && current < lines.length - 1) {
       floatingPanel.style.display = 'none';
     }
   });
+  const modeButton = document.getElementById('mode-button');
+const modeDropdown = document.getElementById('mode-dropdown');
+const modeLinks = modeDropdown.querySelectorAll('a');
+
+let currentMode = 'dual';
+
+modeButton.addEventListener('click', () => {
+  // Toggle dropdown visibility
+  modeDropdown.style.display = modeDropdown.style.display === 'block' ? 'none' : 'block';
+});
+
+// When clicking outside dropdown, close it
+window.addEventListener('click', (e) => {
+  if (!modeDropdown.contains(e.target) && e.target !== modeButton) {
+    modeDropdown.style.display = 'none';
+  }
+});
+
+// When a mode is clicked
+modeLinks.forEach(link => {
+  link.addEventListener('click', (e) => {
+    e.preventDefault();
+
+    // Update selected mode button text
+    currentMode = link.dataset.mode;
+    modeButton.childNodes[0].nodeValue = link.textContent + " ";
+
+    // Close dropdown
+    modeDropdown.style.display = 'none';
+
+    // Update active link style
+    modeLinks.forEach(l => l.classList.remove('active'));
+    link.classList.add('active');
+
+    // Set mode logic (reuse your existing setMode function)
+    setMode(currentMode);
+  });
+});
 </script>
 <div id="floating-translation" style="
   display: none;
@@ -631,4 +709,5 @@ if (current > 0 && current < lines.length - 1) {
   ">×</button>
 </div>
 </body>
+  
 </html>
