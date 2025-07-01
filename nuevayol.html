@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Lyriciclo</title>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
   <style>
     html, body {
       margin: 0;
@@ -349,25 +350,53 @@
 <div class="line1" style="text-align: center; position: relative;">
   <span id="album-name" style="color: #7B6ED6; font-weight: 500;">DeBÍ TiRAR MáS FOToS</span>
   <button id="info-button" aria-label="Show album translation" style="
-    font-family: 'Poppins', sans-serif;
+    font-family: 'Roboto', sans-serif;
     font-weight: 600;
-    font-size: 0.6rem;
+    font-size: 0.65rem;
     color: #7B6ED6;
     background: transparent;
     border: 1px solid #7B6ED6;
     border-radius: 50%;
-    width: 0.9rem;
-    height: 0.9rem;
-    line-height: 0.9rem;
+    width: 1rem;
+    height: 1rem;
+    line-height: 1rem;
     padding: 0;
     display: inline-flex;
     align-items: center;
     justify-content: center;
     cursor: pointer;
-    position: relative;
-    top: -0.5em;
-    margin-left: 0.3rem;
+    margin-left: 0.35rem;
+    vertical-align: middle;
   ">?</button>
+  <div style="color: #4D4787; margin-top: 0.2rem; font-size: 0.85rem;">Bad Bunny | 2025</div>
+</div>
+
+<div id="floating-album-panel" style="
+  display: none;
+  position: absolute;
+  top: 2.1rem;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: #f9f7ff;
+  padding: 0.7rem 1.2rem;
+  border-radius: 0.6rem;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+  color: #4D4787;
+  font-size: 0.88rem;
+  font-weight: 500;
+  z-index: 1000;
+">
+  I ShOuLD HAvE TaKEN MoRE PHOToS
+  <button id="close-floating" style="
+    margin-left: 0.6rem;
+    background: none;
+    border: none;
+    font-weight: 700;
+    color: #7B6ED6;
+    font-size: 1rem;
+    cursor: pointer;
+  ">×</button>
+</div> 
   <div style="color: #4D4787; margin-top: 0.2rem; font-size: 0.85rem;">Bad Bunny | 2025</div>
 </div>
   <p> </p>
@@ -539,21 +568,23 @@ if (current > 0 && current < lines.length - 1) {
   </script>
   
 <script>
-  const albumName = document.getElementById('album-name');
   const infoButton = document.getElementById('info-button');
-  const albumPanel = document.getElementById('album-panel');
-  const closeBtn = document.getElementById('close-album-panel');
+  const floatingPanel = document.getElementById('floating-album-panel');
+  const closeFloating = document.getElementById('close-floating');
 
-  function openPanel() {
-    albumPanel.style.transform = 'translateX(0)';
-  }
-  function closePanel() {
-    albumPanel.style.transform = 'translateX(100%)';
-  }
+  infoButton?.addEventListener('click', () => {
+    floatingPanel.style.display = 'block';
+  });
 
-  albumName?.addEventListener('click', openPanel);
-  infoButton?.addEventListener('click', openPanel);
-  closeBtn?.addEventListener('click', closePanel);
+  closeFloating?.addEventListener('click', () => {
+    floatingPanel.style.display = 'none';
+  });
+
+  window.addEventListener('click', function (e) {
+    if (!floatingPanel.contains(e.target) && e.target !== infoButton) {
+      floatingPanel.style.display = 'none';
+    }
+  });
 </script>
 <div id="floating-translation" style="
   display: none;
