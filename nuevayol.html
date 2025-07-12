@@ -36,7 +36,8 @@
     }
     .top-nav .nav-inner { /* Container inside nav bar that groups logo (>Lyriciclo) and menu items together */
       display: flex; /* Nav-inner is flex container */
-      justify-content: space-between; /* Pushes logo left, nav links right */
+      align-items: center; /* vertical alignment */
+      gap: 5rem; /* add space between logo and menu links */
       align-items: center; /* Vertically center items inside nav */
       max-width: 1200px; /* Keeps nav from getting too wide on big screens */
       margin: 0 auto; /* Centers nav content horizontally on page */
@@ -118,18 +119,18 @@
       line-height: 1.4; /* Space between lines of text */
       margin-top: 1.3rem; /* Space above its container */
     }
-    .tags { /* Container for info badges */
+    .tags { /* General container style for info badges */
       margin: 0.7rem auto 0.3rem; /* Space above (0.7rem), below (0.3rem), and center horizontally */
       display: flex; /* Arrange info badges in a row */
       justify-content: center; /* Info badges horizontally within container */
       gap: 1rem; /* Space between each info badge */
       flex-wrap: wrap; /* Allow info badges to wrap to next line if they don't fit */
     }
-    .tag {
-      background-color: #f1effc;
-      color: #7B6ED6;
-      font-size: 0.8rem;
-      padding: 0.25rem 0.8rem;
+    .tag { /* Each individual info badges style */
+      background-color: #f1effc; /* Fill color */
+      color: #7B6ED6; /* Text size */
+      font-size: 0.8rem; /* Space between text and outside of button */
+      padding: 0.25rem 0.8rem; /* Makes button pill shaped */
       border: none;
       border-radius: 999px;
       font-weight: 500;
