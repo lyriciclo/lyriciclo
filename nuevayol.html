@@ -1,40 +1,42 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Lyriciclo</title>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
-  <style>
-    html, body {
-      margin: 0;
-      padding: 0;
-      scroll-behavior: smooth;
-      width: 100%;
-      height: 100%;
-      overflow-x: hidden;
+<!DOCTYPE html> <!-- Tells browser this is HTML5 document -->
+
+<html lang="en"> <!-- Starts HTML, sets main language to English -->
+<head> <!-- Begins page title, fonts, styles, metadata section (non-visible content) -->
+  <meta charset="UTF-8" /> <!-- Special characters (accents) display properly -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/> <!-- Page fits mobile screens correctly -->
+  <title>Lyriciclo</title> <!-- Name shown in browser tab -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet"> <!-- Loads Poppins font (main font) -->
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet"> <!-- Loads Roboto font (font for symbols, i.e. '?') -->
+  
+  <style> /* Starts CSS (rules for page) */
+    html, body { /* Targets both <html> element (root of page) and <body> element (main visible content), styles inside apply to the entire page */
+      margin: 0; /* Removes space outside page edges (margin = space outside a box) */
+      padding: 0; //* Removes space inside page edges, content starts right at edge (padding = space between edge of box and its content) */
+      scroll-behavior: smooth; /* Scrolling glides smoothly, no jumping */
+      width: 100%; /* Page fills full width of screen */
+      height: 100%; /* Page fills full height of screen */
+      overflow-x: hidden; /* Prevents sideways scrolling if content is too wide */
     }
 
-    body {
-      font-family: 'Poppins', sans-serif;
-      background-color: #fff;
-      color: #333;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
+    body { /* Styles visible part of page */
+      font-family: 'Poppins', sans-serif; /* Sets main text font to Poppins */
+      background-color: #fff; /* Background white */
+      color: #333; /* Default text dark gray; less harsh than black) */
+      display: flex; /* Makes layout system "flexbox"; items easily organized in rows/columns */
+      flex-direction: column; /* Conrent stacked vertically */
+      align-items: center; /* Content centered horizontally on page */
     }
 
-    .top-nav {
-      width: 100%;
-      background: #fff;
-      padding: 0.3rem 2rem;
-      margin-top: 0;
-      display: flex;
+    .top-nav { /* Styles for top navigation bar */
+      width: 100%; /* Goes across whole screen */
+      background: #fff; /* Has white background */
+      padding: 0.3rem 2rem; /* */
+      margin-top: 0; /* Space between bar and top of page */
+      display: flex; /* Nav items centered horizontally inside bar */
       justify-content: center;
       align-items: center;
-      position: relative;
-      z-index: 1000;
+      position: relative; /* Child elements positions relative to nav bar */
+      z-index: 1000; /* nav bar always in front of other page elements */
     }
 
     .nav-links {
