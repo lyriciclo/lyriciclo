@@ -1,3 +1,4 @@
+<!-- ------------------------------------------------------------- General rules ------------------------------------------------------------- -->
 <!DOCTYPE html> <!-- Tells browser this is HTML5 doc -->
 <html lang="en"> <!-- Start of HTML, sets main language to English -->
 <head> <!-- Begins page title, fonts, styles, metadata section (non-visible content) --> 
@@ -6,9 +7,7 @@
   <title>Lyriciclo</title> <!-- Name shown in browser tab -->
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet"> <!-- Loads Poppins font (main font) -->
   <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet"> <!-- Loads Roboto font (font for symbols, i.e. '?') -->
-  
   <style> /* Start of CSS (rules for page) */
-    
     html, body { /* Targets <html> (root of page) and <body> elements (main visible content), styles inside apply to entire page */
       margin: 0; /* Removes space outside page edges (margin = space outside a box) */
       padding: 0; //* Removes space inside page edges, content starts right at edge (padding = space between edge of box and its content) */
@@ -25,7 +24,15 @@
       flex-direction: column; /* Conent stacked vertically */
       align-items: center; /* Content centered horizontally on page */
     }
-   
+/* ----------------------------------------------------------------- Menu bar ----------------------------------------------------------------- */
+    .nav-logo { /* Styles ">Lyriciclo" (top left corner) */
+      position: absolute; /* Removes logo from normal flow (for precise placing) */
+      left: 3.75rem; /* Moves logo # of rem units from left edge of its container */
+      font-weight: 600; /* Text semi-bold */
+      font-size: 1.75rem; /* Sets size of text */
+      text-decoration: none; /* Removes underline */
+      letter-spacing: 0.3px; /* Space between each logo letter */
+    }
     .top-nav { /* Styles for top navigation bar */
       width: 100%; /* Goes across whole screen */
       background: #fff; /* Has white background */
@@ -42,10 +49,10 @@
       max-width: 1200px; /* Keeps nav from getting too wide on big screens */
       margin: 0 auto; /* Centers nav content horizontally on page */
       width: 100%; /* Fill available width (unless greater than 1200px) */
-}
+    }
     .nav-links { /* Holds all menu items */
       display: flex; /* Menu items in row (side by side) */
-      gap: 5rem; /* Space between each link */
+      gap: 3rem; /* Space between each link */
       font-size: 1rem; /* Link text size (default) */
     }
     .nav-item { /* Each menu item in nav bar has its own dropdown menu */
@@ -75,6 +82,7 @@
     .nav-item > a:hover { /* How main menu items behave when mouse is over them */
       color: #6150CE; /* Color of of main menu items on hover */
     }
+/* ---------------------------------------------------------------- Dropdowns ---------------------------------------------------------------- */
     .dropdown { /* Styles for dropdown menu */
       position: absolute; /* Removes dropdown from normal flow, positioned relative to nearest positioned element */
       top: 100%; /* Places dropdown below main menu item */
@@ -103,15 +111,7 @@
     .nav-item:hover .dropdown { /* Shows menu item's dropdown menu on hover */
       display: block; /* Hidden dropdown becomes visible on hover */
     }
-    .nav-logo { /* Styles ">Lyriciclo" (top left corner) */
-      position: absolute; /* Removes logo from normal flow (for precise placing) */
-      left: 3.75rem; /* Moves logo # of rem units from left edge of its container */
-      font-weight: 600; /* Text semi-bold */
-      font-size: 1.75rem; /* Sets size of text */
-      text-decoration: none; /* Removes underline */
-      letter-spacing: 0.3px; /* Space between each logo letter */
-    }
- 
+/* ---------------------------------------------------------------- Song info ---------------------------------------------------------------- */ 
     .song-info { /* Styles of section containing song details (title, artist, etc.) */
       width: 100%; /* Container fills same width as parent */
       max-width: 600px; /* Container will never be wider than 600px */
