@@ -152,33 +152,33 @@
       justify-content: center; /* Buttons centered horizontally */
       margin-top: 0.8rem;/* Space above controls */
     }
-    .controls button {
-      background-color: #7B6ED6;
-      color: white;
-      border: none;
-      font-weight: 700;
-      font-size: 1.8rem;
-      border-radius: 50%;
-      width: 3.5rem;
-      height: 3.5rem;
-      cursor: pointer;
-      line-height: 1;
-      transition: background-color 0.2s;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding-bottom: 1px;
+    .controls button { /* Play/pause button and icon */
+      background-color: #7B6ED6; /* Button fill color */
+      color: white; /* Play/pause icon color */
+      border: none; /* No automatic boarder */
+      font-weight: 700; /* Icon boleness */
+      font-size: 1.8rem; /* Icon size */
+      border-radius: 50%; /* Makes button circular */
+      width: 3.5rem; /* Button width */
+      height: 3.5rem; /* Button height */
+      cursor: pointer; /* Pointer becomes hand on hover */
+      line-height: 1; /* Line spacing */
+      transition: background-color 0.2s; /* Hover transition */
+      display: flex; /* Flex latout (idk ehat this means) */
+      align-items: center; /* Icon centered in button veryically */
+      justify-content: center; /* Icon centered in button horizontally */
+      padding-bottom: 1px; /* Moves icon slightly up */
     }
-    .controls button.play span {
-      transform: translate(3px, 2px);
+    .controls button.play span { /* Play icon */
+      transform: translate(3px, 2px); /* Play icon moved right and down (seems centered in button) */
     }
-    .controls button.pause span {
-      transform: none;
+    .controls button.pause span { /* Pause icon */
+      transform: none; /* Idk if i need this oh well maybe */
     }
-    .controls button:hover {
-      background-color: #9A90E2;
+    .controls button:hover { /* Button behavior on hover */
+      background-color: #9A90E2; /* Button background slightly lighter on hover */
     }
-
+/* --------------------------------------------------------- Span/bilingual/english select --------------------------------------------------------- */
     .mode-selector {
       margin: 1.1rem 0 1rem;
       text-align: center;
