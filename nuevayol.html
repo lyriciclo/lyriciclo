@@ -74,10 +74,11 @@
       font-size: 0.75rem; /* Arrow text size */
       font-weight: 500; /* Arrow boldness */
       display: inline-block; /* Arrow behaves like text but allows size/transform styling */
+      transform: rotate(180deg); /* Arrow points down */
       transition: transform 0.2s ease; /* Allows arrow to smoothly rotate */
     }
     .nav-item:hover .arrow { /* Arrow style on hover */
-      transform: rotate(180deg); /* Flip arrow upside down */
+      transform: rotate(0deg); /* Flip arrow righsideup down */
     }
     .nav-item > a:hover { /* How main menu items behave when mouse is over them */
       color: #6150CE; /* Color of of main menu items on hover */
