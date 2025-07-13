@@ -127,16 +127,16 @@
       gap: 1rem; /* Space between each info badge */
       flex-wrap: wrap; /* Allow info badges to wrap to next line if they don't fit */
     }
-    .tag { /* Each individual info badges style */
+    .tag { /* Styles for info badges (genre, country, year) */
       background-color: #f1effc; /* Fill color */
-      color: #7B6ED6; /* Text size */
-      font-size: 0.8rem; /* Space between text and outside of button */
-      padding: 0.25rem 0.8rem; /* Makes button pill shaped */
-      border: none;
-      border-radius: 999px;
-      font-weight: 500;
-      cursor: pointer;
-      transition: all 0.2s ease;
+      color: #7B6ED6; /* Text color */
+      font-size: 0.8rem; /* Text size */
+      padding: 0.25rem 0.8rem; /* Space inside badge (top/bottom 0.25, left/right 0.8) */
+      border: none; /* No outline or border */
+      border-radius: 999px; /* Rounded corners */
+      font-weight: 500; /* Font boldness */
+      cursor: pointer;/* Shows hand icon on hover (suggests clickability) */
+      transition: all 0.2s ease; /* Smooth hover animation */
     }
     .tag:hover {
       background-color: #e3e0f5;
