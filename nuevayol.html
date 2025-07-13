@@ -1,7 +1,7 @@
 <!-- ------------------------------------------------------------- General rules ------------------------------------------------------------- -->
 <!DOCTYPE html> <!-- Tells browser this is HTML5 doc -->
 <html lang="en"> <!-- Start of HTML, sets main language to English -->
-<head> <!-- Begins page title, fonts, styles, metadata section (non-visible content) --> 
+<head> <!-- Begins page title, fonts, styles, metadata section rules (non-visible content) --> 
   <meta charset="UTF-8" /> <!-- Special characters (accents) displayed properly -->
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/> <!-- Page fits mobile screens correctly -->
   <title>Lyriciclo</title> <!-- Name shown in browser tab -->
@@ -17,12 +17,12 @@
       overflow-x: hidden; /* Prevents horizontal scrolling if content is too wide */
     }
     body { /* Styles visible part of page */
-      font-family: 'Poppins', sans-serif; /* Sets main text font to Poppins */
+      font-family: 'Poppins', sans-serif; /* Main font Poppins */
       background-color: #fff; /* Background of page is white */
       color: #333; /* Default text dark gray (less harsh than black) */
       display: flex; /* Makes layout system "flexbox"; items easily organized in rows/columns (idrk what this means) */
       flex-direction: column; /* Conent stacked vertically */
-      align-items: center; /* Content centered horizontally on page */
+      align-items: center; /* Content centered horizontally */
     }
 /* ----------------------------------------------------------------- Menu bar ----------------------------------------------------------------- */
     .nav-logo { /* Styles ">Lyriciclo" (top left corner) */
@@ -42,10 +42,10 @@
       z-index: 1000; /* nav bar always in front of other page elements */
     }
     .top-nav .nav-inner { /* Container inside nav bar that groups logo (>Lyriciclo) and menu items together */
-      display: flex; /* Nav-inner is flex container */
-      align-items: center; /* vertical alignment */
-      gap: 20rem; /* add space between logo and menu links */
-      align-items: center; /* Vertically center items inside nav */
+      display: flex; /* Horizontal layout */
+      justify-content: center; /* Center everything horizontally */
+      align-items: center; /* Align items vertically */
+      position: relative; /* Needed for absolute positioning inside */
       max-width: 1200px; /* Keeps nav from getting too wide on big screens */
       margin: 0 auto; /* Centers nav content horizontally on page */
       width: 100%; /* Fill available width (unless greater than 1200px) */
