@@ -135,22 +135,22 @@
       border: none; /* No outline or border */
       border-radius: 999px; /* Rounded corners */
       font-weight: 500; /* Font boldness */
-      cursor: pointer;/* Shows hand icon on hover (suggests clickability) */
+      cursor: pointer;/* Shows hand icon on hover (shows clickability) */
       transition: all 0.2s ease; /* Smooth hover animation */
     }
-    .tag:hover {
-      background-color: #e3e0f5;
+    .tag:hover { /* Behavior when mouse hovers over tag */
+      background-color: #e3e0f5; /* Background becomes slightly darker on hover */
     }
 
-    h1 {
-      color: #4D4787;
-      margin: 0.2rem 0 0.2rem;
+    h1 { /* Styles for song title */
+      color: #4D4787; /* Title text color */
+      margin: 0.2rem 0 0.2rem; /* Space above and below title */
     }
 
-    .controls {
-      display: flex;
-      justify-content: center;
-      margin-top: 0.8rem;
+    .controls { /* Container for buttons (eg playback controls and toggles) */
+      display: flex; /* Buttons arranged in row */
+      justify-content: center; /* Buttons centered horizontally */
+      margin-top: 0.8rem;/* Space above controls */
     }
 
     .controls button {
