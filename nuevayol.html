@@ -1,12 +1,12 @@
-<!-- ------------------------------------------------------------- General rules ------------------------------------------------------------- -->
+<!-- -------------------------------------------------------------------- General rules -------------------------------------------------------------------- -->
 <!DOCTYPE html> <!-- Tells browser this is HTML5 doc -->
 <html lang="en"> <!-- Start of HTML, sets main language to English -->
 <head> <!-- Begins page title, fonts, styles, metadata section rules (non-visible content) --> 
   <meta charset="UTF-8" /> <!-- Special characters (accents) displayed properly -->
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/> <!-- Page fits mobile screens correctly -->
   <title>Lyriciclo</title> <!-- Name shown in browser tab -->
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet"> <!-- Loads Poppins font (main font) -->
-  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet"> <!-- Loads Roboto font (font for symbols, i.e. '?') -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet"> <!-- Poppins font (main font) -->
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet"> <!-- Roboto font (font for symbols, i.e. '?') -->
   <style> /* Start of CSS (rules for page) */
     html, body { /* Targets <html> (root of page) and <body> elements (main visible content), styles inside apply to entire page */
       margin: 0; /* Removes space outside page edges (margin = space outside a box) */
@@ -24,7 +24,7 @@
       flex-direction: column; /* Conent stacked vertically */
       align-items: center; /* Content centered horizontally */
     }
-/* ----------------------------------------------------------------- Menu bar ----------------------------------------------------------------- */
+/* ------------------------------------------------------------------ Menu bar ------------------------------------------------------------------ */
     .nav-logo { /* Styles ">Lyriciclo" (top left corner) */
       position: absolute; /* Removes logo from normal flow (for precise placing) */
       left: 0rem; /* Moves logo # of rem units from left edge of its container */
@@ -83,7 +83,7 @@
     .nav-item > a:hover { /* How main menu items behave when mouse is over them */
       color: #6150CE; /* Color of of main menu items on hover */
     }
-/* ---------------------------------------------------------------- Dropdowns ---------------------------------------------------------------- */
+/* ------------------------------------------------- Dropdowns -------------------------------------------------- */
     .dropdown { /* Styles for dropdown menu */
       position: absolute; /* Removes dropdown from normal flow, positioned relative to nearest positioned element */
       top: 100%; /* Places dropdown below main menu item */
@@ -112,7 +112,7 @@
     .nav-item:hover .dropdown { /* Shows menu item's dropdown menu on hover */
       display: block; /* Hidden dropdown becomes visible on hover */
     }
-/* ---------------------------------------------------------------- Song info ---------------------------------------------------------------- */ 
+/* ------------------------------------------ Song info ------------------------------------------ */ 
     .song-info { /* Styles of section containing song details (title, artist, etc.) */
       width: 100%; /* Container fills same width as parent */
       max-width: 500px; /* Container will never be wider than 600px */
@@ -141,12 +141,12 @@
     .tag:hover { /* Behavior when mouse hovers over tag */
       background-color: #e3e0f5; /* Background becomes slightly darker on hover */
     }
-/* -------------------------------------------------------------- Song Title -------------------------------------------------------------- */
+/* ----------------------- Song Title ----------------------- */
     h1 { /* Styles for song title */
       color: #4D4787; /* Title text color */
       margin: 0.2rem 0 0.2rem; /* Space above and below title */
     }
-/* ----------------------------------------------------------- Play/Pause Button ----------------------------------------------------------- */
+/* -------------------------------------- Play/Pause Button -------------------------------------- */
     .controls { /* Container for buttons (eg playback controls and toggles) */
       display: flex; /* Buttons arranged in row */
       justify-content: center; /* Buttons centered horizontally */
@@ -173,41 +173,45 @@
       transform: translate(3px, 2px); /* Play icon moved right and down (seems centered in button) */
     }
     .controls button.pause span { /* Pause icon */
-      transform: none; /* Idk if i need this oh well maybe */
+      transform: none; /* Idk if I need this oh well */
     }
     .controls button:hover { /* Button behavior on hover */
       background-color: #9A90E2; /* Button background slightly lighter on hover */
     }
-/* --------------------------------------------------------- Span/bilingual/english select --------------------------------------------------------- */
-    .mode-selector {
-      margin: 1.1rem 0 1rem;
-      text-align: center;
+/* ---------------------------------------------------------------------------------------------------- Language select ---------------------------------------------------------------------------------------------------- */
+    .mode-selector { /* Container for language mode selector */
+      margin: 1.1rem 0 1rem; /* Space above (1.1rem) and below (1rem) the dropdown (no space on sides) */
+      text-align: center; /* Centers dropdown horizontally inside container */
     }
-
-    #mode-select {
-  background-color: #f9f7ff;
-  color: #4D4787;
-  font-weight: 500;
-  border: none;
-  border-radius: 0.5rem;
-  font-family: 'Poppins', sans-serif;
-  font-size: 0.9rem;
-  padding: 0.5rem 1.2rem;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
-  cursor: pointer;
-  appearance: none;
-  background-image: url('data:image/svg+xml;utf8,<svg fill="%234D4787" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><path d="M7 10l5 5 5-5z"/></svg>');
-  background-repeat: no-repeat;
-  background-position: right 0.8rem center;
-  background-size: 1.2rem;
-  padding-right: 2.2rem;
-  transition: background-color 0.2s ease;
-}
-
-#mode-select:hover {
-  background-color: #eae5fa;
-}
-
+    #mode-select { /* Language mode selector styles */
+      background-color: #f9f7ff; /* Dropdown box color */
+      background-image: url('data:image/svg+xml;utf8,<svg style="transform: rotate(180deg);" fill="%234D4787" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><path d="M7 10l5 5 5-5z"/></svg>');
+        /* Downward-pointing arrow, added as background image */
+      background-size: 1.2rem; /* Size of arrow image */
+      background-repeat: no-repeat; /* Arrow image only appears once */
+      background-position: right 0.8rem center; /* Arrow on right side of text, vertically centered */
+      color: #4D4787; /* Text color */
+      font-weight: 500; /* Text boldness */
+      font-size: 0.9rem; /* Text size */
+      padding: 0.5rem 1.2rem; /* Space inside dropdown: top/bottom = 0.5rem, left/right = 1.2rem */
+      padding-right: 2.2rem; /* Extra space on right for the arrow */
+      border: none; /* Removes default border */
+      border-radius: 0.5rem; /* Rounded corners */
+      box-shadow: 0 2px 8px rgba(0,0,0,0.08); /* Shadow behind dropdown */
+      cursor: pointer; /* Cursor becomes pointer on hover */
+      appearance: none; /* Removes default browser styling for dropdown */
+      transition: background-color 0.2s ease; /* Smooth color change on hover */
+    }
+    #mode-select:focus { /* Styles apply when dropdown is selected by keyboard or mouse */
+      outline: 2px solid #b2b6f6; /* Shows visible border around dropdown */
+      outline-offset: 2px; /* Moves outline slightly away from dropdown edges */
+    }
+    #mode-select:hover { /* Styles when mouse is over dropdown */
+      background-color: #eae5fa; J/* Changes background color on hover */
+      background-image: url('data:image/svg+xml;utf8,<svg style="transform: rotate(0deg);" fill="%234D4787" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><path d="M7 10l5 5 5-5z"/></svg>');
+        /* Arrow points upwards on hover */
+    }
+/* ------------------------------------------------------------ Lyrics ------------------------------------------------------------ */
     .lyrics-container {
       width: 100%;
       max-width: 600px;
