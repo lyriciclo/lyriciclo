@@ -207,7 +207,7 @@
       background-image: url('data:image/svg+xml;utf8,<svg style="transform: rotate(0deg);" fill="%234D4787" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><path d="M7 10l5 5 5-5z"/></svg>');
         /* Arrow points upwards on hover */
     }
-/* ------------------------------------------------------------ General lyrics behavior ------------------------------------------------------------ */
+/* --------------------------------------- General lyrics behavior --------------------------------------- */
     .lyrics-container { /* Box that holds lyrics (scrollable area) */
       width: 100%; /* Goes across full screen width */
       max-width: 600px; /* Max width if scree is 600+px */
@@ -238,30 +238,29 @@
     }
     .lyric-line.active { /* Style for currently highlighted (synced) lyric line */
       font-weight: 600; /* Make the text bolder */
-      color: #6150CE; /* Change color to vibrant purple */
+      color: #6150CE; /* Change color to bright purple */
     }
-    .lyric-line .spanish { display: block; }
-    .lyric-line .english { display: block; }
+    .lyric-line .spanish { display: block; } /* Spanish line is on its own line */
+    .lyric-line .english { display: block; } /* English line is on its own line */
 
-    .lyric-line .english.dual-mode {
-      color: #bbb;
-      font-weight: 300;
+    .lyric-line .english.dual-mode { /* Style of inactive english line in dual mode */
+      color: #bbb; /* Color of inactive english text in dual mode */
+      font-weight: 300; /* Boldness of inactive english text in dual mode */
     }
-
-    .lyric-line.active .english.dual-mode {
-      color: #8F85C4;
-      font-weight: 400;
+    .lyric-line.active .english.dual-mode { /* Style of active english line in dual mode */
+      color: #8F85C4; /* Color of active english text in dual mode */
+      font-weight: 400; /* Boldness of active english text in dual mode */
     }
-
-    .back-to-top a {
-      color: #4D4787;
-      text-decoration: none;
-      transition: color 0.2s ease;
+/* ----------------------- Back to top text ----------------------- */    
+    .back-to-top a { /* Style of back to top text */
+      color: #4D4787; /* Color of back to top text */
+      text-decoration: none; /* Removes automatic underline */
+      transition: color 0.2s ease; /* Smooth color change on hover */
     }
-
-    .back-to-top a:hover {
-      color: #6150CE;
+    .back-to-top a:hover { /* Style of back to top text on hover */
+      color: #6150CE; /* Color of back to top text on hover */
     }
+  /* Mode select */
     #mode-dropdown a.active {
   background-color: #eae5fa;
   font-weight: 600;
