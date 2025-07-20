@@ -260,172 +260,86 @@
     .back-to-top a:hover { /* Style of back to top text on hover */
       color: #6150CE; /* Color of back to top text on hover */
     }
-  /* Mode select */
-    #mode-dropdown a.active {
-  background-color: #eae5fa;
-  font-weight: 600;
-  color: #6150CE;
+/* ---------------------------------------- Mode select ---------------------------------------- */
+  #mode-dropdown a.active { /* Style of mode options on hover */
+    background-color: #eae5fa; /* Background is different color when mode options are highlighted */
+    font-weight: 600; /* Boldness of mode options on hover */
+    color: #6150CE; /* Color of mode text onb hover */
+  }
+.mode-selector .arrow { /* Arrow for mode select style */
+  font-size: 0.78rem; /* Arrow size */
+  font-weight: 600; /* Arrow boldness */
+  transform: scale(1.2, 0.9); /* Arrow size */
+  display: inline-block; /* Tansform and spacing works properly */
+  transition: transform 0.2s ease; /* Smooth animation on rotate */
+  user-select: none; /* Prevent text selection on accidental clicks */
 }
-
-.mode-selector .arrow {
-  font-size: 0.75rem;
-  font-weight: 500;
-  transform: scale(1.2, 0.9);
-  display: inline-block;
-  transition: transform 0.2s ease;
-  user-select: none;
+.mode-selector .arrow { /* Behavior of arrow for mode select default */
+  transform: rotate(180deg) scale(1.2, 0.9); /* Arrow points down by default */
 }
-
-.mode-selector .arrow {
-  transform: rotate(180deg) scale(1.2, 0.9);
-}
-
-.mode-selector.nav-item:hover .arrow {
-  transform: rotate(0deg) scale(1.2, 0.9);
+.mode-selector.nav-item:hover .arrow { /* Behavior of arrow for mode select on hover */
+  transform: rotate(0deg) scale(1.2, 0.9); /* Arrow points up on hover */
 }
   </style>
 </head>
-<body>
-  <nav class="top-nav">
-      <div class="nav-inner">
-        <a href="#" class="nav-logo">
-          <span style="color: #b2b6f6;">></span><span style="color: #7B6ED6;">Lyric</span><span style="color: #b2b6f6;">iclo</span>
-        </a>
-    <div class="nav-links">
-      <div class="nav-item">
-        <a href="#">Songs <span class="arrow">^</span></a>
-        <div class="dropdown">
-          <a href="#">By Popularity</a>
-          <a href="#">By Genre</a>
-          <a href="#">By Country</a>
-        </div>
-      </div>
-      <div class="nav-item">
-        <a href="#">About <span class="arrow">^</span></a>
-        <div class="dropdown">
-          <a href="#">Behind Lyri</a>
-          <a href="#">My Process</a>
-        </div>
-      </div>
-      <div class="nav-item">
-        <a href="#">Contact <span class="arrow">^</span></a>
-        <div class="dropdown">
-          <a href="https://forms.gle/i7RRrc4sTaDEL3PNA" target="_blank" rel="noopener noreferrer">Suggest a Song</a>
-          <a href="#">Report a Problem</a>
-        </div>
-      </div>
-    </div>
-  </nav>
-
+<!-- ------------------------------------------------------ Menu bar ------------------------------------------------------ -->
+<body> <!-- Start of page body -->
+  <nav class="top-nav">  <!-- Meny bar container -->
+    <div class="nav-inner"> <!-- Inner wrapper for navigation content to control width/alignment -->
+      <a href="#" class="nav-logo"> <!-- Clickable logo link to take user to homepage -->
+        <span style="color: #b2b6f6;">></span> <!-- Color of '>' in up left logo -->
+        <span style="color: #7B6ED6;">Lyric</span> <!-- Color of 'Lyric' in up left logo -->
+        <span style="color: #b2b6f6;">iclo</span> <!-- Color of 'iclo' in up left logo -->
+      </a> <!-- End of logo styles -->
+      <div class="nav-links"> <!-- Container for all main menu bar links -->
+        <div class="nav-item">  <!-- Songs nav item container -->
+          <a href="#">Songs <span class="arrow">^</span></a> <!-- Nav link labeled 'Songs' with arrow to show dropdown -->
+          <div class="dropdown"> <!-- Dropdown menu container for 'Songs', shown on hover or click -->
+            <a href="#">By Popularity</a> <!-- Link to take users to all songs sorted by popularity -->
+            <a href="#">By Genre</a> <!-- Link to take users to all songs sorted by genra -->
+            <a href="#">By Country</a> <!-- Link to take users to all songs sorted by counry -->
+            <a href="#">Coming soon</a> <!-- Link to song I am currently coding -->
+          </div> <!-- End of dropdowns in 'Songs' -->
+        </div> <!-- End of 'Songs' -->
+        <div class="nav-item"> <!-- 'About' nav item container -->
+          <a href="#">About <span class="arrow">^</span></a> <!-- Nav link labeled 'About' with arrow to show dropdown -->
+          <div class="dropdown"> <!-- Dropdown menu container for 'About', shown on hover or click -->
+            <a href="#">Behind Lyriciclo</a> <!-- Link to 'Behind Lyriciclo' page -->
+            <a href="#">My Process</a> <!-- Link to 'My Process' page -->
+          </div> <!-- End of dropdowns in 'About' -->
+        </div> <!-- End of 'About' -->
+        <div class="nav-item"> <!-- 'Contact' nav item container -->
+          <a href="#">Contact <span class="arrow">^</span></a> <!-- Nav link labeled 'Contact' with arrow to show dropdown -->
+          <div class="dropdown"> <!-- Dropdown menu container for 'Contact', shown on hover or click -->
+            <a href="https://forms.gle/i7RRrc4sTaDEL3PNA" target="_blank" rel="noopener noreferrer">Suggest a Song</a>
+              <!-- Link to form for song suggestions, opens in new tab -->
+            <a href="#">Report a Problem</a> <!-- Link to form for reporting problems, opens in new tab -->
+          </div> <!-- End of dropdowns in 'Contact' -->
+        </div> <!-- End of 'Contact' -->
+      </div> <!-- Closing nav-links container -->
+    </div> <!-- Closing nav-inner container -->
+  </nav> <!-- Closing menu bar -->
+  
 <div class="song-info">
   <div class="tags">
     <span class="tag">Dembow</span>
     <span class="tag">Reguetón</span>
     <span class="tag">Puerto Rico</span>
   </div>
-  <div id="album-panel" style="
-  position: fixed;
-  top: 0; right: 0;
-  height: 100vh;
-  width: 280px;
-  background-color: #f1effc;
-  box-shadow: -2px 0 8px rgba(0,0,0,0.1);
-  padding: 1.2rem;
-  transform: translateX(100%);
-  transition: transform 0.3s ease;
-  font-family: 'Poppins', sans-serif;
-  z-index: 1500;
-">
-  <button id="close-album-panel" style="
-    background: transparent;
-    border: none;
-    font-size: 1.3rem;
-    font-weight: 700;
-    cursor: pointer;
-    float: right;
-    color: #7B6ED6;
-    user-select: none;
-  ">×</button>
-  <h3 style="color: #6150CE; margin-top: 0;">Translation</h3>
-  <p style="color: #4D4787; line-height: 1.4;">
-    I ShOuLD HAvE TaKEN MoRE PHOToS
-  </p>
 </div>
+
   <p> </p>
   <h1>NUEVAYoL</h1>
 <div style="text-align: center;">
   <div style="display: inline-flex; align-items: center; justify-content: center; gap: 0.4rem;">
     <div style="color: #7B6ED6; font-weight: 500;">DeBÍ TiRAR MáS FOToS</div>
-    <button id="info-button" aria-label="Show album translation" style="
-      font-family: 'Roboto', sans-serif;
-      font-weight: 600;
-      font-size: 0.75rem;
-      color: #7B6ED6;
-      background: transparent;
-      border: 1px solid #7B6ED6;
-      border-radius: 50%;
-      width: 1rem;
-      height: 1rem;
-      line-height: 1rem;
-      padding: 0;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      cursor: pointer;
-      user-select: none;
-      transition: background-color 0.2s, color 0.2s;
-    ">?</button>
   </div>
   <div style="color: #4D4787; font-size: 0.85rem; margin-top: 0.3rem;">Bad Bunny | 2025</div>
 </div>
-
-  <div style="color: #4D4787; font-size: 0.85rem; margin-top: 0.3rem;">Bad Bunny | 2025</div>
-
-<script>
-const infoButton = document.getElementById('info-button');
-const floatingBox = document.getElementById('floating-translation');
-
-infoButton?.addEventListener('mouseenter', () => {
-  floatingBox.style.display = 'block';
-});
-
-infoButton?.addEventListener('mouseleave', () => {
-  floatingBox.style.display = 'none';
-});
-</script>
-</div>
-
-<div id="floating-album-panel" style="
-  display: none;
-  position: absolute;
-  top: 2.1rem;
-  left: 50%;
-  transform: translateX(-50%);
-  background-color: #f9f7ff;
-  padding: 0.7rem 1.2rem;
-  border-radius: 0.6rem;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.08);
-  color: #4D4787;
-  font-size: 0.88rem;
-  font-weight: 500;
-  z-index: 1000;
-">
-  I ShOuLD HAvE TaKEN MoRE PHOToS
-  <button id="close-floating" style="
-    margin-left: 0.6rem;
-    background: none;
-    border: none;
-    font-weight: 700;
-    color: #7B6ED6;
-    font-size: 1rem;
-    cursor: pointer;
-  ">×</button>
-</div> 
   <p> </p>
   <div class="controls">
     <button id="play-pause" class="play"><span>▶︎</span></button>
   </div>
-
  <div class="mode-selector nav-item" style="position: relative; display: inline-block;">
   <button id="mode-button" style="
     background: #f9f7ff;
@@ -452,7 +366,6 @@ infoButton?.addEventListener('mouseleave', () => {
     <a href="#" data-mode="english">English</a>
   </div>
 </div>
-
 <div class="lyrics-container" id="lyrics">
   <div class="lyric-line" data-time="0">
     <div class="spanish">¡Nueva Yol!</div>
@@ -480,31 +393,26 @@ infoButton?.addEventListener('mouseleave', () => {
   </div>
   <div class="lyric-line" data-time="18">
     <div class="spanish">Con encanto y con primor (¿Pero qué es esto?)</div>
-    <div class="english">With style and with flair (What’s this all about?)</div>
+    <div class="english">With style and with flair (What’s this about?)</div>
   </div>
   <div class="lyric-line" data-time="21">
     <div class="spanish">Solo tienes que vivir (¿Y este frío?)</div>
-    <div class="english">You just have to live (What’s up with this cold?)</div>
+    <div class="english">You just have to live (And this cold?)</div>
   </div>
   <div class="lyric-line" data-time="24">
     <div class="spanish">Un verano en Nueva York (Un ratito na' má')</div>
     <div class="english">A summer in New York (Just for a bit, that’s it)</div>
   </div>
-
   <div class="back-to-top" style="text-align: center; margin-top: 2rem; font-size: 0.9rem;">
     <a id="back-to-top-link" href="#">Back to Top</a>
   </div>
 </div>
-
-
   <script>
     const lines = document.querySelectorAll('.lyric-line');
     const playPauseBtn = document.getElementById('play-pause');
     const playPauseIcon = playPauseBtn?.querySelector('span');
     const backToTopLink = document.getElementById('back-to-top-link');
-
     let isPlaying = false, current = 0, startTime = null, intervalId = null, pausedAt = 0, finished = false;
-
     function resetToTopState() {
       lines.forEach(l => l.classList.remove('active'));
       current = 0;
@@ -512,21 +420,17 @@ infoButton?.addEventListener('mouseleave', () => {
       finished = false;
       lines[0]?.scrollIntoView({ behavior: 'smooth', block: 'start' });
     }
-
     window.onload = () => {
       resetToTopState();
       setMode('dual');
     };
-
     backToTopLink?.addEventListener('click', (e) => {
       e.preventDefault();
       resetToTopState();
     });
-
     function scrollLine(line) {
       line.scrollIntoView({ behavior: 'smooth', block: 'start' });
     }
-
     function updatePlayback() {
       const now = (Date.now() - startTime) / 1000;
       if (current >= lines.length) {
@@ -552,7 +456,6 @@ if (current > 0 && current < lines.length - 1) {
         current++;
       }
     }
-
     playPauseBtn?.addEventListener('click', () => {
       if (finished) resetToTopState();
       if (!isPlaying) {
@@ -571,7 +474,6 @@ if (current > 0 && current < lines.length - 1) {
         isPlaying = false;
       }
     });
-
     lines.forEach((line, index) => {
       line.addEventListener('click', () => {
         const time = parseFloat(line.dataset.time);
@@ -587,11 +489,9 @@ if (current > 0 && current < lines.length - 1) {
         scrollLine(line);
       });
     });
-
     const modeSelect = document.getElementById('mode-select');
     const spanishLines = document.querySelectorAll('.spanish');
     const englishLines = document.querySelectorAll('.english');
-
     function setMode(mode) {
       spanishLines.forEach(span => {
         span.style.display = (mode === 'english') ? 'none' : 'block';
@@ -601,25 +501,20 @@ if (current > 0 && current < lines.length - 1) {
         en.classList.toggle('dual-mode', mode === 'dual');
       });
     }
-
     modeSelect?.addEventListener('change', () => {
       setMode(modeSelect.value);
     });
   </script>
-  
 <script>
   const infoButton = document.getElementById('info-button');
   const floatingPanel = document.getElementById('floating-album-panel');
   const closeFloating = document.getElementById('close-floating');
-
   infoButton?.addEventListener('click', () => {
     floatingPanel.style.display = 'block';
   });
-
   closeFloating?.addEventListener('click', () => {
     floatingPanel.style.display = 'none';
   });
-
   window.addEventListener('click', function (e) {
     if (!floatingPanel.contains(e.target) && e.target !== infoButton) {
       floatingPanel.style.display = 'none';
@@ -628,69 +523,26 @@ if (current > 0 && current < lines.length - 1) {
   const modeButton = document.getElementById('mode-button');
 const modeDropdown = document.getElementById('mode-dropdown');
 const modeLinks = modeDropdown.querySelectorAll('a');
-
 let currentMode = 'dual';
-
 modeButton.addEventListener('click', () => {
-  // Toggle dropdown visibility
   modeDropdown.style.display = modeDropdown.style.display === 'block' ? 'none' : 'block';
 });
-
-// When clicking outside dropdown, close it
 window.addEventListener('click', (e) => {
   if (!modeDropdown.contains(e.target) && e.target !== modeButton) {
     modeDropdown.style.display = 'none';
   }
 });
-
-// When a mode is clicked
 modeLinks.forEach(link => {
   link.addEventListener('click', (e) => {
     e.preventDefault();
-
-    // Update selected mode button text
     currentMode = link.dataset.mode;
     modeButton.childNodes[0].nodeValue = link.textContent + " ";
-
-    // Close dropdown
     modeDropdown.style.display = 'none';
-
-    // Update active link style
     modeLinks.forEach(l => l.classList.remove('active'));
     link.classList.add('active');
-
-    // Set mode logic (reuse your existing setMode function)
     setMode(currentMode);
   });
 });
 </script>
-<div id="floating-translation" style="
-  display: none;
-  position: absolute;
-  top: -2.3rem;
-  left: 50%;
-  transform: translateX(-50%);
-  background-color: #f9f7ff;
-  color: #4D4787;
-  padding: 0.7rem 1rem;
-  border-radius: 0.75rem;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
-  font-size: 0.85rem;
-  font-weight: 500;
-  z-index: 2000;
-  white-space: nowrap;
-">
-  I ShOuLD HAvE TaKEN MoRE PHOToS
-  <button id="close-floating" style="
-    margin-left: 0.6rem;
-    background: none;
-    border: none;
-    font-weight: 600;
-    color: #7B6ED6;
-    font-size: 0.9rem;
-    cursor: pointer;
-  ">×</button>
-</div>
 </body>
-  
 </html>
