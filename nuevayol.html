@@ -1,16 +1,19 @@
-<!-- -------------------------------------------------------------------- General rules -------------------------------------------------------------------- -->
+<!-- --------------------------------------------- General rules ---------------------------------------------- -->
 <!DOCTYPE html> <!-- Tells browser this is HTML5 doc -->
 <html lang="en"> <!-- Start of HTML, sets main language to English -->
 <head> <!-- Begins page title, fonts, styles, metadata section rules (non-visible content) --> 
   <meta charset="UTF-8" /> <!-- Special characters (accents) displayed properly -->
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/> <!-- Page fits mobile screens correctly -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <!-- Page fits mobile screens correctly -->
   <title>NUEVAYoL - Lyriciclo</title> <!-- Name shown in browser tab -->
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet"> <!-- Poppins font (main font) -->
-  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet"> <!-- Roboto font (font for symbols, i.e. '?') -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <!-- Poppins font (main font) -->
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <!-- Roboto font (font for symbols, i.e. '?') -->
   <style> /* Start of CSS (rules for page) */
-    html, body { /* Targets <html> (root of page) and <body> elements (main visible content), styles inside apply to entire page */
+    html, body { /* Targets <html> and <body> elements, styles inside apply to entire page */
       margin: 0; /* Removes space outside page edges (margin = space outside a box) */
-      padding: 0; //* Removes space inside page edges, content starts right at edge (padding = space between edge of box and its content) */
+      padding: 0; //* Removes space inside page edges, content starts right at edge */
       scroll-behavior: smooth; /* Scrolling glides smoothly, no jumping */
       width: 100%; /* Page fills full width of screen */
       height: 100%; /* Page fills full height of screen */
@@ -24,7 +27,7 @@
       flex-direction: column; /* Conent stacked vertically */
       align-items: center; /* Content centered horizontally */
     }
-/* ------------------------------------------------------------------ Menu bar ------------------------------------------------------------------ */
+/* ----------------------------------------------- Menu bar ----------------------------------------------- */
     .nav-logo { /* Styles ">Lyriciclo" (top left corner) */
       position: absolute; /* Removes logo from normal flow (for precise placing) */
       left: 0rem; /* Moves logo # of rem units from left edge of its container */
@@ -74,18 +77,20 @@
       font-size: 0.92rem; /* Arrow text size */
       font-weight: 550; /* Arrow boldness */
       display: inline-block; /* Arrow behaves like text but allows size/transform styling */
-      transform: rotate(180deg) scale(1.15, 0.9) translateY(-3px); /* Arrow points down, slightly stretched (wider/shorter), slightly higher */
+      transform: rotate(180deg) scale(1.15, 0.9) translateY(-3px);
+        /* Arrow points down, slightly stretched (wider/shorter), slightly higher */
       transition: transform 0.2s ease; /* Allows arrow to smoothly rotate */
     }
     .nav-item:hover .arrow { /* Arrow style on hover */
-      transform: rotate(0deg) scale(1.15, 0.9) translateY(-3px); /* Flip arrow righside up , slightly stretched (wider/shorter), slightly higher */
+      transform: rotate(0deg) scale(1.15, 0.9) translateY(-3px);
+        /* Flip arrow righside up , slightly stretched (wider/shorter), slightly higher */
     }
     .nav-item > a:hover { /* How main menu items behave when mouse is over them */
       color: #6150CE; /* Color of of main menu items on hover */
     }
-/* ------------------------------------------------- Dropdowns -------------------------------------------------- */
+/* -------------------------------------------- Dropdowns --------------------------------------------- */
     .dropdown { /* Styles for dropdown menu */
-      position: absolute; /* Removes dropdown from normal flow, positioned relative to nearest positioned element */
+      position: absolute; /* Removes dropdown from normal flow, positioned relative to nearest element */
       top: 100%; /* Places dropdown below main menu item */
       left: 50%; /* Dropdown begins horizontally at the center of main menu item */
       transform: translateX(-50%); /* Shifts dropdown so it appears center */
@@ -207,7 +212,7 @@
       background-image: url('data:image/svg+xml;utf8,<svg style="transform: rotate(0deg);" fill="%234D4787" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><path d="M7 10l5 5 5-5z"/></svg>');
         /* Arrow points upwards on hover */
     }
-/* --------------------------------------- General lyrics behavior --------------------------------------- */
+/* ----------------------------------- General lyrics behavior ----------------------------------- */
     .lyrics-container { /* Box that holds lyrics (scrollable area) */
       width: 100%; /* Goes across full screen width */
       max-width: 600px; /* Max width if scree is 600+px */
@@ -219,7 +224,7 @@
       scroll-padding-bottom: 5rem; /* When scrolling to a line near bottom, some space below it */
       scrollbar-width: none; /* Hide scrollbar in Firefox */
     }
-    .lyrics-container::-webkit-scrollbar { /* Targets scrollbar styling in Chrome, Safari, other browsers */
+    .lyrics-container::-webkit-scrollbar { /* Targets scrollbar styling in majority of browsers */
       display: none; /* Hide scrollbar */
     }
     .lyric-line { /* Styles for each individual lyric line (separates from others) */
@@ -251,7 +256,7 @@
       color: #8F85C4; /* Color of active english text in dual mode */
       font-weight: 400; /* Boldness of active english text in dual mode */
     }
-/* ----------------------- Back to top text ----------------------- */    
+/* ----------------------- BACK TO TOP TEXT ----------------------- */    
     .back-to-top a { /* Style of back to top text */
       color: #4D4787; /* Color of back to top text */
       text-decoration: none; /* Removes automatic underline */
@@ -260,7 +265,7 @@
     .back-to-top a:hover { /* Style of back to top text on hover */
       color: #6150CE; /* Color of back to top text on hover */
     }
-/* ---------------------------------------- Mode select ---------------------------------------- */
+/* ----------------------------------------- MODE SELECT ----------------------------------------- */
   #mode-dropdown a.active { /* Style of mode options on hover */
     background-color: #eae5fa; /* Background is different color when mode options are highlighted */
     font-weight: 600; /* Boldness of mode options on hover */
@@ -282,7 +287,7 @@
 }
   </style>
 </head>
-<!-- ------------------------------------------------------- Menu bar ------------------------------------------------------- -->
+<!-- ------------------------------------------------------- MENU BAR -------------------------------------------------------- -->
 <body> <!-- Start of page body -->
   <nav class="top-nav">  <!-- Meny bar container -->
     <div class="nav-inner"> <!-- Inner wrapper for navigation content to control width/alignment -->
@@ -318,7 +323,7 @@
       </div> <!-- Closing nav-links container -->
     </div> <!-- Closing nav-inner container -->
   </nav> <!-- Closing menu bar -->
-<!-- ------------------------------------------------ Song Info ------------------------------------------------ -->  
+<!-- ------------------------------------------------ SONG INFO ------------------------------------------------- -->  
 <div class="song-info"> <!-- Container for song-related info (genre, region, etc.) -->
   <div class="tags"> <!-- Container  for displaying song tags -->
     <span class="tag">Dembow</span> <!-- Individual tag label displaying genre -->
@@ -335,11 +340,12 @@
   <div style="color: #4D4787; font-size: 0.85rem; margin-top: 0.3rem;">Bad Bunny | 2025</div>
     <!-- Artist name and year, styled in a smaller, darker font with spacing from title -->
 </div> <!-- Close text-align center container -->
-<!-- ----------------------------------------------------------- Playback Button Section ----------------------------------------------------------- -->
+<!-- ------------------------------ PLAYBACK BUTTON ------------------------------- -->
   <div class="controls"> <!-- Start of playback controls container -->
-    <button id="play-pause" class="play"><span>▶︎</span></button> <!-- Play/pause button, 'play' by default; ID for JavaScript; shows play symbol (▶︎) -->
+    <button id="play-pause" class="play"><span>▶︎</span></button>
+      <!-- Play/pause button, 'play' by default; ID for Java; shows play symbol (▶︎) -->
   </div> <!-- End of playback controls container -->
-<!-- ----------------------------------------------------------------- Mode Selector Section ----------------------------------------------------------------- -->
+<!-- -------------------------------------------------------------- MODE SELECTOR --------------------------------------------------------------- -->
  <div class="mode-selector nav-item" style="position: relative; display: inline-block;">
      <!-- Container for the mode toggle; positioned relative so inside dropdown is placed correctly; 'inline-block' keeps inline with other items -->
   <button id="mode-button" style=" /* Mode select text and button styles */
@@ -363,12 +369,15 @@
   </button>   <!-- End of toggle button -->
   <div id="mode-dropdown" class="dropdown" style="left: 0; transform: none; min-width: 120px;">
     <!-- Dropdown menu container for lyric modes; positioned directly below the button; min width matches button -->
-    <a href="#" data-mode="spanish">Spanish</a> <!-- Option to switch to Spanish-only lyrics; 'data-mode' used by Java to identify selected mode -->
-    <a href="#" data-mode="dual" class="active">Bilingual</a>  <!-- Option to switch to Dual view; default; 'data-mode' used by Java to identify selected mode -->
-    <a href="#" data-mode="english">English</a> <!-- Option to switch to English-only lyrics; 'data-mode' used by Java to identify selected mode -->
+    <a href="#" data-mode="spanish">Spanish</a>
+      <!-- Option to switch to Spanish-only lyrics; 'data-mode' used by Java to identify selected mode -->
+    <a href="#" data-mode="dual" class="active">Bilingual</a>
+      <!-- Option to switch to Dual view; default; 'data-mode' used by Java to identify selected mode -->
+    <a href="#" data-mode="english">English</a>
+      <!-- Option to switch to English-only lyrics; 'data-mode' used by Java to identify selected mode -->
   </div> <!-- End of dropdown menu -->
 </div> <!-- End of full mode-selector block -->
-<!-- -------------------------------- Lyrics text -------------------------------- -->
+<!-- -------------------------------- LYRICS TEXT --------------------------------- -->
 <div class="lyrics-container" id="lyrics"> <!-- Main container for all lyric lines -->
   <div class="lyric-line" data-time="0"> <!-- Timestamp (in seconds) -->
     <div class="spanish">¡Nueva Yol!</div> <!-- Original lyrics in Spanish -->
@@ -406,37 +415,44 @@
     <div class="spanish">Un verano en Nueva York (Un ratito na' má')</div>
     <div class="english">A summer in New York (Just for a bit, that’s it)</div>
   </div>
-<!-- Back to top button -->  
+<!-- ----------------------------------- BACK TO TOP BUTTON ------------------------------------ -->  
   <div class="back-to-top" style="text-align: center; margin-top: 2rem; font-size: 0.9rem;">
     <!-- Center the link horizontally; space between link and last lyric; font size -->
     <a id="back-to-top-link" href="#">Back to Top</a> <!-- Clicking scrolls to first lyrics line -->
   </div> <!-- End of back-to-top container -->
   </div> <!-- End of lyrics container -->
 </div> <!-- End of outer wrapper, closes full content block) -->
-  
-  <script>
-    const lines = document.querySelectorAll('.lyric-line');
-    const playPauseBtn = document.getElementById('play-pause');
-    const playPauseIcon = playPauseBtn?.querySelector('span');
-    const backToTopLink = document.getElementById('back-to-top-link');
-    let isPlaying = false, current = 0, startTime = null, intervalId = null, pausedAt = 0, finished = false;
-    function resetToTopState() {
-      lines.forEach(l => l.classList.remove('active'));
-      current = 0;
-      pausedAt = 0;
-      finished = false;
-      lines[0]?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+<!-- ----------------------------------- LYRICS PLAYBACK AND VIEW MODE CONTROL ------------------------------------ -->
+  <script> // Java start
+      // Interactive elements (lyrics, buttons, dropdowns)
+    const lines = document.querySelectorAll('.lyric-line'); // All lines of lyrics (used for syncing and highlighting)
+    const playPauseBtn = document.getElementById('play-pause'); // Play/Pause button
+    const playPauseIcon = playPauseBtn?.querySelector('span'); // ▶︎/II icon inside Play/Pause button
+    const backToTopLink = document.getElementById('back-to-top-link'); // "Back to Top" link at bottom of page
+      // Playback state variables
+    let isPlaying = false; // Whether the playback is currently running
+    let current = 0; // Index of the current lyric line
+    let startTime = null; // Time when playback started (used to calculate timing)
+    let intervalId = null; // ID of the playback interval, used to stop it
+    let pausedAt = 0; // Seconds elapsed when paused (used to resume from same point)
+    let finished = false; // Whether playback has reached the end
+    function resetToTopState() { // Resets everything
+      lines.forEach(l => l.classList.remove('active')); // Un-highlight all lines
+      current = 0; // Reset to first line
+      pausedAt = 0; // Reset paused time
+      finished = false; // Mark playback as not finished
+      lines[0]?.scrollIntoView({ behavior: 'smooth', block: 'start' }); // Smooth-scroll to top
     }
-    window.onload = () => {
-      resetToTopState();
-      setMode('dual');
+    window.onload = () => { // Behavior on page reload
+      resetToTopState(); // No lyrics highlighted
+      setMode('dual'); // Default view mode shows both languages
     };
-    backToTopLink?.addEventListener('click', (e) => {
-      e.preventDefault();
-      resetToTopState();
+    backToTopLink?.addEventListener('click', (e) => { // Behavior on "Back to Top" link click
+      e.preventDefault(); // Prevent jump to "#"
+      resetToTopState(); // No lyrics highlighted
     });
-    function scrollLine(line) {
-      line.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    function scrollLine(line) { // Scrolls to a specific lyric line
+      line.scrollIntoView({ behavior: 'smooth', block: 'start' }); 
     }
     function updatePlayback() {
       const now = (Date.now() - startTime) / 1000;
@@ -512,6 +528,12 @@ if (current > 0 && current < lines.length - 1) {
       setMode(modeSelect.value);
     });
   </script>
+
+
+
+
+
+  
 <script>
   const infoButton = document.getElementById('info-button');
   const floatingPanel = document.getElementById('floating-album-panel');
