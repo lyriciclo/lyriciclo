@@ -422,7 +422,7 @@
   </div> <!-- End of back-to-top container -->
   </div> <!-- End of lyrics container -->
 </div> <!-- End of outer wrapper, closes full content block) -->
-<!-- ----------------------------------- ACTIVE LINE SCROLLING ------------------------------------ -->
+<!-- ------------------------------------------ ACTIVE LINE SCROLLING ------------------------------------------- -->
  <script> // Opens JavaScript block inside HTML file
   const lines = document.querySelectorAll('.lyric-line');
     // Selects all lyric lines on page (elements with class "lyric-line"), stores them as list
@@ -437,32 +437,36 @@
   function scrollLine(line) { // Defines a reusable function that scrolls a lyric line to the top of the screen
     line.scrollIntoView({ behavior: 'smooth', block: 'start' }); // Smoothly scrolls given line to top
   }
- 
-    function updatePlayback() {
-      const now = (Date.now() - startTime) / 1000;
-      if (current >= lines.length) {
-        clearInterval(intervalId);
-        isPlaying = false;
-        finished = true;
-        playPauseIcon.textContent = '▶︎';
-        playPauseBtn.classList.remove('pause');
-        playPauseBtn.classList.add('play');
-        setTimeout(() => lines.forEach(l => l.classList.remove('active')), 1500);
-        return;
-      }
-      const line = lines[current];
-      const time = parseFloat(line.dataset.time);
-      if (now >= time) {
-        lines.forEach(l => l.classList.remove('active'));
-        line.classList.add('active');
-if (current > 0 && current < lines.length - 1) {
-  lines[current - 1].scrollIntoView({ behavior: 'smooth', block: 'start' });
-} else {
-  line.scrollIntoView({ behavior: 'smooth', block: 'start' });
-}
-        current++;
-      }
+// ---------------------------------------------------------- PLAYBACK SYNC ----------------------------------------------------------
+  function updatePlayback() { // Keeps lyrics in sync with time
+    const now = (Date.now() - startTime) / 1000; // Calculates how many seconds passed since playback start
+    if (current >= lines.length) { // Behavior when last lyric line is reached
+      clearInterval(intervalId); // Stop update loop
+      isPlaying = false; // Mark that playback is no longer happening
+      finished = true; // Mark that full song has played
+      playPauseIcon.textContent = '▶︎'; // Change icon back to "play" symbol
+      playPauseBtn.classList.remove('pause'); // Remove pause button styling
+      playPauseBtn.classList.add('play'); // Add play button styling
+      setTimeout(() => lines.forEach(l => l.classList.remove('active')), 1500); // After 1.5 seconds, remove highlight from all lines
+      return; // Exit function early
     }
+    const line = lines[current]; // Get currently indexed lyric line
+    const time = parseFloat(line.dataset.time); // Get its assigned timestamp (in seconds)
+    if (now >= time) { // bEHAVIOR WHEN current time has passed this line’s time
+      lines.forEach(l => l.classList.remove('active')); // Un-highlight all lines
+      line.classList.add('active'); // Highlight current line
+      if (current > 0 && current < lines.length - 1) { // If not first or last line…
+        lines[current - 1].scrollIntoView({ behavior: 'smooth', block: 'start' }); // Scroll previous line to top (creates centered effect)
+      } else {
+        line.scrollIntoView({ behavior: 'smooth', block: 'start' }); // If it’s first or last line, scroll current one directly
+      }
+      current++; // Move to the next line index for the next loop
+    }
+  }
+
+
+
+   
     playPauseBtn?.addEventListener('click', () => {
       if (finished) resetToTopState();
       if (!isPlaying) {
