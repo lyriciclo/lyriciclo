@@ -1,4 +1,4 @@
-<!-- --------------------------------------------- General rules ---------------------------------------------- -->
+<!-- --------------------------------------------- GENERAL RULES ---------------------------------------------- -->
 <!DOCTYPE html> <!-- Tells browser this is HTML5 doc -->
 <html lang="en"> <!-- Start of HTML, sets main language to English -->
 <head> <!-- Begins page title, fonts, styles, metadata section rules (non-visible content) --> 
@@ -27,7 +27,7 @@
       flex-direction: column; /* Conent stacked vertically */
       align-items: center; /* Content centered horizontally */
     }
-/* ----------------------------------------------- Menu bar ----------------------------------------------- */
+/* ----------------------------------------------- MENU BAR ----------------------------------------------- */
     .nav-logo { /* Styles ">Lyriciclo" (top left corner) */
       position: absolute; /* Removes logo from normal flow (for precise placing) */
       left: 0rem; /* Moves logo # of rem units from left edge of its container */
@@ -88,7 +88,7 @@
     .nav-item > a:hover { /* How main menu items behave when mouse is over them */
       color: #6150CE; /* Color of of main menu items on hover */
     }
-/* -------------------------------------------- Dropdowns --------------------------------------------- */
+/* -------------------------------------------- DROPDOWNS --------------------------------------------- */
     .dropdown { /* Styles for dropdown menu */
       position: absolute; /* Removes dropdown from normal flow, positioned relative to nearest element */
       top: 100%; /* Places dropdown below main menu item */
@@ -117,7 +117,7 @@
     .nav-item:hover .dropdown { /* Shows menu item's dropdown menu on hover */
       display: block; /* Hidden dropdown becomes visible on hover */
     }
-/* ------------------------------------------ Song info ------------------------------------------ */ 
+/* ------------------------------------------ SONG INFO ------------------------------------------ */ 
     .song-info { /* Styles of section containing song details (title, artist, etc.) */
       width: 100%; /* Container fills same width as parent */
       max-width: 500px; /* Container will never be wider than 600px */
@@ -146,12 +146,12 @@
     .tag:hover { /* Behavior when mouse hovers over tag */
       background-color: #e3e0f5; /* Background becomes slightly darker on hover */
     }
-/* ----------------------- Song Title ----------------------- */
+/* ----------------------- SONG TITLE ----------------------- */
     h1 { /* Styles for song title */
       color: #4D4787; /* Title text color */
       margin: 0.2rem 0 0.2rem; /* Space above and below title */
     }
-/* -------------------------------------- Play/Pause Button -------------------------------------- */
+/* -------------------------------------- PLAY/PAUSE BUTTON -------------------------------------- */
     .controls { /* Container for buttons (eg playback controls and toggles) */
       display: flex; /* Buttons arranged in row */
       justify-content: center; /* Buttons centered horizontally */
@@ -183,7 +183,7 @@
     .controls button:hover { /* Button behavior on hover */
       background-color: #9A90E2; /* Button background slightly lighter on hover */
     }
-/* ---------------------------------------------------------------------------------------------------- Language select ---------------------------------------------------------------------------------------------------- */
+/* ---------------------------------------------------------------------------------------------------- LANGUAGE SELECT ---------------------------------------------------------------------------------------------------- */
     .mode-selector { /* Container for language mode selector */
       margin: 1.1rem 0 1rem; /* Space above (1.1rem) and below (1rem) the dropdown (no space on sides) */
       text-align: center; /* Centers dropdown horizontally inside container */
@@ -212,7 +212,7 @@
       background-image: url('data:image/svg+xml;utf8,<svg style="transform: rotate(0deg);" fill="%234D4787" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><path d="M7 10l5 5 5-5z"/></svg>');
         /* Arrow points upwards on hover */
     }
-/* ----------------------------------- General lyrics behavior ----------------------------------- */
+/* ----------------------------------- GENERAL LYRICS BEHAVIOR ----------------------------------- */
     .lyrics-container { /* Box that holds lyrics (scrollable area) */
       width: 100%; /* Goes across full screen width */
       max-width: 600px; /* Max width if scree is 600+px */
@@ -422,38 +422,22 @@
   </div> <!-- End of back-to-top container -->
   </div> <!-- End of lyrics container -->
 </div> <!-- End of outer wrapper, closes full content block) -->
-<!-- ----------------------------------- LYRICS PLAYBACK AND VIEW MODE CONTROL ------------------------------------ -->
-  <script> // Java start
-      // Interactive elements (lyrics, buttons, dropdowns)
-    const lines = document.querySelectorAll('.lyric-line'); // All lines of lyrics (used for syncing and highlighting)
-    const playPauseBtn = document.getElementById('play-pause'); // Play/Pause button
-    const playPauseIcon = playPauseBtn?.querySelector('span'); // ▶︎/II icon inside Play/Pause button
-    const backToTopLink = document.getElementById('back-to-top-link'); // "Back to Top" link at bottom of page
-      // Playback state variables
-    let isPlaying = false; // Whether the playback is currently running
-    let current = 0; // Index of the current lyric line
-    let startTime = null; // Time when playback started (used to calculate timing)
-    let intervalId = null; // ID of the playback interval, used to stop it
-    let pausedAt = 0; // Seconds elapsed when paused (used to resume from same point)
-    let finished = false; // Whether playback has reached the end
-    function resetToTopState() { // Resets everything
-      lines.forEach(l => l.classList.remove('active')); // Un-highlight all lines
-      current = 0; // Reset to first line
-      pausedAt = 0; // Reset paused time
-      finished = false; // Mark playback as not finished
-      lines[0]?.scrollIntoView({ behavior: 'smooth', block: 'start' }); // Smooth-scroll to top
-    }
-    window.onload = () => { // Behavior on page reload
-      resetToTopState(); // No lyrics highlighted
-      setMode('dual'); // Default view mode shows both languages
-    };
-    backToTopLink?.addEventListener('click', (e) => { // Behavior on "Back to Top" link click
-      e.preventDefault(); // Prevent jump to "#"
-      resetToTopState(); // No lyrics highlighted
-    });
-    function scrollLine(line) { // Scrolls to a specific lyric line
-      line.scrollIntoView({ behavior: 'smooth', block: 'start' }); 
-    }
+<!-- ----------------------------------- ACTIVE LINE SCROLLING ------------------------------------ -->
+ <script> // Opens JavaScript block inside HTML file
+  const lines = document.querySelectorAll('.lyric-line');
+    // Selects all lyric lines on page (elements with class "lyric-line"), stores them as list
+  let current = 0; // Keeps track of which lyric line is  active (starts at top = line 0)
+  let startTime = 0; // Stores timestamp when playback starts
+  let intervalId = null; // Stores interval loop that runs playback update function
+  let isPlaying = false; // Tracks if song is playing
+  let pausedAt = 0; // If song is paused, stores how many seconds had played before pausing
+  let finished = false; // Tracks whether playback has reached end of song
+  const playPauseBtn = document.getElementById('play-pause-btn'); // Grabs play/pause button element by ID
+  const playPauseIcon = document.getElementById('play-pause-icon'); // Grabs inner icon (▶/||) inside button by ID
+  function scrollLine(line) { // Defines a reusable function that scrolls a lyric line to the top of the screen
+    line.scrollIntoView({ behavior: 'smooth', block: 'start' }); // Smoothly scrolls given line to top
+  }
+ 
     function updatePlayback() {
       const now = (Date.now() - startTime) / 1000;
       if (current >= lines.length) {
