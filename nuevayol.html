@@ -335,7 +335,7 @@
 <div style="text-align: center;"> <!-- Center-aligns all inner content horizontally -->
   <div style="display: inline-flex; align-items: center; justify-content: center; gap: 0.4rem;">
     <!-- Horizontally and vertically centered, vetical space above/below -->
-    <div style="color: #7B6ED6; font-weight: 500;">DeBÍ TiRAR MáS FOToS</div> <!-- Song title, color and boldness -->
+    <div style="color: #7B6ED6; font-weight: 500;">DeBÍ TiRAR MáS FOToS</div> <!-- Song title, color, and boldness -->
   </div> <!-- Close inline-flex title container -->
   <div style="color: #4D4787; font-size: 0.85rem; margin-top: 0.3rem;">Bad Bunny | 2025</div>
     <!-- Artist name and year, styled in a smaller, darker font with spacing from title -->
@@ -422,7 +422,7 @@
   </div> <!-- End of back-to-top container -->
   </div> <!-- End of lyrics container -->
 </div> <!-- End of outer wrapper, closes full content block) -->
-<!-- ------------------------------------------ ACTIVE LINE SCROLLING ------------------------------------------- -->
+<!-- ---------------------------------------------- ACTIVE LINE SCROLLING AND SYNC ----------------------------------------------- -->
  <script> // Opens JavaScript block inside HTML file
   const lines = document.querySelectorAll('.lyric-line');
     // Selects all lyric lines on page (elements with class "lyric-line"), stores them as list
@@ -437,7 +437,6 @@
   function scrollLine(line) { // Defines a reusable function that scrolls a lyric line to the top of the screen
     line.scrollIntoView({ behavior: 'smooth', block: 'start' }); // Smoothly scrolls given line to top
   }
-// ---------------------------------------------------------- PLAYBACK SYNC ----------------------------------------------------------
   function updatePlayback() { // Keeps lyrics in sync with time
     const now = (Date.now() - startTime) / 1000; // Calculates how many seconds passed since playback start
     if (current >= lines.length) { // Behavior when last lyric line is reached
@@ -463,65 +462,59 @@
       current++; // Move to the next line index for the next loop
     }
   }
-
-
-
-   
-    playPauseBtn?.addEventListener('click', () => {
-      if (finished) resetToTopState();
-      if (!isPlaying) {
-        startTime = Date.now() - pausedAt * 1000;
-        intervalId = setInterval(updatePlayback, 100);
-        playPauseIcon.textContent = 'II';
-        playPauseBtn.classList.remove('play');
-        playPauseBtn.classList.add('pause');
-        isPlaying = true;
-      } else {
-        clearInterval(intervalId);
-        pausedAt = (Date.now() - startTime) / 1000;
-        playPauseIcon.textContent = '▶︎';
-        playPauseBtn.classList.remove('pause');
-        playPauseBtn.classList.add('play');
-        isPlaying = false;
-      }
-    });
-    lines.forEach((line, index) => {
-      line.addEventListener('click', () => {
-        const time = parseFloat(line.dataset.time);
-        current = index;
-        pausedAt = time;
-        if (isPlaying) {
-          clearInterval(intervalId);
-          startTime = Date.now() - time * 1000;
-          intervalId = setInterval(updatePlayback, 100);
-        }
-        lines.forEach(l => l.classList.remove('active'));
-        line.classList.add('active');
-        scrollLine(line);
-      });
-    });
-    const modeSelect = document.getElementById('mode-select');
-    const spanishLines = document.querySelectorAll('.spanish');
-    const englishLines = document.querySelectorAll('.english');
-    function setMode(mode) {
-      spanishLines.forEach(span => {
-        span.style.display = (mode === 'english') ? 'none' : 'block';
-      });
-      englishLines.forEach(en => {
-        en.style.display = (mode === 'spanish') ? 'none' : 'block';
-        en.classList.toggle('dual-mode', mode === 'dual');
-      });
+// ------------------------------------------- PLAY/PAUSE BUTTON -------------------------------------------
+  playPauseBtn?.addEventListener('click', () => { // Behavior when play/pause button is clicked
+    if (finished) resetToTopState(); // If song finished before, reset everything to the top
+    if (!isPlaying) { // Behavior when song is paused
+      startTime = Date.now() - pausedAt * 1000; // Resume from where left off by subtracting paused time
+      intervalId = setInterval(updatePlayback, 100); // Update playback every 100 milliseconds
+      playPauseIcon.textContent = 'II'; // Switch icon to pause symbol
+      playPauseBtn.classList.remove('play'); // Remove play button styling
+      playPauseBtn.classList.add('pause'); // Add pause button styling
+      isPlaying = true; // Mark that playback is active
+    } else { // Behavior when song is playing
+      clearInterval(intervalId); // Stop lyric update loop
+      pausedAt = (Date.now() - startTime) / 1000; // Remember paused time so it can be resumed from later
+      playPauseIcon.textContent = '▶︎'; // Switch icon to play symbol
+      playPauseBtn.classList.remove('pause'); // Remove pause styling
+      playPauseBtn.classList.add('play'); // Add play styling
+      isPlaying = false; // Mark that playback is paused
     }
-    modeSelect?.addEventListener('change', () => {
-      setMode(modeSelect.value);
+  });
+// ---------------------------------------------- JUMP TO LYRIC ----------------------------------------------
+  lines.forEach((line, index) => { // Applies to every lyric line
+    line.addEventListener('click', () => { // Behavior when line is clicked
+      const time = parseFloat(line.dataset.time); // Get  time associated with line (from data-time attribute)
+      current = index; // Update current line to one that was clicked
+      pausedAt = time; // Set paused so playback resumes from exact time
+      if (isPlaying) { // Behavior when playback is  active
+        clearInterval(intervalId); // Stop current playback loop
+        startTime = Date.now() - time * 1000; // Recalculate startTime to resume from clicked point
+        intervalId = setInterval(updatePlayback, 100); // Restart  playback loop from new point
+      }
+      lines.forEach(l => l.classList.remove('active')); // Clear all 'active' highlights from every line
+      line.classList.add('active'); // Highlight only clicked line
+      scrollLine(line); // Scroll clicked line into view smoothly
     });
-  </script>
-
-
-
-
-
-  
+  });
+// ------------------------------------------------- VIEW MODE TOGGLE -------------------------------------------------
+  const modeSelect = document.getElementById('mode-select'); // Grab dropdown element when switching view mode
+  const spanishLines = document.querySelectorAll('.spanish'); // Select elements with class 'spanish' (Spanish lyrics)
+  const englishLines = document.querySelectorAll('.english'); // Select elements with class 'english' (English lyrics)
+  function setMode(mode) { // Define function to set which lyrics should be visible based on selected mode
+    spanishLines.forEach(span => { // Behavior for each Spanish line
+      span.style.display = (mode === 'english') ? 'none' : 'block'; // Hide in English-only mode, otherwise show
+    });
+    englishLines.forEach(en => { // Behavior for each English line
+      en.style.display = (mode === 'spanish') ? 'none' : 'block'; // Hide in Spanish-only mode, otherwise show
+      en.classList.toggle('dual-mode', mode === 'dual'); // Add special styling class when Dual mode active
+    });
+  }
+  modeSelect?.addEventListener('change', () => { // If modeSelect exists, listen for when user selects a new mode
+    setMode(modeSelect.value); // Apply selected mode by calling setMode with new value
+  });
+</script>
+<!-- ---------------------------------------------- RESET AND BACK TO TOP ----------------------------------------------- -->  
 <script>
   const infoButton = document.getElementById('info-button');
   const floatingPanel = document.getElementById('floating-album-panel');
