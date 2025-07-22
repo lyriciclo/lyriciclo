@@ -285,6 +285,26 @@
 .mode-selector.nav-item:hover .arrow { /* Behavior of arrow for mode select on hover */
   transform: rotate(0deg) scale(1.2, 0.9); /* Arrow points up on hover */
 }
+  /* Make mode dropdown appear on hover, not click */
+.mode-selector {
+  position: relative;
+  display: inline-block;
+}
+#mode-dropdown {
+  display: none;
+  position: absolute;
+  left: 0;
+  top: 100%;
+  background: white;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  min-width: 120px;
+  border-radius: 0.5rem;
+  padding: 0.5rem 0;
+  z-index: 100;
+}
+.mode-selector:hover #mode-dropdown {
+  display: block !important;
+}
   </style>
 </head>
 <!-- ------------------------------------------------------- MENU BAR -------------------------------------------------------- -->
@@ -570,17 +590,6 @@
   const modeDropdown = document.getElementById('mode-dropdown'); // Dropdown menu
   const modeLinks = modeDropdown.querySelectorAll('a'); // Each mode option
   let currentMode = 'dual'; // Default mode
-
-  // Clicking the mode button shows/hides dropdown
-  modeButton.addEventListener('click', () => {
-    modeDropdown.style.display = modeDropdown.style.display === 'block' ? 'none' : 'block';
-  });
-  // Clicking outside the dropdown closes it
-  window.addEventListener('click', (e) => {
-    if (!modeDropdown.contains(e.target) && e.target !== modeButton) {
-      modeDropdown.style.display = 'none';
-    }
-  });
   // Selecting a mode from the dropdown
 modeLinks.forEach(link => {
   link.addEventListener('click', (e) => {
