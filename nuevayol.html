@@ -575,21 +575,20 @@
   modeButton.addEventListener('click', () => {
     modeDropdown.style.display = modeDropdown.style.display === 'block' ? 'none' : 'block';
   });
-
   // Clicking outside the dropdown closes it
   window.addEventListener('click', (e) => {
     if (!modeDropdown.contains(e.target) && e.target !== modeButton) {
       modeDropdown.style.display = 'none';
     }
   });
-
   // Selecting a mode from the dropdown
-  const modeLabel = modeButton.querySelector('.mode-label');
 modeLinks.forEach(link => {
   link.addEventListener('click', (e) => {
     e.preventDefault();
     currentMode = link.dataset.mode;
-    modeLabel.textContent = link.textContent;  // ONLY change the mode label text
+    // Replace button's text content except the arrow
+    // We'll set modeButton's innerHTML to: selected mode text + a space + arrow span
+    modeButton.innerHTML = link.textContent + ' <span class="arrow">^</span>';
     modeDropdown.style.display = 'none';
     modeLinks.forEach(l => l.classList.remove('active'));
     link.classList.add('active');
