@@ -365,7 +365,7 @@
     min-width: 120px; /* Ensures button is at least 120px wide */
     justify-content: space-between; /* Pushes the text and arrow to opposite ends of box horizontally, creating space between */
   "> <!-- End of select text and button styles styles -->
-    Bilingual <span class="arrow">^</span> <!-- Button text shows current mode ('Bilingual'), arrow to indicate dropdown behavior -->
+    span class="mode-label">Bilingual</span> <span class="arrow">^</span> <!-- Button text shows current mode ('Bilingual'), arrow to indicate dropdown behavior -->
   </button>   <!-- End of toggle button -->
   <div id="mode-dropdown" class="dropdown" style="left: 0; transform: none; min-width: 120px;">
     <!-- Dropdown menu container for lyric modes; positioned directly below the button; min width matches button -->
@@ -584,15 +584,16 @@
   });
 
   // Selecting a mode from the dropdown
-  modeLinks.forEach(link => {
-    link.addEventListener('click', (e) => {
-      e.preventDefault(); // Prevent jump
-      currentMode = link.dataset.mode; // Get selected mode
-      modeButton.childNodes[0].nodeValue = link.textContent + " "; // Update button text
-      modeDropdown.style.display = 'none'; // Hide dropdown
-      modeLinks.forEach(l => l.classList.remove('active')); // Clear active state
-      link.classList.add('active'); // Highlight selected
-      setMode(currentMode); // Apply mode
-    });
+  const modeLabel = modeButton.querySelector('.mode-label');
+modeLinks.forEach(link => {
+  link.addEventListener('click', (e) => {
+    e.preventDefault();
+    currentMode = link.dataset.mode;
+    modeLabel.textContent = link.textContent;  // ONLY change the mode label text
+    modeDropdown.style.display = 'none';
+    modeLinks.forEach(l => l.classList.remove('active'));
+    link.classList.add('active');
+    setMode(currentMode);
   });
+});
 </script>
