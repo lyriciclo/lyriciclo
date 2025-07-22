@@ -423,128 +423,176 @@
   </div> <!-- End of lyrics container -->
 </div> <!-- End of outer wrapper, closes full content block) -->
 <!-- ---------------------------------------------- PLAYBACK SETUP ----------------------------------------------- -->
-<script> // Opens the JavaScript block
-  const lines = document.querySelectorAll('.lyric-line'); // Select all lyric lines and store in a list
-  let current = 0; // Track index of the current lyric line
-  let startTime = 0; // Store the timestamp when playback starts
-  let intervalId = null; // Store the interval ID for playback updates
-  let isPlaying = false; // Track whether playback is currently active
-  let pausedAt = 0; // Store how many seconds had passed when paused
-  let finished = false; // Track whether playback has finished
-  const playPauseBtn = document.getElementById('play-pause-btn'); // Select the Play/Pause button
-  const playPauseIcon = document.getElementById('play-pause-icon'); // Select the icon inside Play/Pause button (▶︎ or II)
-  function scrollLine(line) { // Define a helper function to scroll a line into view
-    line.scrollIntoView({ behavior: 'smooth', block: 'start' }); // Smoothly scroll that line to the top
+<script>
+  // Get references to key elements
+  const lines = document.querySelectorAll('.lyric-line'); // All lyric lines
+  const playPauseBtn = document.getElementById('play-pause'); // Play/pause button
+  const playPauseIcon = playPauseBtn?.querySelector('span'); // Icon inside play/pause button
+  const backToTopLink = document.getElementById('back-to-top-link'); // "Back to Top" link
+
+  // Initialize playback state
+  let isPlaying = false, // Whether playback is active
+      current = 0,       // Current lyric line index
+      startTime = null,  // Timestamp when playback started
+      intervalId = null, // ID for setInterval
+      pausedAt = 0,      // How many seconds into the song we're paused
+      finished = false;  // Whether the song has finished
+
+  // Reset playback to the top of the lyrics
+  function resetToTopState() {
+    lines.forEach(l => l.classList.remove('active')); // Remove all active highlights
+    current = 0;
+    pausedAt = 0;
+    finished = false;
+    lines[0]?.scrollIntoView({ behavior: 'smooth', block: 'start' }); // Scroll to first line
   }
-  function updatePlayback() { // Define the function that updates lyrics based on time
-    const now = (Date.now() - startTime) / 1000; // Calculate elapsed time in seconds since playback started
-    if (current >= lines.length) { // If all lines have been played
-      clearInterval(intervalId); // Stop the interval
-      isPlaying = false; // Mark playback as not active
-      finished = true; // Mark playback as finished
-      playPauseIcon.textContent = '▶︎'; // Change icon to play symbol
-      playPauseBtn.classList.remove('pause'); // Remove pause styling
-      playPauseBtn.classList.add('play'); // Add play styling
-      setTimeout(() => lines.forEach(l => l.classList.remove('active')), 1500); // After 1.5s, un-highlight all lines
-      return; // Exit function early
+
+  // When the page loads
+  window.onload = () => {
+    resetToTopState(); // Start at the top
+    setMode('dual');   // Default to dual mode (both languages)
+  };
+
+  // Click handler for "Back to Top" link
+  backToTopLink?.addEventListener('click', (e) => {
+    e.preventDefault();
+    resetToTopState();
+  });
+
+  // Scroll the specified lyric line into view
+  function scrollLine(line) {
+    line.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+
+  // Main playback loop, called on interval
+  function updatePlayback() {
+    const now = (Date.now() - startTime) / 1000; // Time since playback began, in seconds
+
+    // If we've reached the end
+    if (current >= lines.length) {
+      clearInterval(intervalId); // Stop playback
+      isPlaying = false;
+      finished = true;
+      playPauseIcon.textContent = '▶︎'; // Update icon to play
+      playPauseBtn.classList.remove('pause');
+      playPauseBtn.classList.add('play');
+      setTimeout(() => lines.forEach(l => l.classList.remove('active')), 1500); // Clear highlight after delay
+      return;
     }
-    const line = lines[current]; // Get the current lyric line
-    const time = parseFloat(line.dataset.time); // Read the data-time attribute (seconds)
-    if (now >= time) { // If current time has reached the line’s timestamp
-      lines.forEach(l => l.classList.remove('active')); // Un-highlight all lines
-      line.classList.add('active'); // Highlight the current line
-      if (current > 0 && current < lines.length - 1) { // If not the first or last line
-        lines[current - 1].scrollIntoView({ behavior: 'smooth', block: 'start' }); // Scroll the previous line (center effect)
+
+    // Get the current line and its timestamp
+    const line = lines[current];
+    const time = parseFloat(line.dataset.time);
+
+    // If the current time has passed the line's timestamp
+    if (now >= time) {
+      lines.forEach(l => l.classList.remove('active')); // Clear highlights
+      line.classList.add('active'); // Highlight current line
+
+      // Scroll to previous line if not at beginning or end
+      if (current > 0 && current < lines.length - 1) {
+        lines[current - 1].scrollIntoView({ behavior: 'smooth', block: 'start' });
       } else {
-        line.scrollIntoView({ behavior: 'smooth', block: 'start' }); // Otherwise scroll the current line
+        line.scrollIntoView({ behavior: 'smooth', block: 'start' });
       }
-      current++; // Move to the next line for next interval check
+
+      current++; // Move to next line
     }
   }
-  // ------------------------------- PLAY PAUSE BUTTON -------------------------------
-  playPauseBtn?.addEventListener('click', () => { // When Play/Pause button is clicked
-    if (finished) resetToTopState(); // If song finished, reset playback state
-    if (!isPlaying) { // If playback is currently paused
-      startTime = Date.now() - pausedAt * 1000; // Adjust start time to resume
-      intervalId = setInterval(updatePlayback, 100); // Run updatePlayback every 100ms
+
+  // Play/pause button behavior
+  playPauseBtn?.addEventListener('click', () => {
+    if (finished) resetToTopState(); // If finished, restart
+
+    if (!isPlaying) {
+      // Start playback
+      startTime = Date.now() - pausedAt * 1000; // Adjust for paused time
+      intervalId = setInterval(updatePlayback, 100); // Update every 100ms
       playPauseIcon.textContent = 'II'; // Change icon to pause
-      playPauseBtn.classList.remove('play'); // Remove play styling
-      playPauseBtn.classList.add('pause'); // Add pause styling
-      isPlaying = true; // Mark playback as active
-    } else { // If playback is running
-      clearInterval(intervalId); // Stop the update loop
-      pausedAt = (Date.now() - startTime) / 1000; // Save how many seconds passed
-      playPauseIcon.textContent = '▶︎'; // Change icon back to play
-      playPauseBtn.classList.remove('pause'); // Remove pause styling
-      playPauseBtn.classList.add('play'); // Add play styling
-      isPlaying = false; // Mark playback as paused
+      playPauseBtn.classList.remove('play');
+      playPauseBtn.classList.add('pause');
+      isPlaying = true;
+    } else {
+      // Pause playback
+      clearInterval(intervalId);
+      pausedAt = (Date.now() - startTime) / 1000; // Save current time
+      playPauseIcon.textContent = '▶︎'; // Change icon to play
+      playPauseBtn.classList.remove('pause');
+      playPauseBtn.classList.add('play');
+      isPlaying = false;
     }
   });
-  function resetToTopState() { // Reset all playback to start
-    clearInterval(intervalId); // Stop playback
-    current = 0; // Reset current line index
-    pausedAt = 0; // Reset paused time
-    startTime = 0; // Reset start time
-    isPlaying = false; // Mark as not playing
-    finished = false; // Mark as not finished
-    lines.forEach(l => l.classList.remove('active')); // Remove all highlights
-    scrollLine(lines[0]); // Scroll to the first lyric line
-    playPauseIcon.textContent = '▶︎'; // Reset icon to play
-    playPauseBtn.classList.remove('pause'); // Remove pause styling
-    playPauseBtn.classList.add('play'); // Add play styling
-  }
-// --------------------------------- JUMP TO LINE ON CLICK ---------------------------------
-  lines.forEach((line, index) => { // For every lyric line
-    line.addEventListener('click', () => { // When a lyric line is clicked
-      const time = parseFloat(line.dataset.time); // Read its time from data-time attribute
-      current = index; // Update current index to this line
-      pausedAt = time; // Store time so playback resumes from here
-      if (isPlaying) { // If currently playing
-        clearInterval(intervalId); // Stop current loop
-        startTime = Date.now() - time * 1000; // Restart from clicked line's timestamp
-        intervalId = setInterval(updatePlayback, 100); // Start updating again
+
+  // Clicking on a lyric line will jump to it
+  lines.forEach((line, index) => {
+    line.addEventListener('click', () => {
+      const time = parseFloat(line.dataset.time); // Get timestamp
+      current = index; // Jump to this line
+      pausedAt = time; // Update paused position
+
+      if (isPlaying) {
+        clearInterval(intervalId);
+        startTime = Date.now() - time * 1000; // Resume from clicked point
+        intervalId = setInterval(updatePlayback, 100);
       }
-      lines.forEach(l => l.classList.remove('active')); // Un-highlight all lines
-      line.classList.add('active'); // Highlight the clicked line
-      scrollLine(line); // Scroll clicked line to top
+
+      lines.forEach(l => l.classList.remove('active')); // Remove all highlights
+      line.classList.add('active'); // Highlight clicked line
+      scrollLine(line); // Scroll to clicked line
     });
   });
-// ------------------------------------------- VIEW MODE DROP DOWN -------------------------------------------
-  const modeButton = document.getElementById('mode-button'); // Button that shows current mode
-  const modeDropdown = document.getElementById('mode-dropdown'); // Dropdown menu container
-  const modeLinks = modeDropdown.querySelectorAll('a'); // Each <a> inside dropdown
+
+  // Mode switching: English / Spanish / Dual
+  const modeSelect = document.getElementById('mode-select'); // For <select> dropdown (if used)
   const spanishLines = document.querySelectorAll('.spanish'); // All Spanish lines
   const englishLines = document.querySelectorAll('.english'); // All English lines
-  let currentMode = 'dual'; // Default mode is dual
 
-  modeButton.addEventListener('click', () => { // When dropdown button is clicked
-    modeDropdown.style.display = modeDropdown.style.display === 'block' ? 'none' : 'block'; // Toggle show/hide
+  function setMode(mode) {
+    // Show/hide Spanish
+    spanishLines.forEach(span => {
+      span.style.display = (mode === 'english') ? 'none' : 'block';
+    });
+
+    // Show/hide English and add class for dual styling
+    englishLines.forEach(en => {
+      en.style.display = (mode === 'spanish') ? 'none' : 'block';
+      en.classList.toggle('dual-mode', mode === 'dual');
+    });
+  }
+
+  // If using a <select> menu (optional support)
+  modeSelect?.addEventListener('change', () => {
+    setMode(modeSelect.value);
   });
 
-  window.addEventListener('click', (e) => { // When user clicks anywhere
-    if (!modeDropdown.contains(e.target) && e.target !== modeButton) { // If click is outside dropdown
-      modeDropdown.style.display = 'none'; // Hide dropdown
+  // Mode dropdown (button-style)
+  const modeButton = document.getElementById('mode-button'); // Button to toggle dropdown
+  const modeDropdown = document.getElementById('mode-dropdown'); // Dropdown menu
+  const modeLinks = modeDropdown.querySelectorAll('a'); // Each mode option
+  let currentMode = 'dual'; // Default mode
+
+  // Clicking the mode button shows/hides dropdown
+  modeButton.addEventListener('click', () => {
+    modeDropdown.style.display = modeDropdown.style.display === 'block' ? 'none' : 'block';
+  });
+
+  // Clicking outside the dropdown closes it
+  window.addEventListener('click', (e) => {
+    if (!modeDropdown.contains(e.target) && e.target !== modeButton) {
+      modeDropdown.style.display = 'none';
     }
   });
 
-  function setMode(mode) { // Function to change lyric display mode
-    spanishLines.forEach(span => {
-      span.style.display = (mode === 'english') ? 'none' : 'block'; // Hide Spanish if English-only mode
-    });
-    englishLines.forEach(en => {
-      en.style.display = (mode === 'spanish') ? 'none' : 'block'; // Hide English if Spanish-only mode
-      en.classList.toggle('dual-mode', mode === 'dual'); // Add dual styling when both languages shown
-    });
-  }
-  modeLinks.forEach(link => { // For every link in dropdown
-    link.addEventListener('click', (e) => { // When mode option clicked
-      e.preventDefault(); // Prevent default anchor behavior
-      currentMode = link.dataset.mode; // Set currentMode to the clicked option
-      modeButton.textContent = link.textContent; // Change button label to selected text
+  // Selecting a mode from the dropdown
+  modeLinks.forEach(link => {
+    link.addEventListener('click', (e) => {
+      e.preventDefault(); // Prevent jump
+      currentMode = link.dataset.mode; // Get selected mode
+      modeButton.childNodes[0].nodeValue = link.textContent + " "; // Update button text
       modeDropdown.style.display = 'none'; // Hide dropdown
-      modeLinks.forEach(l => l.classList.remove('active')); // Remove 'active' from all
-      link.classList.add('active'); // Add 'active' to clicked one
-      setMode(currentMode); // Apply the mode change
+      modeLinks.forEach(l => l.classList.remove('active')); // Clear active state
+      link.classList.add('active'); // Highlight selected
+      setMode(currentMode); // Apply mode
     });
   });
-</script> <!-- End of script -->
+</script>
