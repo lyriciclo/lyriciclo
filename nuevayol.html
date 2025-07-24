@@ -183,35 +183,6 @@
     .controls button:hover { /* Button behavior on hover */
       background-color: #9A90E2; /* Button background slightly lighter on hover */
     }
-/* ---------------------------------------------------------------------------------------------------- LANGUAGE SELECT ---------------------------------------------------------------------------------------------------- */
-    .mode-selector { /* Container for language mode selector */
-      margin: 1.1rem 0 1rem; /* Space above (1.1rem) and below (1rem) the dropdown (no space on sides) */
-      text-align: center; /* Centers dropdown horizontally inside container */
-    }
-    #mode-select { /* Language mode selector styles */
-      background-color: #f9f7ff; /* Dropdown box color */
-      background-image: url('data:image/svg+xml;utf8,<svg style="transform: rotate(180deg);" fill="%234D4787" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><path d="M7 10l5 5 5-5z"/></svg>');
-        /* Downward-pointing arrow, added as background image */
-      background-size: 1.2rem; /* Size of arrow image */
-      background-repeat: no-repeat; /* Arrow image only appears once */
-      background-position: right 0.8rem center; /* Arrow on right side of text, vertically centered */
-      color: #4D4787; /* Text color */
-      font-weight: 500; /* Text boldness */
-      font-size: 0.9rem; /* Text size */
-      padding: 0.5rem 1.2rem; /* Space inside dropdown: top/bottom = 0.5rem, left/right = 1.2rem */
-      padding-right: 2.2rem; /* Extra space on right for the arrow */
-      border: none; /* Removes default border */
-      border-radius: 0.5rem; /* Rounded corners */
-      box-shadow: 0 2px 8px rgba(0,0,0,0.08); /* Shadow behind dropdown */
-      cursor: pointer; /* Cursor becomes pointer on hover */
-      appearance: none; /* Removes default browser styling for dropdown */
-      transition: background-color 0.2s ease; /* Smooth color change on hover */
-    }
-    #mode-select:hover { /* Styles when mouse is over dropdown */
-      background-color: #eae5fa; J/* Changes background color on hover */
-      background-image: url('data:image/svg+xml;utf8,<svg style="transform: rotate(0deg);" fill="%234D4787" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><path d="M7 10l5 5 5-5z"/></svg>');
-        /* Arrow points upwards on hover */
-    }
 /* ----------------------------------- GENERAL LYRICS BEHAVIOR ----------------------------------- */
     .lyrics-container { /* Box that holds lyrics (scrollable area) */
       width: 100%; /* Goes across full screen width */
@@ -281,9 +252,6 @@
 }
 .mode-selector .arrow { /* Behavior of arrow for mode select default */
   transform: rotate(180deg) scale(1.2, 0.9); /* Arrow points down by default */
-}
-.mode-selector.nav-item:hover .arrow { /* Behavior of arrow for mode select on hover */
-  transform: rotate(0deg) scale(1.2, 0.9); /* Arrow points up on hover */
 }
   /* Make mode dropdown appear on hover, not click */
 .mode-selector {
