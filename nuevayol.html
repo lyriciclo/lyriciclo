@@ -506,14 +506,11 @@
       lines.forEach(l => l.classList.remove('active')); // Clear highlights
       line.classList.add('active'); // Highlight current line
       // Scroll to previous line if not at beginning or end
- const container = document.querySelector('.lyrics-container');
-if (current > 1) {
-  const offset = 80;
-  const targetTop = line.offsetTop - offset;
-  container.scrollTo({ top: targetTop, behavior: 'smooth' });
-} else {
-  line.scrollIntoView({ behavior: 'smooth', block: 'start' });
-}
+      if (current > 0 && current < lines.length - 1) {
+        lines[current - 1].scrollIntoView({ behavior: 'smooth', block: 'start' });
+      } else {
+        line.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
       current++; // Move to next line
     }
   }
@@ -551,14 +548,7 @@ if (current > 1) {
       }
       lines.forEach(l => l.classList.remove('active')); // Remove all highlights
       line.classList.add('active'); // Highlight clicked line
-      const container = document.querySelector('.lyrics-container');
-if (current > 1) {
-  const offset = 80;
-  const targetTop = line.offsetTop - offset;
-  container.scrollTo({ top: targetTop, behavior: 'smooth' });
-} else {
-  line.scrollIntoView({ behavior: 'smooth', block: 'start' });
-}
+      scrollLine(line); // Scroll to clicked line
     });
   });
   // Mode switching: English / Spanish / Dual
