@@ -548,15 +548,9 @@ lines.forEach((line, index) => {
     }
     lines.forEach(l => l.classList.remove('active'));
     line.classList.add('active');
-    const container = document.querySelector('.lyrics-container');
-    if (index > 1) {
-      // Scroll to the previous line (one line above)
-      const offset = 80; // adjust if needed for vertical offset
-      const targetLine = lines[index - 1];
-      const targetTop = targetLine.offsetTop - offset;
-      container.scrollTo({ top: targetTop, behavior: 'smooth' });
+    if (index > 0 && index < lines.length - 1) {
+      lines[index - 1].scrollIntoView({ behavior: 'smooth', block: 'start' });
     } else {
-      // For first two lines, don't scroll (or scroll normally if you want)
       line.scrollIntoView({ behavior: 'smooth', block: 'start' });
     }
   });
