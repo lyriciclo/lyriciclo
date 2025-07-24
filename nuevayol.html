@@ -295,15 +295,37 @@
   position: absolute;
   left: 0;
   top: 100%;
-  background: white;
+  background-color: #f9f7ff;
   box-shadow: 0 4px 8px rgba(0,0,0,0.1);
   min-width: 120px;
   border-radius: 0.5rem;
   padding: 0.5rem 0;
   z-index: 100;
 }
+    #mode-dropdown.dropdown {
+  min-width: 120px;
+  left: 0;
+  transform: none;
+}
 .mode-selector:hover #mode-dropdown {
   display: block !important;
+}
+/* Make mode button look like nav menu links */
+#mode-button.nav-item-link {
+  text-decoration: none;
+  color: #4D4787;
+  font-weight: 400;
+  padding: 0.3rem 0;
+  display: inline-flex;
+  align-items: center;
+  gap: 1rem;
+  font-size: 0.96rem;
+  cursor: pointer;
+  user-select: none;
+}
+/* Hover effect like menu links */
+#mode-button.nav-item-link:hover {
+  color: #6150CE;
 }
   </style>
 </head>
@@ -368,26 +390,10 @@
 <!-- -------------------------------------------------------------- MODE SELECTOR --------------------------------------------------------------- -->
  <div class="mode-selector nav-item" style="position: relative; display: inline-block;">
      <!-- Container for the mode toggle; positioned relative so inside dropdown is placed correctly; 'inline-block' keeps inline with other items -->
-  <button id="mode-button" style=" /* Mode select text and button styles */
-    background: #f9f7ff; /* Color of mode button (Spanish, Bilingual, English) */
-    border: none; /* Removes default border on button */
-    padding: 0.5rem 1.2rem; /* Vertical and horizontal padding inside button */
-    border-radius: 0.5rem; /* Rounds button’s corners */
-    color: #4D4787; /* Button text and icon color */
-    font-weight: 500; /* Boldness of button text */
-    font-family: 'Poppins', sans-serif; /* Sets Poppins for button text, sans-serif as backup */
-    font-size: 0.9rem; /* Font size of button text */
-    cursor: pointer; /* Changes cursor to pointer on hover, indicating clickable */
-    box-shadow: 0 2px 8px rgba(0,0,0,0.08); /* Adds drop shadow */
-    display: flex; /* Turns the button content into flex container for layout */
-    align-items: center; /* Vertically centers the button’s inline content (text and arrow) */
-    gap: 0.5rem; /* Adds horizontal spacing between text and arrow */
-    min-width: 120px; /* Ensures button is at least 120px wide */
-    justify-content: space-between; /* Pushes the text and arrow to opposite ends of box horizontally, creating space between */
-  "> <!-- End of select text and button styles styles -->
-     Bilingual <span class="arrow">^</span> <!-- Button text shows current mode ('Bilingual'), arrow to indicate dropdown behavior -->
-  </button>   <!-- End of toggle button -->
-  <div id="mode-dropdown" class="dropdown" style="left: 0; transform: none; min-width: 120px;">
+<a href="#" id="mode-button" class="nav-item-link">
+  Bilingual <span class="arrow">^</span>
+</a>
+  <div id="mode-dropdown" class="dropdown">
     <!-- Dropdown menu container for lyric modes; positioned directly below the button; min width matches button -->
     <a href="#" data-mode="spanish">Spanish</a>
       <!-- Option to switch to Spanish-only lyrics; 'data-mode' used by Java to identify selected mode -->
@@ -449,7 +455,6 @@
   const playPauseBtn = document.getElementById('play-pause'); // Play/pause button
   const playPauseIcon = playPauseBtn?.querySelector('span'); // Icon inside play/pause button
   const backToTopLink = document.getElementById('back-to-top-link'); // "Back to Top" link
-
   // Initialize playback state
   let isPlaying = false, // Whether playback is active
       current = 0,       // Current lyric line index
@@ -457,7 +462,6 @@
       intervalId = null, // ID for setInterval
       pausedAt = 0,      // How many seconds into the song we're paused
       finished = false;  // Whether the song has finished
-
   // Reset playback to the top of the lyrics
   function resetToTopState() {
     lines.forEach(l => l.classList.remove('active')); // Remove all active highlights
@@ -466,28 +470,23 @@
     finished = false;
     lines[0]?.scrollIntoView({ behavior: 'smooth', block: 'start' }); // Scroll to first line
   }
-
   // When the page loads
   window.onload = () => {
     resetToTopState(); // Start at the top
     setMode('dual');   // Default to dual mode (both languages)
   };
-
   // Click handler for "Back to Top" link
   backToTopLink?.addEventListener('click', (e) => {
     e.preventDefault();
     resetToTopState();
   });
-
   // Scroll the specified lyric line into view
   function scrollLine(line) {
     line.scrollIntoView({ behavior: 'smooth', block: 'start' });
   }
-
   // Main playback loop, called on interval
   function updatePlayback() {
     const now = (Date.now() - startTime) / 1000; // Time since playback began, in seconds
-
     // If we've reached the end
     if (current >= lines.length) {
       clearInterval(intervalId); // Stop playback
@@ -499,31 +498,25 @@
       setTimeout(() => lines.forEach(l => l.classList.remove('active')), 1500); // Clear highlight after delay
       return;
     }
-
     // Get the current line and its timestamp
     const line = lines[current];
     const time = parseFloat(line.dataset.time);
-
     // If the current time has passed the line's timestamp
     if (now >= time) {
       lines.forEach(l => l.classList.remove('active')); // Clear highlights
       line.classList.add('active'); // Highlight current line
-
       // Scroll to previous line if not at beginning or end
       if (current > 0 && current < lines.length - 1) {
         lines[current - 1].scrollIntoView({ behavior: 'smooth', block: 'start' });
       } else {
         line.scrollIntoView({ behavior: 'smooth', block: 'start' });
       }
-
       current++; // Move to next line
     }
   }
-
   // Play/pause button behavior
   playPauseBtn?.addEventListener('click', () => {
     if (finished) resetToTopState(); // If finished, restart
-
     if (!isPlaying) {
       // Start playback
       startTime = Date.now() - pausedAt * 1000; // Adjust for paused time
@@ -542,49 +535,41 @@
       isPlaying = false;
     }
   });
-
   // Clicking on a lyric line will jump to it
   lines.forEach((line, index) => {
     line.addEventListener('click', () => {
       const time = parseFloat(line.dataset.time); // Get timestamp
       current = index; // Jump to this line
       pausedAt = time; // Update paused position
-
       if (isPlaying) {
         clearInterval(intervalId);
         startTime = Date.now() - time * 1000; // Resume from clicked point
         intervalId = setInterval(updatePlayback, 100);
       }
-
       lines.forEach(l => l.classList.remove('active')); // Remove all highlights
       line.classList.add('active'); // Highlight clicked line
       scrollLine(line); // Scroll to clicked line
     });
   });
-
   // Mode switching: English / Spanish / Dual
   const modeSelect = document.getElementById('mode-select'); // For <select> dropdown (if used)
   const spanishLines = document.querySelectorAll('.spanish'); // All Spanish lines
   const englishLines = document.querySelectorAll('.english'); // All English lines
-
   function setMode(mode) {
     // Show/hide Spanish
     spanishLines.forEach(span => {
       span.style.display = (mode === 'english') ? 'none' : 'block';
     });
-
     // Show/hide English and add class for dual styling
     englishLines.forEach(en => {
       en.style.display = (mode === 'spanish') ? 'none' : 'block';
       en.classList.toggle('dual-mode', mode === 'dual');
     });
   }
-
   // If using a <select> menu (optional support)
   modeSelect?.addEventListener('change', () => {
     setMode(modeSelect.value);
   });
-
   // Mode dropdown (button-style)
   const modeButton = document.getElementById('mode-button'); // Button to toggle dropdown
   const modeDropdown = document.getElementById('mode-dropdown'); // Dropdown menu
