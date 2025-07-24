@@ -536,21 +536,31 @@
     }
   });
   // Clicking on a lyric line will jump to it
-  lines.forEach((line, index) => {
-    line.addEventListener('click', () => {
-      const time = parseFloat(line.dataset.time); // Get timestamp
-      current = index; // Jump to this line
-      pausedAt = time; // Update paused position
-      if (isPlaying) {
-        clearInterval(intervalId);
-        startTime = Date.now() - time * 1000; // Resume from clicked point
-        intervalId = setInterval(updatePlayback, 100);
-      }
-      lines.forEach(l => l.classList.remove('active')); // Remove all highlights
-      line.classList.add('active'); // Highlight clicked line
-      scrollLine(line); // Scroll to clicked line
-    });
+lines.forEach((line, index) => {
+  line.addEventListener('click', () => {
+    const time = parseFloat(line.dataset.time);
+    current = index;
+    pausedAt = time;
+    if (isPlaying) {
+      clearInterval(intervalId);
+      startTime = Date.now() - time * 1000;
+      intervalId = setInterval(updatePlayback, 100);
+    }
+    lines.forEach(l => l.classList.remove('active'));
+    line.classList.add('active');
+    const container = document.querySelector('.lyrics-container');
+    if (index > 1) {
+      // Scroll to the previous line (one line above)
+      const offset = 80; // adjust if needed for vertical offset
+      const targetLine = lines[index - 1];
+      const targetTop = targetLine.offsetTop - offset;
+      container.scrollTo({ top: targetTop, behavior: 'smooth' });
+    } else {
+      // For first two lines, don't scroll (or scroll normally if you want)
+      line.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
   });
+});
   // Mode switching: English / Spanish / Dual
   const modeSelect = document.getElementById('mode-select'); // For <select> dropdown (if used)
   const spanishLines = document.querySelectorAll('.spanish'); // All Spanish lines
