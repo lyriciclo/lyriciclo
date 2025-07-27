@@ -435,7 +435,7 @@
     current = 0;
     pausedAt = 0;
     finished = false;
-    lines[0]?.scrollIntoView({ behavior: 'smooth', block: 'start' }); // Scroll to first line
+    smartScrollTo(lines[0]);
   }
   // When the page loads
   window.onload = () => {
