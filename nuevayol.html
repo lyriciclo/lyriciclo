@@ -452,7 +452,7 @@ function smartScrollTo(line) {
   const container = document.getElementById('lyrics');
   const mode = currentMode;
   // Amount of space above the line depending on mode
-  const offset = mode === 'dual' ? 100 : 40;
+  const offset = mode === 'dual' ? 200 : 80;
   const containerTop = container.getBoundingClientRect().top;
   const lineTop = line.getBoundingClientRect().top;
   const scrollAmount = lineTop - containerTop - offset;
