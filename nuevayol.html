@@ -526,9 +526,9 @@ lines.forEach((line, index) => {
     lines.forEach(l => l.classList.remove('active'));
     line.classList.add('active');
     if (index > 0 && index < lines.length - 1) {
-      lines[index - 1].scrollIntoView({ behavior: 'smooth', block: 'start' });
+      smartScrollTo(lines[index - 1]);
     } else {
-      line.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      smartScrollTo(line);
     }
   });
 });
