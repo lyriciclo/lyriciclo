@@ -484,9 +484,9 @@ function smartScrollTo(line) {
       line.classList.add('active'); // Highlight current line
       // Scroll to previous line if not at beginning or end
       if (current > 0 && current < lines.length - 1) {
-        lines[current - 1].scrollIntoView({ behavior: 'smooth', block: 'start' });
+        smartScrollTo(lines[current - 1]);
       } else {
-        line.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        smartScrollTo(line);
       }
       current++; // Move to next line
     }
