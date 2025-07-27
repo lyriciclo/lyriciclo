@@ -447,10 +447,6 @@
     e.preventDefault();
     resetToTopState();
   });
-  // Scroll the specified lyric line into view
-  function scrollLine(line) {
-    line.scrollIntoView({ behavior: 'smooth', block: 'start' });
-  }
   // Main playback loop, called on interval
 function smartScrollTo(line) {
   const container = document.getElementById('lyrics');
